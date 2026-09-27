@@ -1,68 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-<style>
-#loadingScreen{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(180deg,#06110a,#0d2212,#06110a);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:99999;
-  transition:opacity .6s;
-}
-
-.loading-box{
-  text-align:center;
-  color:white;
-  font-family:Arial,sans-serif;
-}
-
-#duckLogo{
-  width:180px;
-  animation:bounce 1.5s infinite ease-in-out;
-}
-
-.loading-box h1{
-  margin:15px 0 5px;
-  font-size:58px;
-  color:#39ff73;
-  text-shadow:0 0 20px #39ff73;
-}
-
-.loading-box p{
-  margin:0;
-  font-size:22px;
-  color:#d9d9d9;
-}
-
-.bar{
-  width:360px;
-  height:22px;
-  background:#18311d;
-  border:3px solid #39ff73;
-  border-radius:999px;
-  overflow:hidden;
-  margin:30px auto 15px;
-}
-
-#barFill{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg,#39ff73,#8bffb3);
-}
-
-.loading-box span{
-  color:#8bffb3;
-  font-size:18px;
-}
-
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
-}
-</style>    <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainrot Garden: Online Leaderboard Edition</title>
     <link
@@ -102,42 +41,9 @@
         margin: 0;
         padding: 0;
       }
-<script>
-const bar = document.getElementById("barFill");
-const loading = document.getElementById("loadingScreen");
 
-let progress = 0;
-
-const timer = setInterval(() => {
-  progress += 2;
-  bar.style.width = progress + "%";
-
-  if (progress >= 100) {
-    clearInterval(timer);
-
-    loading.style.opacity = "0";
-
-    setTimeout(() => {
-      loading.style.display = "none";
-    }, 600);
-  }
-}, 60);
-</script>
       body {
-    <!-- PCHR GAMES Loading Screen -->
-<div id="loadingScreen">
-  <div class="loading-box">
-    <img src="duck.png" id="duckLogo">
-    <h1>MEME GARDEN</h1>
-    <p>by PCHR GAMES</p>
-
-    <div class="bar">
-      <div id="barFill"></div>
-    </div>
-
-    <span>Internet Meltdown Update</span>
-  </div>
-</div>    background: radial-gradient(circle at center, #1f2438 0%, #0b0c10 100%);
+        background: radial-gradient(circle at center, #1f2438 0%, #0b0c10 100%);
         color: var(--text-color);
         min-height: 100vh;
         display: flex;
