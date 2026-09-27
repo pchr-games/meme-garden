@@ -1255,6 +1255,12 @@
       }
     }
 
+    
+    /* ===== ADMIN ABUSE CONFETI ===== */
+    #confettiContainer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;display:none;}
+    .confetti{position:absolute;top:-20px;width:10px;height:16px;border-radius:2px;animation:confettiFall linear forwards;}
+    @keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:.9;}}
+
     @media (max-width: 700px) {
       body {
         padding: 12px;
@@ -1325,6 +1331,7 @@
 </head>
 
 <body>
+  <div id="confettiContainer"></div>
 
   <!-- EVENTO ADMIN ABUSE -->
   <div id="adminEventBanner">
@@ -6435,6 +6442,13 @@ setInterval(
   1000
 );
 
+
+
+/* ===== ADMIN ABUSE EXTRA ===== */
+let lastAdminState=isAdminAbuseActive();let mythicAfterAdmin=false,confettiLoop=null;
+function spawnConfettiBurst(){const c=document.getElementById('confettiContainer');if(!c)return;c.style.display='block';const colors=['#ff304f','#ffd21c','#00ffaa','#00d2ff','#a855f7','#ffffff'];for(let i=0;i<25;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'vw';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDuration=(3+Math.random()*3)+'s';d.style.transform='rotate('+Math.random()*360+'deg)';c.appendChild(d);setTimeout(()=>d.remove(),6500);}}
+function updateAdminExtras(){const active=isAdminAbuseActive();if(active){if(!confettiLoop){spawnConfettiBurst();confettiLoop=setInterval(spawnConfettiBurst,700);}}else{if(confettiLoop){clearInterval(confettiLoop);confettiLoop=null;}const c=document.getElementById('confettiContainer');if(c){c.style.display='none';c.innerHTML='';}}if(lastAdminState&&!active){mythicAfterAdmin=true;restockShop();}lastAdminState=active;}
+const _oldRestockShop=restockShop;restockShop=function(){_oldRestockShop();if(mythicAfterAdmin){const mythics=shopMemes.filter(m=>m.rarity==='Mítico');if(mythics.length){const pick=mythics[Math.floor(Math.random()*mythics.length)];pick.stock=Math.max(1,pick.stock);renderShop();}mythicAfterAdmin=false;}};
 
 /* =========================================================
    INICIO
