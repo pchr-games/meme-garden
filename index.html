@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brainrot Garden: Online Leaderboard Edition</title>
+  <title>Meme Garden: Online Leaderboard Edition</title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;700;900&display=swap"
@@ -28,8 +28,9 @@
       --rarity-epic: #b84cff;
       --rarity-legendary: #ffd21c;
       --rarity-mythic: #ff304f;
+      --rarity-halloween: #ff6a00;
 
-      /* Exotic original */
+      /* Exotic: brillante y con glow */
       --rarity-exotic: #7FFFD4;
 
       /* Secret: negro / gris metálico */
@@ -58,6 +59,173 @@
 
     html {
       scroll-behavior: smooth;
+    }
+
+    /* =====================================================
+       PANTALLA DE CARGA MEME GARDEN
+    ===================================================== */
+
+    #gameLoadingScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,196,92,.12), transparent 18%),
+        radial-gradient(circle at 50% 38%, rgba(168,85,247,.20), transparent 32%),
+        radial-gradient(circle at 50% 85%, rgba(255,106,0,.13), transparent 38%),
+        linear-gradient(145deg,#07030b,#12070a 52%,#06040b);
+      color: #fff;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+
+    #gameLoadingScreen.loading-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loading-moon {
+      position: relative;
+      z-index: 2;
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      font-size: 2.7rem;
+      border-radius: 50%;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      animation: loadingMoonFloat 1.8s ease-in-out infinite alternate;
+    }
+
+    .loading-title {
+      font-family: "Fredoka", sans-serif;
+      position: relative;
+      z-index: 2;
+      margin-top: 2px;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      line-height: 1;
+      text-align: center;
+      background: linear-gradient(90deg,#ff8a00,#ffcc66,#c084fc,#ff8a00);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: loadingTitleShine 2s linear infinite;
+      filter: drop-shadow(0 0 18px rgba(255,106,0,.28));
+      text-shadow: 0 0 30px rgba(168,85,247,.16);
+    }
+
+    .loading-plant {
+      display: inline-block;
+      -webkit-text-fill-color: initial;
+      background: none;
+      filter: saturate(1.35) brightness(1.05) drop-shadow(0 0 10px rgba(34,197,94,.28));
+      transform: translateY(2px);
+    }
+
+    .loading-subtitle {
+      margin-top: -4px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #ffd7a3;
+      text-shadow: 0 0 12px rgba(255,140,0,.65);
+    }
+
+    .loading-credit {
+      position: relative;
+      z-index: 2;
+      padding: 0;
+      margin-top: -3px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      font-size: .78rem;
+      font-weight: 800;
+      color: rgba(255,255,255,.82);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .loading-spinner {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      backdrop-filter: none;
+    }
+
+    .loading-spinner span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff8a00;
+      box-shadow: 0 0 10px rgba(255,138,0,.8);
+      animation: loadingDot 1s ease-in-out infinite;
+    }
+
+    .loading-spinner span:nth-child(2) { animation-delay: .15s; }
+    .loading-spinner span:nth-child(3) { animation-delay: .3s; }
+
+    .loading-bar {
+      width: min(300px, 70vw);
+      height: 6px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .loading-bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#ff6a00,#a855f7,#ff9d00);
+      box-shadow: 0 0 14px rgba(255,106,0,.65);
+      animation: loadingProgress 4.45s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .loading-text {
+      font-size: .78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .04em;
+    }
+
+    @keyframes loadingMoonFloat {
+      from { transform: translateY(0) rotate(-4deg); }
+      to { transform: translateY(-7px) rotate(4deg); }
+    }
+
+    @keyframes loadingTitleShine {
+      from { background-position: 0% 50%; }
+      to { background-position: 250% 50%; }
+    }
+
+    @keyframes loadingDot {
+      0%,100% { transform: translateY(0); opacity: .45; }
+      50% { transform: translateY(-7px); opacity: 1; }
+    }
+
+    @keyframes loadingProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
     }
 
     body {
@@ -568,6 +736,40 @@
       flex-direction: column;
     }
 
+    /* CANDY / MISIONES */
+    .candy-panel{
+      background:linear-gradient(145deg,rgba(35,12,45,.96),rgba(75,20,55,.92));
+      border:1px solid rgba(255,157,0,.45);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 0 22px rgba(255,106,0,.12),inset 0 0 20px rgba(123,31,162,.10);
+    }
+    .candy-balance{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background:linear-gradient(135deg,rgba(255,106,0,.20),rgba(123,31,162,.25));
+      border:1px solid rgba(255,189,102,.38);border-radius:15px;padding:14px 16px;margin-bottom:14px;
+    }
+    .candy-balance strong{font-size:1.35rem;color:#ffd27a;text-shadow:0 0 10px rgba(255,157,0,.35)}
+    .candy-subtitle{font-size:.72rem;color:#cdbbd4;margin-top:3px}
+    .mission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .mission-card{background:rgba(12,8,20,.72);border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:14px;transition:.2s}
+    .mission-card.completed{border-color:rgba(255,157,0,.55);box-shadow:0 0 14px rgba(255,106,0,.12)}
+    .mission-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .mission-icon{font-size:1.8rem}.mission-title{font-weight:900;font-size:.88rem}.mission-desc{font-size:.72rem;color:#aaa;margin-top:3px}
+    .mission-progress{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin:12px 0 9px}
+    .mission-progress>div{height:100%;background:linear-gradient(90deg,#ff6a00,#ffd27a);border-radius:99px;transition:width .25s}
+    .mission-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.72rem;color:#aaa}
+    .mission-reward{color:#ffd27a;font-weight:900}.mission-claim{border:0;border-radius:9px;padding:7px 10px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:white}.mission-claim:disabled{opacity:.4;cursor:not-allowed}
+    #tab-candy{position:relative;overflow:hidden}
+    .candy-shop-title{font-size:1rem;font-weight:900;color:#ffd27a;margin:4px 0 10px}
+    .candy-shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:18px}
+    .candy-shop-card{background:rgba(12,8,20,.78);border:1px solid rgba(255,189,102,.18);border-radius:15px;padding:13px;box-shadow:inset 0 0 18px rgba(123,31,162,.08)}
+    .candy-shop-card .shop-big-icon{font-size:2rem}
+    .candy-shop-card h4{margin:6px 0 3px;font-size:.88rem}
+    .candy-shop-card p{margin:0 0 9px;color:#aaa;font-size:.68rem;line-height:1.35;min-height:30px}
+    .candy-buy{width:100%;border:0;border-radius:9px;padding:8px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:#fff}
+    .candy-buy:disabled{opacity:.4;cursor:not-allowed}
+
     .shop-tabs {
       display: flex;
       gap: 6px;
@@ -727,9 +929,23 @@
       background: linear-gradient(135deg,#870019,#ff4d69,#99001d);
     }
 
+    .rarity-halloween {
+      background: linear-gradient(135deg,#ff6a00,#7b2cff,#ff9d00);
+      color: #fff;
+      border-color: #ff6a00;
+      box-shadow: 0 0 10px rgba(255,106,0,.25);
+    }
+
     .rarity-exotic {
-      background: #7FFFD4;
-      color: #000;
+      /* Exótico: brillo discreto, con la parte superior casi blanca */
+      background: linear-gradient(180deg,#ffffff 0%,#eafffb 18%,#8ff5df 55%,#55d9c2 100%);
+      color: #06352e;
+      border-color: #d8fff8;
+      box-shadow:
+        0 0 6px rgba(255,255,255,.35),
+        0 0 12px rgba(127,255,212,.25),
+        inset 0 1px 2px rgba(255,255,255,.9);
+      text-shadow: 0 1px 2px rgba(255,255,255,.65);
     }
 
     .rarity-secret {
@@ -813,6 +1029,25 @@
       margin-bottom: 0;
     }
 
+    .req-item.req-ready {
+      color: #7dff9b;
+    }
+
+    .req-item.req-ready > span:last-child {
+      color: #7dff9b;
+      font-weight: 900;
+      text-shadow: 0 0 8px rgba(65, 255, 120, .25);
+    }
+
+    .req-item.req-pending > span:last-child {
+      color: #ff8b8b;
+    }
+
+    .rebirth-btn.ready {
+      background: linear-gradient(45deg, #16a34a, #22c55e);
+      box-shadow: 0 0 18px rgba(34, 197, 94, .28);
+    }
+
     .rebirth-btn {
       background: linear-gradient(45deg,var(--accent-purple),var(--accent-pink));
       color: #fff;
@@ -883,6 +1118,99 @@
       flex-direction: column;
       gap: 6px;
     }
+
+    /* HALLOWEEN */
+    .halloween-panel {
+      background: linear-gradient(135deg,rgba(255,106,0,.12),rgba(123,44,255,.12));
+      border: 2px solid #ff6a00;
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .halloween-shop-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .mystery-open-btn {
+      border:none;
+      border-radius:12px;
+      padding:9px 12px;
+      background:linear-gradient(45deg,#ff6a00,#7b2cff);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 0 15px rgba(255,106,0,.25);
+    }
+    .halloween-title {
+      color:#ff9d00;
+      font-family:"Fredoka",sans-serif;
+    }
+    .mystery-modal-box {
+      background:#17101f;
+      border:2px solid #ff6a00;
+      padding:22px;
+      border-radius:20px;
+      text-align:center;
+      width:min(560px,92vw);
+      max-height:88vh;
+      overflow-y:auto;
+      box-shadow:0 15px 45px rgba(0,0,0,.85);
+    }
+    .mystery-modal-head {
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+    }
+    .mystery-modal-head h2 { margin:0; }
+    .mystery-percent-btn {
+      position:absolute;
+      top:0;
+      right:0;
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid #ff9d00;
+      background:#29152f;
+      color:#ffbd66;
+      font-size:1.1rem;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 0 10px rgba(255,106,0,.2);
+    }
+    .mystery-percent-btn:hover {
+      transform:translateY(-1px);
+      box-shadow:0 0 15px rgba(255,106,0,.45);
+    }
+    .halloween-restock-timer {
+      display:inline-block;
+      margin-top:7px;
+      padding:4px 8px;
+      border-radius:8px;
+      background:rgba(255,106,0,.10);
+      border:1px solid rgba(255,157,0,.35);
+      color:#ffbd66;
+      font-size:.72rem;
+      font-weight:800;
+    }
+    .mystery-box-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin:16px 0;
+    }
+    .mystery-card {
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,106,0,.35);
+      border-radius:15px;
+      padding:13px 8px;
+    }
+    .mystery-card-icon { font-size:2.4rem; }
+    .mystery-card button { width:100%; margin-top:8px; }
+    @media(max-width:520px){ .mystery-box-grid{grid-template-columns:1fr;} }
 
     /* LEADERBOARD */
     .name-box {
@@ -1255,12 +1583,6 @@
       }
     }
 
-    
-    /* ===== ADMIN ABUSE CONFETI ===== */
-    #confettiContainer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;display:none;}
-    .confetti{position:absolute;top:-20px;width:10px;height:16px;border-radius:2px;animation:confettiFall linear forwards;}
-    @keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:.9;}}
-
     @media (max-width: 700px) {
       body {
         padding: 12px;
@@ -1328,10 +1650,66 @@
       }
     }
   </style>
+
+<style id="halloween-interface-theme">
+/* Halloween interface — visual only, scoped to the Halloween tab/modal */
+#tab-halloween{position:relative;overflow:hidden;background:linear-gradient(180deg,#ff6a00 0%,#32104f 48%,#09030f 100%);border-radius:18px;min-height:520px;}
+#tab-halloween::before{content:"";position:absolute;right:7%;top:30px;width:105px;height:105px;border-radius:50%;background:#ffd98a;box-shadow:0 0 30px rgba(255,217,138,.45);opacity:.9;z-index:0;}
+#tab-halloween::after{content:"🦇     🕸️\A        🕷️";white-space:pre;position:absolute;inset:12px 18px auto auto;color:#17101d;font-size:32px;line-height:1.5;opacity:.8;pointer-events:none;z-index:1;}
+#tab-halloween .halloween-panel{position:relative;z-index:2;margin:14px;border:2px solid #ff6a00;background:linear-gradient(145deg,rgba(20,5,30,.96),rgba(70,18,70,.94));box-shadow:0 0 24px rgba(255,106,0,.35),inset 0 0 22px rgba(123,0,255,.15);border-radius:18px;}
+#tab-halloween .halloween-shop-head{background:linear-gradient(90deg,#ff6a00,#7b1fa2,#24102d);border-radius:15px 15px 0 0;padding:16px;border-bottom:2px solid #ff9d00;}
+#tab-halloween .halloween-title{color:#ffd27a!important;text-shadow:0 0 10px #ff6a00,0 0 18px #8b2cff;font-size:1.45rem;}
+#tab-halloween .mystery-open-btn{background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:#fff;border:1px solid #ffbd66;box-shadow:0 0 12px rgba(255,106,0,.45);transition:.2s;cursor:pointer;}
+#tab-halloween .mystery-open-btn:hover,.mystery-card:hover{transform:translateY(-2px);box-shadow:0 0 18px rgba(255,106,0,.55);}
+#tab-halloween .restock-bar{background:rgba(18,7,25,.85);border:1px solid #ff6a00;color:#ffd27a;box-shadow:0 0 10px rgba(255,106,0,.2);}
+#tab-halloween .shop-card{background:linear-gradient(145deg,#21102b,#3b163f);border:1px solid #ff6a00;box-shadow:0 0 10px rgba(255,106,0,.18);transition:.2s;}
+#tab-halloween .shop-card:hover{transform:translateY(-3px);box-shadow:0 0 20px rgba(255,106,0,.4);border-color:#ffb347;}
+#mysteryBoxesModal .mystery-modal-box{background:linear-gradient(145deg,#16051f,#3b1450,#1a071f);border:2px solid #ff6a00;box-shadow:0 0 30px rgba(255,106,0,.4);}
+#mysteryBoxesModal .mystery-card{background:linear-gradient(145deg,#25102f,#4a1852);border:1px solid #ff7a18;transition:.2s;}
+#mysteryBoxesModal .mystery-card-icon{text-shadow:0 0 12px #ff6a00;}
+</style>
+
+<style id="global-halloween-theme">
+:root{
+  --bg:#17100d; --panel:#211612; --panel2:#2a1a13; --border:#5a2b16;
+  --accent:#e85d04; --accent2:#f48c06; --purple:#6a0dad; --text:#f4e9df;
+}
+body{
+  background:
+    radial-gradient(circle at 50% -8%,rgba(232,93,4,.18),transparent 34%),
+    linear-gradient(180deg,#24130d 0%,#17100d 48%,#100b09 100%) !important;
+  color:var(--text);
+}
+body:before{content:"🌙";position:fixed;top:18px;right:24px;font-size:42px;opacity:.28;pointer-events:none;z-index:0;filter:drop-shadow(0 0 12px rgba(244,140,6,.35));}
+.header,.stats,.shop,.garden,.inventory,.panel,.card,.modal-box,.tab-content,.leaderboard-card,.update-card{
+  background-color:rgba(29,19,15,.94) !important;
+  border-color:rgba(232,93,4,.25) !important;
+}
+.header{border-bottom-color:rgba(232,93,4,.4)!important;box-shadow:0 4px 22px rgba(0,0,0,.28),0 0 18px rgba(232,93,4,.06);}
+button,.btn,.buy-btn{border-color:rgba(232,93,4,.35)!important;}
+button:hover,.btn:hover,.buy-btn:hover{box-shadow:0 0 12px rgba(232,93,4,.22);border-color:rgba(244,140,6,.65)!important;}
+.tab-btn.active{background:linear-gradient(135deg,#6a0dad,#e85d04)!important;color:#fff!important;}
+.tab-btn:hover{background:rgba(106,13,173,.18)!important;}
+.shop-list-container,.inventory-grid,.garden-grid{scrollbar-color:#6a0dad #17100d;}
+input,select{background:#211612!important;color:#f4e9df!important;border-color:#5a2b16!important;}
+.progress-bar,.xp-bar{background:#321b12!important;}
+.progress-fill,.xp-fill{background:linear-gradient(90deg,#6a0dad,#e85d04,#f48c06)!important;}
+.badge,.status-badge{background:rgba(106,13,173,.2)!important;border-color:rgba(106,13,173,.45)!important;}
+</style>
+
 </head>
 
-<body>
-  <div id="confettiContainer"></div>
+<body class="halloween-mode">
+
+  <!-- PANTALLA DE CARGA -->
+  <div id="gameLoadingScreen" aria-label="Cargando Meme Garden">
+    <div class="loading-moon">🌙</div>
+    <div class="loading-title"><span class="loading-plant" aria-hidden="true">🌱</span> MEME GARDEN</div>
+    <div class="loading-credit">By Pau Ch</div>
+    <div class="loading-spinner"><span></span><span></span><span></span></div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <div class="loading-text">Cargando el jardín de memes...</div>
+  </div>
 
   <!-- EVENTO ADMIN ABUSE -->
   <div id="adminEventBanner">
@@ -1343,7 +1721,7 @@
   <header>
     <button class="streak-btn" onclick="openStreakModal()">🔥 Racha Diaria</button>
 
-    <h1>🧠 BRAINROT GARDEN</h1>
+    <h1>🌱 MEME GARDEN</h1>
 
     <button class="codes-btn" onclick="openCodesModal()">🎁 Códigos</button>
   </header>
@@ -1359,6 +1737,10 @@
 
     <div class="stat-card">
       🛡️ <span id="shields" class="stat-val">0</span>
+    </div>
+
+    <div class="stat-card">
+      🍬 <span id="candy" class="stat-val">0</span>
     </div>
 
     <div class="stat-card">
@@ -1402,6 +1784,14 @@
 
         <button class="tab-btn" onclick="switchTab('powerups', this)">
           ⚡ Power-Ups
+        </button>
+
+        <button class="tab-btn" onclick="switchTab('candy', this)">
+          🍬 Candy
+        </button>
+
+        <button class="tab-btn" onclick="switchTab('halloween', this)">
+          🎃 Halloween
         </button>
 
         <button class="tab-btn" onclick="switchTab('rebirth', this)">
@@ -1450,6 +1840,38 @@
 
         <div class="shop-list-container" id="powerShopList"></div>
 
+      </div>
+
+      <!-- CANDY / MISIONES -->
+      <div id="tab-candy" class="tab-content">
+        <div class="candy-panel">
+          <div class="candy-balance">
+            <div>
+              <div style="font-size:1.05rem;font-weight:900;color:#fff;">🍬 Candy</div>
+              <div class="candy-subtitle">Completa misiones diarias para conseguir Candy.</div>
+            </div>
+            <strong id="candyBalance">0 🍬</strong>
+          </div>
+          <div class="candy-shop-title">🛒 Candy Shop</div>
+          <div id="candyShopGrid" class="candy-shop-grid"></div>
+          <div style="font-size:.92rem;font-weight:900;color:#ffd27a;margin-bottom:10px;">📜 Misiones de hoy</div>
+          <div id="candyMissions" class="mission-grid"></div>
+        </div>
+      </div>
+
+      <!-- HALLOWEEN -->
+      <div id="tab-halloween" class="tab-content">
+        <div class="halloween-panel">
+          <div class="halloween-shop-head">
+            <div>
+              <div class="halloween-title">🎃 Halloween Shop</div>
+              <div style="font-size:.72rem;color:#aaa;margin-top:3px;">Memes exclusivos + rareza Halloween</div>
+              <div id="restockTimerHalloween" class="halloween-restock-timer">🔄 Restock en 60s</div>
+            </div>
+            <button class="mystery-open-btn" onclick="openMysteryBoxesModal()">🎁 Mystery Boxes</button>
+          </div>
+          <div class="shop-list-container" id="halloweenShopList"></div>
+        </div>
       </div>
 
       <!-- REBIRTH -->
@@ -1507,21 +1929,21 @@
         <div class="update-panel-box">
 
           <h2>
-            🚀 Update 1.0 — Internet Meltdown
+            🎃 Update 1.1 — Halloween Update
           </h2>
 
           <p style="font-size:.8rem;color:#ddd;margin-bottom:5px;">
-            Tiempo restante para la gran expansión:
+            ¡La expansión de Halloween ya está aquí!
           </p>
 
           <div class="update-timer-display" id="updateCountdown">
-            COMING SOON
+            🎃 HALLOWEEN UPDATE ACTIVA
           </div>
 
           <div class="update-content-box">
 
             <h4>
-              ✨ Contenido que se abrirá:
+              🎃 Contenido de Halloween:
             </h4>
 
             <p
@@ -1534,23 +1956,19 @@
             <ul>
 
               <li>
-                🔥 <strong>Nueva Rareza:</strong>
-                ¡Nuevos memes exclusivos ultra potentes!
+                🎃 <strong>Halloween:</strong> ¡10 memes exclusivos y una nueva rareza!
               </li>
 
               <li>
-                🌀 <strong>Nuevos Rebirths:</strong>
-                Niveles adicionales de evolución y multiplicadores locos.
+                🎁 <strong>Mystery Boxes:</strong> abre cajas para conseguir memes exclusivos de Halloween.
               </li>
 
               <li>
-                🪴 <strong>Más Parcelas:</strong>
-                Expande tu jardín al siguiente nivel.
+                👻 <strong>Interfaz Halloween:</strong> tienda temática con recompensas especiales.
               </li>
 
               <li>
-                🎉 <strong>Admin Abuse:</strong>
-                ¡Confeti, x5 stock, x2 dinero y DROP MÍTICO al terminar!
+                ⚡ <strong>Admin Abuse:</strong> ¡confeti, x5 stock, x2 dinero y DROP MÍTICO al terminar!
               </li>
 
             </ul>
@@ -1658,6 +2076,19 @@
 
     </div>
 
+  </div>
+
+  <!-- MYSTERY BOXES -->
+  <div class="modal-overlay" id="mysteryBoxesModal">
+    <div class="mystery-modal-box">
+      <div class="mystery-modal-head">
+        <h2 style="color:#ff9d00;font-family:'Fredoka',sans-serif;">🎃 Mystery Boxes</h2>
+        <button class="mystery-percent-btn" onclick="showMysteryBoxProbabilities()" title="Ver probabilidades">%</button>
+      </div>
+      <p style="font-size:.8rem;color:#aaa;">Compra una caja y recibe un meme exclusivo de Halloween.</p>
+      <div class="mystery-box-grid" id="mysteryBoxGrid"></div>
+      <button class="btn-cancel" style="width:100%;" onclick="closeMysteryBoxesModal()">Cerrar</button>
+    </div>
   </div>
 
   <!-- RACHA -->
@@ -2142,6 +2573,7 @@ function triggerAdminAbuseEndDrop() {
     que uno de los Míticos tenga stock.
   */
   restockShop(true);
+  restockHalloweenShop(true);
 
   /*
     Feedback visual.
@@ -2213,6 +2645,7 @@ function checkAdminAbuseTransition() {
       para que el x5 stock se note desde el principio.
     */
     restockShop();
+    restockHalloweenShop(true);
 
     playSound("buy");
   }
@@ -2682,7 +3115,7 @@ function playSound(type) {
 ========================================================= */
 
 const MIN_STARTING_COINS = 100;
-const MAX_REBIRTHS = 8;
+const MAX_REBIRTHS = 11;
 
 let playerId =
   localStorage.getItem(
@@ -2707,9 +3140,14 @@ let playerName =
       Math.random() * 8999 + 1000
     );
 
-let coins = 100;
+let coins = 4000;
 let lifetimeCoins = 100;
 let shields = 0;
+let candy = 0;
+let candyMissionDate = "";
+let candyDailyStats = { earned: 0, planted: 0, halloweenBought: 0 };
+let candyClaimedMissions = [];
+let candyMultiplierExpiresAt = 0;
 
 let boostExpiresAt = 0;
 let moneyStormExpiresAt = 0;
@@ -2724,6 +3162,11 @@ let streakDay = 1;
 let lastClaimDate = "";
 
 let inventory = [];
+let mysteryBoxInventory = {
+  spooky_box: 0,
+  haunted_box: 0,
+  demon_box: 0
+};
 let selectedInvIndex = null;
 let garden = [
   null,
@@ -2737,6 +3180,127 @@ let shopPowerups = [];
 
 let restockTimerVal = 30;
 let restockTimerPowerVal = 60;
+
+
+/* =========================================================
+   CANDY / MISIONES DIARIAS
+========================================================= */
+
+const candyMissions = [
+  { id:"earn", icon:"🪙", title:"Genera monedas", desc:"Consigue 100.000 monedas hoy", target:100000, reward:50, stat:"earned" },
+  { id:"plant", icon:"🌱", title:"Jardín activo", desc:"Planta 3 memes hoy", target:3, reward:75, stat:"planted" },
+  { id:"halloween", icon:"🎃", title:"Cazador de Halloween", desc:"Compra 2 memes de Halloween hoy", target:2, reward:125, stat:"halloweenBought" }
+];
+
+function getLocalDateKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+function resetCandyMissionsIfNeeded(){
+  const today=getLocalDateKey();
+  if(candyMissionDate!==today){
+    candyMissionDate=today;
+    candyDailyStats={earned:0,planted:0,halloweenBought:0};
+    candyClaimedMissions=[];
+  }
+}
+
+const candyShopItems = [
+  {id:"candy_spooky_box", icon:"🎃", name:"Candy Spooky Box", desc:"Consigue 1 Spooky Box para abrir después.", price:250, type:"box", boxId:"spooky_box"},
+  {id:"candy_haunted_box", icon:"👻", name:"Candy Haunted Box", desc:"Consigue 1 Haunted Box para abrir después.", price:900, type:"box", boxId:"haunted_box"},
+  {id:"candy_demon_box", icon:"😈", name:"Candy Demon Box", desc:"La mejor caja: Épico 75% · Legendario 12,5% · Mítico 9% · Halloween 3,5%.", price:2500, type:"box", boxId:"demon_box"},
+  {id:"candy_multiplier", icon:"🍭", name:"Sugar Rush x3", desc:"Multiplica tus monedas por x3 durante 60 segundos.", price:1500, type:"multiplier"}
+];
+
+function renderCandyShop(){
+  const grid=document.getElementById("candyShopGrid");
+  if(!grid) return;
+  grid.innerHTML="";
+  candyShopItems.forEach(item=>{
+    const card=document.createElement("div");
+    card.className="candy-shop-card";
+    card.innerHTML=`<div class="shop-big-icon">${item.icon}</div><h4>${item.name}</h4><p>${item.desc}</p>`;
+    const btn=document.createElement("button");
+    btn.className="candy-buy";
+    btn.innerText=`${formatNumber(item.price)} 🍬`;
+    btn.disabled=candy<item.price;
+    btn.onclick=()=>buyCandyShopItem(item.id);
+    card.appendChild(btn);
+    grid.appendChild(card);
+  });
+}
+
+function buyCandyShopItem(id){
+  const item=candyShopItems.find(x=>x.id===id);
+  if(!item || candy<item.price) return;
+  candy-=item.price;
+
+  if(item.type==="box"){
+    mysteryBoxInventory[item.boxId]=(mysteryBoxInventory[item.boxId]||0)+1;
+    playSound("buy");
+    alert(`🍬 ¡COMPRA REALIZADA!\nHas conseguido 1 ${mysteryBoxes.find(b=>b.id===item.boxId)?.name || "Mystery Box"} 🎁`);
+    renderMysteryBoxes();
+  }else if(item.type==="multiplier"){
+    candyMultiplierExpiresAt=Math.max(Date.now(),candyMultiplierExpiresAt)+60000;
+    playSound("buy");
+    alert("🍭 ¡SUGAR RUSH!\nTus monedas se multiplican x3 durante 60 segundos.");
+  }
+
+  renderCandyShop();
+  renderCandyMissions();
+  updateUI();
+  saveGame();
+}
+
+function renderCandyMissions(){
+  resetCandyMissionsIfNeeded();
+  renderCandyShop();
+  const balance=document.getElementById("candyBalance");
+  const top=document.getElementById("candy");
+  if(balance) balance.innerText=`${formatNumber(candy)} 🍬`;
+  if(top) top.innerText=formatNumber(candy);
+  const grid=document.getElementById("candyMissions");
+  if(!grid) return;
+  grid.innerHTML="";
+
+  candyMissions.forEach(m=>{
+    const value=Math.min(m.target, Number(candyDailyStats[m.stat])||0);
+    const done=value>=m.target;
+    const claimed=candyClaimedMissions.includes(m.id);
+    const pct=Math.min(100,(value/m.target)*100);
+    const card=document.createElement("div");
+    card.className=`mission-card${done?" completed":""}`;
+    card.innerHTML=`
+      <div class="mission-top">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div class="mission-icon">${m.icon}</div>
+          <div><div class="mission-title">${m.title}</div><div class="mission-desc">${m.desc}</div></div>
+        </div>
+      </div>
+      <div class="mission-progress"><div style="width:${pct}%"></div></div>
+      <div class="mission-footer">
+        <span>${formatNumber(value)} / ${formatNumber(m.target)}</span>
+        <span class="mission-reward">+${formatNumber(m.reward)} 🍬</span>
+        <button class="mission-claim" ${(!done||claimed)?"disabled":""} onclick="claimCandyMission('${m.id}')">${claimed?"RECLAMADA":done?"RECLAMAR":"EN PROGRESO"}</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function claimCandyMission(id){
+  resetCandyMissionsIfNeeded();
+  const mission=candyMissions.find(m=>m.id===id);
+  if(!mission || candyClaimedMissions.includes(id)) return;
+  const value=Number(candyDailyStats[mission.stat])||0;
+  if(value<mission.target) return;
+  candyClaimedMissions.push(id);
+  candy+=mission.reward;
+  playSound("buy");
+  renderCandyMissions();
+  updateUI();
+  saveGame();
+}
 
 
 /* =========================================================
@@ -2799,6 +3363,27 @@ const rebirthConfigs = [
     lifetimeReq: 2500000000000,
     bonusMultiplier: 35,
     addPlots: 2
+  },
+  {
+    level: 9,
+    cost: 2250000000000,
+    lifetimeReq: 7500000000000,
+    bonusMultiplier: 105,
+    addPlots: 0
+  },
+  {
+    level: 10,
+    cost: 11250000000000,
+    lifetimeReq: 37500000000000,
+    bonusMultiplier: 525,
+    addPlots: 1
+  },
+  {
+    level: 11,
+    cost: 90000000000000,
+    lifetimeReq: 300000000000000,
+    bonusMultiplier: 4200,
+    addPlots: 2
   }
 ];
 
@@ -2812,8 +3397,7 @@ const allMemes = [
     id: "gigachad",
     name: "Gigachad",
     icon: "🗿",
-    cps: 2,
-    price: 30,
+    cps: 2, price: 4000,
     chance: .7,
     rarity: "Común",
     color: "var(--rarity-common)"
@@ -2822,8 +3406,7 @@ const allMemes = [
     id: "mewing",
     name: "Mewing Cat",
     icon: "😼",
-    cps: 8,
-    price: 90,
+    cps: 8, price: 16000,
     chance: .6,
     rarity: "Común",
     color: "var(--rarity-common)"
@@ -2832,8 +3415,7 @@ const allMemes = [
     id: "grimace",
     name: "Grimace Shake",
     icon: "🥛",
-    cps: 15,
-    price: 200,
+    cps: 15, price: 30000,
     chance: .5,
     rarity: "Común",
     color: "var(--rarity-common)"
@@ -2843,8 +3425,7 @@ const allMemes = [
     id: "sigma",
     name: "Sigmaphone",
     icon: "🍷",
-    cps: 35,
-    price: 450,
+    cps: 35, price: 70000,
     chance: .35,
     rarity: "Raro",
     color: "var(--rarity-rare)"
@@ -2853,8 +3434,7 @@ const allMemes = [
     id: "pizza",
     name: "Pizza Tower",
     icon: "🍕",
-    cps: 70,
-    price: 900,
+    cps: 70, price: 140000,
     chance: .3,
     rarity: "Raro",
     color: "var(--rarity-rare)"
@@ -2863,8 +3443,7 @@ const allMemes = [
     id: "skibidi",
     name: "Skibidi Toilet",
     icon: "🤖",
-    cps: 150,
-    price: 2000,
+    cps: 150, price: 300000,
     chance: .25,
     rarity: "Raro",
     color: "var(--rarity-rare)"
@@ -2874,8 +3453,7 @@ const allMemes = [
     id: "ohio",
     name: "Ohio King",
     icon: "👑",
-    cps: 400,
-    price: 5000,
+    cps: 400, price: 800000,
     chance: .15,
     rarity: "Épico",
     color: "var(--rarity-epic)"
@@ -2884,8 +3462,7 @@ const allMemes = [
     id: "gyatt",
     name: "Gyatt Dragon",
     icon: "🔥",
-    cps: 1200,
-    price: 15000,
+    cps: 1200, price: 2400000,
     chance: .1,
     rarity: "Épico",
     color: "var(--rarity-epic)"
@@ -2895,8 +3472,7 @@ const allMemes = [
     id: "cosmic",
     name: "Cosmic Rizz",
     icon: "🌌",
-    cps: 4000,
-    price: 50000,
+    cps: 4000, price: 8000000,
     chance: .05,
     rarity: "Legendario",
     color: "var(--rarity-legendary)"
@@ -2905,8 +3481,7 @@ const allMemes = [
     id: "elprimo",
     name: "El Primo Gym",
     icon: "🥊",
-    cps: 10000,
-    price: 120000,
+    cps: 10000, price: 20000000,
     chance: .03,
     rarity: "Legendario",
     color: "var(--rarity-legendary)"
@@ -2915,8 +3490,7 @@ const allMemes = [
     id: "chadgold",
     name: "Giga Chad Gold",
     icon: "🔱",
-    cps: 25000,
-    price: 300000,
+    cps: 25000, price: 50000000,
     chance: .02,
     rarity: "Legendario",
     color: "var(--rarity-legendary)"
@@ -2926,8 +3500,7 @@ const allMemes = [
     id: "fanum",
     name: "Fanum Tax God",
     icon: "🍔",
-    cps: 75000,
-    price: 1000000,
+    cps: 75000, price: 150000000,
     chance: .008,
     rarity: "Mítico",
     color: "var(--rarity-mythic)"
@@ -2936,8 +3509,7 @@ const allMemes = [
     id: "sakading_apple",
     name: "Sakading Apple",
     icon: "🍎",
-    cps: 150000,
-    price: 2500000,
+    cps: 150000, price: 300000000,
     chance: .004,
     rarity: "Mítico",
     color: "var(--rarity-mythic)"
@@ -2946,8 +3518,7 @@ const allMemes = [
     id: "brainrot_supreme",
     name: "Brainrot Overlord",
     icon: "🧠",
-    cps: 250000,
-    price: 5000000,
+    cps: 250000, price: 500000000,
     chance: .002,
     rarity: "Mítico",
     color: "var(--rarity-mythic)"
@@ -2957,8 +3528,7 @@ const allMemes = [
     id: "duck_exe",
     name: "Duck.exe",
     icon: "🦆",
-    cps: 1000000000,
-    price: 4000000000,
+    cps: 1000000000, price: 2000000000000,
     chance: .00001,
     rarity: "Exótico",
     color: "var(--rarity-exotic)"
@@ -2968,8 +3538,7 @@ const allMemes = [
     id: "pulpo_misterioso",
     name: "Pulpo Misterioso",
     icon: "🐙",
-    cps: 625000000,
-    price: 900000000,
+    cps: 625000000, price: 1250000000000,
     chance: .00008,
     rarity: "Secreto",
     color: "var(--rarity-secret)"
@@ -2978,8 +3547,7 @@ const allMemes = [
     id: "shadow_ape",
     name: "Shadow Ape",
     icon: "🦍",
-    cps: 700000000,
-    price: 1800000000,
+    cps: 700000000, price: 1400000000000,
     chance: .00004,
     rarity: "Secreto",
     color: "var(--rarity-secret)"
@@ -2988,14 +3556,217 @@ const allMemes = [
     id: "gigante_supremo",
     name: "Gigante Supremo",
     icon: "🦾",
-    cps: 750000000,
-    price: 3000000000,
+    cps: 750000000, price: 1500000000000,
     chance: .00002,
     rarity: "Secreto",
     color: "var(--rarity-secret)"
   }
 ];
 
+
+/* =========================================================
+   HALLOWEEN
+========================================================= */
+
+const halloweenMemes = [
+  {id:"pumpkin_sigma",name:"Pumpkin Sigma",icon:"🎃",cps: 45, price: 90000,rarity:"Común",color:"var(--rarity-common)",chance:.7},
+  {id:"ghost_mewing",name:"Ghost Mewing",icon:"👻",cps: 90, price: 180000,rarity:"Común",color:"var(--rarity-common)",chance:.6},
+  {id:"spooky_skibidi",name:"Spooky Skibidi",icon:"🚽",cps: 250, price: 500000,rarity:"Raro",color:"var(--rarity-rare)",chance:.35},
+  {id:"witch_gyatt",name:"Witch Gyatt",icon:"🧙",cps: 600, price: 1200000,rarity:"Raro",color:"var(--rarity-rare)",chance:.3},
+  {id:"haunted_ohio",name:"Haunted Ohio",icon:"🏚️",cps: 1800, price: 3600000,rarity:"Épico",color:"var(--rarity-epic)",chance:.15},
+  {id:"vampire_rizz",name:"Vampire Rizz",icon:"🧛",cps: 4200, price: 8400000,rarity:"Épico",color:"var(--rarity-epic)",chance:.1},
+  {id:"reaper_chad",name:"Reaper Chad",icon:"💀",cps: 15000, price: 30000000,rarity:"Legendario",color:"var(--rarity-legendary)",chance:.05},
+  {id:"pumpkin_king",name:"Pumpkin King",icon:"🎃👑",cps: 50000, price: 100000000,rarity:"Legendario",color:"var(--rarity-legendary)",chance:.03},
+  {id:"cursed_fanum",name:"Cursed Fanum",icon:"🍔🕷️",cps: 220000, price: 440000000,rarity:"Mítico",color:"var(--rarity-mythic)",chance:.008},
+  {id:"halloween_demon",name:"Halloween Demon",icon:"😈",cps: 550000000, price: 1100000000000,rarity:"Halloween",color:"var(--rarity-halloween)",chance:.00005}
+];
+
+// Economía de memes: todos cuestan exactamente CPS × 2.000.
+// Se aplica tanto a la tienda normal como a la tienda de Halloween.
+allMemes.forEach(meme => { meme.price = meme.cps * 100; });
+halloweenMemes.forEach(meme => { meme.price = meme.cps * 100; });
+
+const mysteryBoxes = [
+  {id:"spooky_box",name:"Spooky Box",icon:"🎃",price:1000000},
+  {id:"haunted_box",name:"Haunted Box",icon:"👻",price:410000000},
+  {id:"demon_box",name:"Demon Box",icon:"😈",price:900000000}
+];
+
+function getHalloweenRarityMultiplier(rarity){
+  const m={"Común":2.2,"Raro":1.2,"Épico":.55,"Legendario":.20,"Mítico":.06,"Halloween":.007};
+  return m[rarity] || 1;
+}
+
+let halloweenShopStock = [];
+let halloweenGuaranteedPending = false;
+
+function restockHalloweenShop(forceHalloween = false){
+  const byRarity = {};
+  halloweenMemes.forEach(item => {
+    if(!byRarity[item.rarity]) byRarity[item.rarity] = [];
+    byRarity[item.rarity].push(item);
+  });
+
+  // Todos los memes se muestran siempre; la probabilidad solo decide su stock.
+  const rarityChances = {
+    "Común": 0.75, "Raro": 0.67, "Épico": 0.25,
+    "Legendario": 0.10, "Mítico": 0.02,
+    "Halloween": forceHalloween || isAdminAbuseActive() ? 1 : 0.005
+  };
+
+  halloweenShopStock = halloweenMemes.map(item => {
+    const chance = rarityChances[item.rarity] ?? 0;
+    return {...item, stock: Math.random() <= chance ? 1 : 0};
+  });
+
+  renderHalloweenShop();
+}
+
+function renderHalloweenShop(){
+  const c=document.getElementById("halloweenShopList");
+  if(!c) return;
+  c.innerHTML="";
+  halloweenShopStock.forEach((item,index)=>{
+    const el=document.createElement("div"); el.className="shop-item";
+    const info=document.createElement("div"); info.className="item-info";
+    const icon=document.createElement("span"); icon.className="item-icon"; icon.innerText=item.icon;
+    const details=document.createElement("div");
+    const name=document.createElement("div"); name.className="item-name"; name.innerText=item.name;
+    const tag=document.createElement("span"); tag.className=`stock-tag ${getRarityClass(item.rarity)}`; tag.innerText=item.rarity; name.appendChild(tag);
+    const meta=document.createElement("div"); meta.style.cssText="font-size:.68rem;color:#aaa;margin-top:3px;"; meta.innerText=`${formatNumber(item.cps)} CPS · ${formatNumber(item.price)} 🪙`;
+    details.append(name,meta); info.append(icon,details);
+    const stockText = document.createElement("div");
+    stockText.style.cssText="font-size:.68rem;color:#ff9d00;margin-top:3px;";
+    stockText.innerText=`Stock: ${item.stock}`;
+    details.appendChild(stockText);
+    const btn=document.createElement("button"); btn.className="buy-btn"; btn.innerText=`${formatNumber(item.price)} 🪙`; btn.onclick=()=>buyHalloweenMeme(index); btn.disabled=coins<item.price || item.stock<=0;
+    el.append(info,btn); c.appendChild(el);
+  });
+}
+
+function buyHalloweenMeme(index){
+  const item = halloweenShopStock[index];
+  if(!item || item.stock<=0 || coins<item.price) return;
+  coins-=item.price;
+  item.stock--;
+  inventory.push({...item, stock:undefined});
+  resetCandyMissionsIfNeeded();
+  candyDailyStats.halloweenBought++;
+  playSound("buy"); updateUI(); saveGame(); renderHalloweenShop();
+}
+
+function openMysteryBoxesModal(){ playSound("select"); renderMysteryBoxes(); document.getElementById("mysteryBoxesModal").style.display="flex"; }
+function closeMysteryBoxesModal(){ document.getElementById("mysteryBoxesModal").style.display="none"; }
+const mysteryBoxProbabilities = {
+  spooky_box: [
+    ["Común", 67], ["Raro", 25], ["Épico", 8]
+  ],
+  haunted_box: [
+    ["Raro", 50], ["Épico", 35], ["Legendario", 10], ["Mítico", 5]
+  ],
+  demon_box: [
+    ["Épico", 75], ["Legendario", 12.5], ["Mítico", 9], ["Halloween", 3.5]
+  ]
+};
+
+function getMysteryBoxRarity(boxId){
+  const chances = mysteryBoxProbabilities[boxId] || [];
+  const roll = Math.random() * 100;
+  let total = 0;
+  for(const [rarity, chance] of chances){
+    total += chance;
+    if(roll < total) return rarity;
+  }
+  return chances[chances.length - 1]?.[0] || "Común";
+}
+
+function showMysteryBoxProbabilities(){
+  const lines = [
+    "🎃 SPOOKY BOX",
+    "Común: 67%",
+    "Raro: 25%",
+    "Épico: 8%",
+    "",
+    "👻 HAUNTED BOX",
+    "Raro: 50%",
+    "Épico: 35%",
+    "Legendario: 10%",
+    "Mítico: 5%",
+    "",
+    "😈 DEMON BOX",
+    "Épico: 75%",
+    "Legendario: 12.5%",
+    "Mítico: 9%",
+    "Halloween: 3.5%"
+  ];
+  alert("📊 Probabilidades Mystery Boxes\n\n" + lines.join("\n"));
+}
+
+function openMysteryBoxFromInventory(boxId){
+  if(!mysteryBoxInventory[boxId] || mysteryBoxInventory[boxId] <= 0) return;
+
+  const box = mysteryBoxes.find(b => b.id === boxId);
+  if(!box) return;
+
+  const rarity = getMysteryBoxRarity(box.id);
+  const pool = halloweenMemes.filter(item => item.rarity === rarity);
+  if(!pool.length) return;
+
+  mysteryBoxInventory[boxId]--;
+  const reward = {...pool[Math.floor(Math.random() * pool.length)]};
+  inventory.push(reward);
+
+  playSound("rebirth");
+  alert(`🎃 ¡MYSTERY BOX ABIERTA!\nHas conseguido: ${reward.icon} ${reward.name} [${reward.rarity}]`);
+  updateUI();
+  saveGame();
+  renderMysteryBoxes();
+}
+
+function renderMysteryBoxes(){
+  const c=document.getElementById("mysteryBoxGrid"); if(!c) return; c.innerHTML="";
+
+  mysteryBoxes.forEach(box=>{
+    const card=document.createElement("div"); card.className="mystery-card";
+    card.innerHTML=`<div class="mystery-card-icon">${box.icon}</div><strong>${box.name}</strong><div style="font-size:.72rem;color:#aaa;margin-top:4px;">1 meme de Halloween</div>`;
+
+    const owned = mysteryBoxInventory[box.id] || 0;
+    if(owned > 0){
+      const ownedText=document.createElement("div");
+      ownedText.style.cssText="font-size:.78rem;color:#ff9d00;font-weight:800;margin:7px 0;";
+      ownedText.innerText=`🎁 En tu inventario: ${owned}`;
+      card.appendChild(ownedText);
+
+      const openBtn=document.createElement("button");
+      openBtn.className="buy-btn";
+      openBtn.innerText=`Abrir 1`;
+      openBtn.onclick=()=>openMysteryBoxFromInventory(box.id);
+      card.appendChild(openBtn);
+    }
+
+    const btn=document.createElement("button"); btn.className="buy-btn"; btn.innerText=`${formatNumber(box.price)} 🪙`; btn.disabled=coins<box.price; btn.onclick=()=>buyMysteryBox(box); card.appendChild(btn);
+    c.appendChild(card);
+  });
+}
+
+function buyMysteryBox(box){
+  if(coins<box.price) return;
+  coins-=box.price;
+
+  const rarity = getMysteryBoxRarity(box.id);
+  const pool = halloweenMemes.filter(item => item.rarity === rarity);
+  if(!pool.length){
+    coins += box.price;
+    return;
+  }
+
+  const reward = {...pool[Math.floor(Math.random() * pool.length)]};
+
+  inventory.push(reward);
+  playSound("rebirth");
+  alert(`🎃 ¡MYSTERY BOX!\nHas conseguido: ${reward.icon} ${reward.name} [${reward.rarity}]`);
+  updateUI(); saveGame(); renderMysteryBoxes(); renderHalloweenShop();
+}
 
 /* =========================================================
    POWERUPS
@@ -3088,6 +3859,13 @@ const validCodes = {
     type: "shield",
     value: 3,
     desc: "🛡️ +3 Escudos Anti-Robo"
+  },
+
+  "PLSMYSTERYBOX": {
+    type: "mysteryBoxes",
+    boxId: "demon_box",
+    value: 10,
+    desc: "😈 +10 Demon Boxes — las Mystery Boxes de mayor nivel"
   }
 };
 
@@ -3265,12 +4043,43 @@ function getPreviousDateKey(
 }
 
 function formatNumber(value) {
-  if (!Number.isFinite(value)) {
-    return "0";
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return "0";
+
+  const n = Math.floor(Math.abs(numericValue));
+  const sign = numericValue < 0 ? "-" : "";
+  const units = [
+    [1e33, "DC"],
+    [1e30, "NO"],
+    [1e27, "OC"],
+    [1e24, "SP"],
+    [1e21, "SX"],
+    [1e18, "QI"],
+    [1e15, "QA"],
+    [1e12, "T"],
+    [1e9, "B"],
+    [1e6, "M"],
+    [1e3, "K"]
+  ];
+
+  for (const [threshold, suffix] of units) {
+    if (n >= threshold) {
+      const scaled = n / threshold;
+      let text;
+
+      if (scaled >= 100) {
+        text = Math.floor(scaled).toString();
+      } else if (scaled >= 10) {
+        text = scaled.toFixed(1).replace(/\.0$/, "");
+      } else {
+        text = scaled.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+      }
+
+      return sign + text + suffix;
+    }
   }
 
-  return Math.floor(value)
-    .toLocaleString("es-ES");
+  return sign + n.toLocaleString("es-ES");
 }
 
 function canAfford(price) {
@@ -3318,6 +4127,13 @@ function getTemporaryMoneyMultiplier() {
     multiplier *= 5;
   }
 
+  if (
+    now <
+    candyMultiplierExpiresAt
+  ) {
+    multiplier *= 3;
+  }
+
   return multiplier;
 }
 
@@ -3340,7 +4156,7 @@ function loadGame() {
       coins =
         Math.max(
           0,
-          Number(data.coins) || 100
+          Number(data.coins) || 4000
         );
 
       lifetimeCoins =
@@ -3355,6 +4171,18 @@ function loadGame() {
           0,
           Number(data.shields) || 0
         );
+
+      candy = Math.max(0, Number(data.candy) || 0);
+      candyMissionDate = typeof data.candyMissionDate === "string" ? data.candyMissionDate : "";
+      candyDailyStats = data.candyDailyStats && typeof data.candyDailyStats === "object"
+        ? {
+            earned: Math.max(0, Number(data.candyDailyStats.earned) || 0),
+            planted: Math.max(0, Number(data.candyDailyStats.planted) || 0),
+            halloweenBought: Math.max(0, Number(data.candyDailyStats.halloweenBought) || 0)
+          }
+        : {earned:0,planted:0,halloweenBought:0};
+      candyClaimedMissions = Array.isArray(data.candyClaimedMissions) ? data.candyClaimedMissions : [];
+      resetCandyMissionsIfNeeded();
 
       rebirths =
         clampNumber(
@@ -3373,6 +4201,16 @@ function loadGame() {
         Array.isArray(data.inventory)
           ? data.inventory
           : [];
+
+      mysteryBoxInventory =
+        data.mysteryBoxInventory &&
+        typeof data.mysteryBoxInventory === "object"
+          ? {
+              spooky_box: Math.max(0, Number(data.mysteryBoxInventory.spooky_box) || 0),
+              haunted_box: Math.max(0, Number(data.mysteryBoxInventory.haunted_box) || 0),
+              demon_box: Math.max(0, Number(data.mysteryBoxInventory.demon_box) || 0)
+            }
+          : {spooky_box:0, haunted_box:0, demon_box:0};
 
       garden =
         Array.isArray(data.garden)
@@ -3407,6 +4245,11 @@ function loadGame() {
       moneyStormExpiresAt =
         Number(
           data.moneyStormExpiresAt
+        ) || 0;
+
+      candyMultiplierExpiresAt =
+        Number(
+          data.candyMultiplierExpiresAt
         ) || 0;
 
       shortWordsActive =
@@ -3544,6 +4387,11 @@ function saveGame() {
         shields
       ),
 
+    candy: Math.max(0, candy),
+    candyMissionDate,
+    candyDailyStats,
+    candyClaimedMissions,
+
     rebirths:
       clampNumber(
         rebirths,
@@ -3558,12 +4406,14 @@ function saveGame() {
       ),
 
     inventory,
+    mysteryBoxInventory,
     garden,
     redeemedCodes,
     streakDay,
     lastClaimDate,
     boostExpiresAt,
     moneyStormExpiresAt,
+    candyMultiplierExpiresAt,
     shortWordsActive,
     playerName
   };
@@ -3682,6 +4532,17 @@ function redeemCode() {
   }
 
   else if (
+    reward.type === "mysteryBoxes"
+  ) {
+    if (!mysteryBoxInventory[reward.boxId]) {
+      mysteryBoxInventory[reward.boxId] = 0;
+    }
+
+    mysteryBoxInventory[reward.boxId] += reward.value;
+    success = true;
+  }
+
+  else if (
     reward.type === "meme"
   ) {
     const template =
@@ -3751,36 +4612,19 @@ function redeemCode() {
 ========================================================= */
 
 function normalizeStreak() {
-  const today =
-    getLocalDateKey();
-
+  const today=getLocalDateKey();
   if (!lastClaimDate) {
-    streakDay =
-      clampNumber(
-        streakDay,
-        1,
-        streakRewards.length
-      );
-
-    return;
+    streakDay=clampNumber(streakDay,1,streakRewards.length);
+    return false;
   }
-
-  if (
-    lastClaimDate ===
-    today
-  ) {
-    return;
+  if (lastClaimDate===today) return false;
+  const yesterday=getPreviousDateKey();
+  if (lastClaimDate!==yesterday) {
+    streakDay=1;
+    saveGame();
+    return true;
   }
-
-  const yesterday =
-    getPreviousDateKey();
-
-  if (
-    lastClaimDate !==
-    yesterday
-  ) {
-    streakDay = 1;
-  }
+  return false;
 }
 
 function openStreakModal() {
@@ -3919,6 +4763,7 @@ function renderStreakGrid() {
 
 function claimDailyStreak() {
   normalizeStreak();
+  renderStreakGrid();
 
   const today =
     getLocalDateKey();
@@ -3988,6 +4833,22 @@ function claimDailyStreak() {
   saveGame();
 }
 
+
+
+setInterval(() => {
+  const before=streakDay;
+  normalizeStreak();
+  if(before!==streakDay || document.getElementById("streakModal").style.display==="flex") renderStreakGrid();
+}, 30000);
+
+/* Guardado extra de la racha al salir/cerrar la página. */
+window.addEventListener("pagehide", () => {
+  saveGame();
+});
+
+window.addEventListener("beforeunload", () => {
+  saveGame();
+});
 
 /* =========================================================
    RESTOCK
@@ -4164,6 +5025,7 @@ function getRarityClass(
     "Épico": "rarity-epic",
     "Legendario": "rarity-legendary",
     "Mítico": "rarity-mythic",
+    "Halloween": "rarity-halloween",
     "Exótico": "rarity-exotic",
     "Secreto": "rarity-secret"
   }[rarity] || "";
@@ -4307,7 +5169,7 @@ function renderShop() {
 
       stats.appendChild(
         document.createTextNode(
-          `+${item.cps.toLocaleString()} 🪙/s | Stock: `
+          `+${formatNumber(item.cps)} 🪙/s | Stock: `
         )
       );
 
@@ -4336,7 +5198,7 @@ function renderShop() {
         );
 
       button.innerText =
-        `🪙 ${item.price.toLocaleString()}`;
+        `🪙 ${formatNumber(item.price)}`;
 
       button.onclick =
         () => buyMeme(index);
@@ -4545,14 +5407,27 @@ function buyMeme(index) {
     }
   }
 
-  inventory.push({
-    ...item,
-    adminGuaranteed: undefined
-  });
+  // Añadir una copia limpia al inventario.
+  // Nunca guardamos aquí el stock ni la marca temporal de Admin Abuse.
+  const purchasedMeme = {
+    id: item.id,
+    name: item.name,
+    icon: item.icon,
+    cps: item.cps,
+    price: item.price,
+    chance: item.chance,
+    rarity: item.rarity,
+    color: item.color
+  };
+
+  inventory.push(purchasedMeme);
 
   playSound("buy");
 
+  // Renderizar el inventario inmediatamente después de comprar.
+  renderInventory();
   updateUI();
+  renderInventory();
   renderShop();
   saveGame();
 }
@@ -4716,6 +5591,9 @@ function handlePlotClick(
       selectedInvIndex =
         null;
 
+      resetCandyMissionsIfNeeded();
+      candyDailyStats.planted++;
+
       playSound("plant");
 
       updateUI();
@@ -4774,7 +5652,7 @@ function doRebirth() {
       maxPlots +
       currentReq.addPlots;
 
-    coins = 100;
+    coins = 4000;
 
     inventory = [];
 
@@ -5113,17 +5991,16 @@ function updateUI() {
   document.getElementById(
     "cps"
   ).innerText =
-    currentCPS.toLocaleString(
-      "es-ES",
-      {
-        maximumFractionDigits: 0
-      }
-    );
+    formatNumber(currentCPS);
 
   document.getElementById(
     "shields"
   ).innerText =
     shields;
+
+  const candyEl=document.getElementById("candy");
+  if(candyEl) candyEl.innerText=formatNumber(candy);
+  renderCandyMissions();
 
   document.getElementById(
     "rebirthsVal"
@@ -5137,6 +6014,7 @@ function updateUI() {
 
   renderGarden();
   renderInventory();
+  renderHalloweenShop();
   updateRebirthUI();
   updatePowerupStatus();
   updateAdminStatus();
@@ -5176,6 +6054,10 @@ function renderGarden() {
         handlePlotClick(i);
 
     if (item) {
+
+      plot.style.borderColor =
+        item.color ||
+        "var(--accent-green)";
 
       const icon =
         document.createElement(
@@ -5266,7 +6148,7 @@ function renderInventory() {
         item.icon;
 
       el.title =
-        `${item.name} · ${item.cps.toLocaleString()} CPS`;
+        `${item.name} · ${formatNumber(item.cps)} CPS`;
 
       el.onclick =
         () =>
@@ -5319,26 +6201,55 @@ function updateRebirthUI() {
   document.getElementById(
     "reqCoins"
   ).innerText =
-    `${formatNumber(coins)} / ${currentReq.cost.toLocaleString("es-ES")}`;
+    `${formatNumber(coins)} / ${formatNumber(currentReq.cost)}`;
 
   document.getElementById(
     "reqLifetime"
   ).innerText =
-    `${formatNumber(lifetimeCoins)} / ${currentReq.lifetimeReq.toLocaleString("es-ES")}`;
+    `${formatNumber(lifetimeCoins)} / ${formatNumber(currentReq.lifetimeReq)}`;
 
   document.getElementById(
     "reqReward"
   ).innerText =
     `+${currentReq.addPlots} Slot y x${currentReq.bonusMultiplier} Monedas`;
 
+  const coinsReady =
+    coins >= currentReq.cost;
+
+  const lifetimeReady =
+    lifetimeCoins >= currentReq.lifetimeReq;
+
+  const coinsReq = document.getElementById("reqCoins");
+  const lifetimeReq = document.getElementById("reqLifetime");
+
+  const coinsRow = coinsReq.closest(".req-item");
+  const lifetimeRow = lifetimeReq.closest(".req-item");
+
+  coinsRow.classList.toggle("req-ready", coinsReady);
+  coinsRow.classList.toggle("req-pending", !coinsReady);
+
+  lifetimeRow.classList.toggle("req-ready", lifetimeReady);
+  lifetimeRow.classList.toggle("req-pending", !lifetimeReady);
+
+  coinsReq.innerText =
+    `${coinsReady ? "✓ " : ""}${formatNumber(coins)} / ${formatNumber(currentReq.cost)}`;
+
+  lifetimeReq.innerText =
+    `${lifetimeReady ? "✓ " : ""}${formatNumber(lifetimeCoins)} / ${formatNumber(currentReq.lifetimeReq)}`;
+
   const canRebirth =
-    coins >=
-      currentReq.cost &&
-    lifetimeCoins >=
-      currentReq.lifetimeReq;
+    coinsReady &&
+    lifetimeReady;
 
   button.disabled =
     !canRebirth;
+
+  button.classList.toggle("ready", canRebirth);
+
+  button.innerText =
+    canRebirth
+      ? "✓ ¡REBIRTH LISTO!"
+      : "¡Hacer Rebirth!";
 }
 
 function updatePowerupStatus() {
@@ -5445,11 +6356,16 @@ function switchTab(
     );
   }
 
-  if (
-    tabId ===
-    "leaderboard"
-  ) {
+  if (tabId === "leaderboard") {
     fetchOnlineLeaderboard();
+  }
+
+  if (tabId === "halloween") {
+    renderHalloweenShop();
+  }
+
+  if (tabId === "candy") {
+    renderCandyMissions();
   }
 }
 
@@ -5639,9 +6555,7 @@ function updateNextUpdateTimer() {
   document.getElementById(
     "updateCountdown"
   ).innerText =
-    `${days}d ${String(hours).padStart(2,"0")}h ` +
-    `${String(minutes).padStart(2,"0")}m ` +
-    `${String(seconds).padStart(2,"0")}s`;
+    `🎃 Halloween Update 1.1 · Admin Abuse en ${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
 
   checkAdminAbuseTransition();
 
@@ -6337,6 +7251,9 @@ setInterval(
     lifetimeCoins +=
       gained;
 
+    resetCandyMissionsIfNeeded();
+    candyDailyStats.earned += gained;
+
     updateUI();
 
   },
@@ -6442,19 +7359,34 @@ setInterval(
   1000
 );
 
+let halloweenRestockTimer = 60;
+function updateHalloweenRestockTimerDisplay(){
+  const timerEl = document.getElementById("restockTimerHalloween");
+  if(timerEl) timerEl.innerText = `🔄 Restock en ${Math.max(0, halloweenRestockTimer)}s`;
+}
+updateHalloweenRestockTimerDisplay();
+setInterval(() => {
+  halloweenRestockTimer--;
+  if(halloweenRestockTimer <= 0){
+    restockHalloweenShop(isAdminAbuseActive());
+    halloweenRestockTimer = 60;
+  }
+  updateHalloweenRestockTimerDisplay();
+}, 1000);
 
-
-/* ===== ADMIN ABUSE EXTRA ===== */
-let lastAdminState=isAdminAbuseActive();let mythicAfterAdmin=false,confettiLoop=null;
-function spawnConfettiBurst(){const c=document.getElementById('confettiContainer');if(!c)return;c.style.display='block';const colors=['#ff304f','#ffd21c','#00ffaa','#00d2ff','#a855f7','#ffffff'];for(let i=0;i<25;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'vw';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDuration=(3+Math.random()*3)+'s';d.style.transform='rotate('+Math.random()*360+'deg)';c.appendChild(d);setTimeout(()=>d.remove(),6500);}}
-function updateAdminExtras(){const active=isAdminAbuseActive();if(active){if(!confettiLoop){spawnConfettiBurst();confettiLoop=setInterval(spawnConfettiBurst,700);}}else{if(confettiLoop){clearInterval(confettiLoop);confettiLoop=null;}const c=document.getElementById('confettiContainer');if(c){c.style.display='none';c.innerHTML='';}}if(lastAdminState&&!active){mythicAfterAdmin=true;restockShop();}lastAdminState=active;}
-const _oldRestockShop=restockShop;restockShop=function(){_oldRestockShop();if(mythicAfterAdmin){const mythics=shopMemes.filter(m=>m.rarity==='Mítico');if(mythics.length){const pick=mythics[Math.floor(Math.random()*mythics.length)];pick.stock=Math.max(1,pick.stock);renderShop();}mythicAfterAdmin=false;}};
 
 /* =========================================================
    INICIO
 ========================================================= */
 
 loadGame();
+
+/* Pantalla de carga inicial */
+setTimeout(() => {
+  const loadingScreen = document.getElementById("gameLoadingScreen");
+  if (loadingScreen) loadingScreen.classList.add("loading-hidden");
+}, 5000);
+restockHalloweenShop();
 
 /*
   Si entramos durante Admin Abuse,
