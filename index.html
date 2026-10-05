@@ -28,6 +28,7 @@
       --rarity-epic: #b84cff;
       --rarity-legendary: #ffd21c;
       --rarity-mythic: #ff304f;
+      --rarity-celestial: #ff69b4;
       --rarity-halloween: #ff6a00;
 
       /* Exotic: brillante y con glow */
@@ -927,6 +928,13 @@
 
     .rarity-mythic {
       background: linear-gradient(135deg,#870019,#ff4d69,#99001d);
+    }
+
+    .rarity-celestial {
+      background: linear-gradient(135deg,#d92f86,#ff69b4,#ff9ed0);
+      color: #fff;
+      border-color: #ffb7dc;
+      box-shadow: 0 0 9px rgba(255,105,180,.28);
     }
 
     .rarity-halloween {
@@ -1951,7 +1959,7 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
         <div class="update-panel-box">
 
           <h2>
-            🎃 Update 1.1.1 — Halloween Update
+            🎃 Update 1.2.1 — Halloween Update
           </h2>
 
           <p style="font-size:.8rem;color:#ddd;margin-bottom:5px;">
@@ -3534,6 +3542,34 @@ const allMemes = [
   },
 
   {
+    id: "vikingo_prime",
+    name: "Vikingo Prime",
+    icon: "⚔️",
+    cps: 1500000, price: 150000000,
+    chance: .00012,
+    rarity: "Celestial",
+    color: "var(--rarity-celestial)"
+  },
+  {
+    id: "samurai_prime",
+    name: "Samurai Prime",
+    icon: "🥷",
+    cps: 2000000, price: 200000000,
+    chance: .00006,
+    rarity: "Celestial",
+    color: "var(--rarity-celestial)"
+  },
+  {
+    id: "spartan_prime",
+    name: "Spartan Prime",
+    icon: "🛡️",
+    cps: 2500000, price: 250000000,
+    chance: .00003,
+    rarity: "Celestial",
+    color: "var(--rarity-celestial)"
+  },
+
+  {
     id: "duck_exe",
     name: "Duck.exe",
     icon: "🦆",
@@ -4895,6 +4931,7 @@ function getRarityMultiplier(
     "Épico": .55,
     "Legendario": .20,
     "Mítico": .06,
+    "Celestial": .025,
     "Secreto": .01,
     "Exótico": .0002
   };
@@ -4924,7 +4961,7 @@ function showRarityAlert(item) {
 }
 
 function checkHighRarityStock(stock, includeHalloween = false) {
-  const priority = ["Legendario", "Mítico", "Secreto", "Exótico", "Halloween"];
+  const priority = ["Legendario", "Mítico", "Celestial", "Secreto", "Exótico", "Halloween"];
   const found = stock.find(item => item.stock > 0 && priority.includes(item.rarity));
   if (found) showRarityAlert(found);
 }
@@ -5084,6 +5121,7 @@ function getRarityClass(
     "Épico": "rarity-epic",
     "Legendario": "rarity-legendary",
     "Mítico": "rarity-mythic",
+    "Celestial": "rarity-celestial",
     "Halloween": "rarity-halloween",
     "Exótico": "rarity-exotic",
     "Secreto": "rarity-secret"
@@ -6614,7 +6652,7 @@ function updateNextUpdateTimer() {
   document.getElementById(
     "updateCountdown"
   ).innerText =
-    `🎃 Halloween Update 1.1.1 · Admin Abuse en ${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
+    `🎃 Halloween Update 1.2.1 · Admin Abuse en ${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
 
   checkAdminAbuseTransition();
 
