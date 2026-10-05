@@ -1559,6 +1559,24 @@
       color: var(--accent-gold) !important;
     }
 
+
+    #rarityAlert, #adminRefreshNotice {
+      display: none;
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5000;
+      width: min(92vw, 620px);
+      padding: 16px 20px;
+      border-radius: 16px;
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.35;
+      box-shadow: 0 12px 35px rgba(0,0,0,.55);
+    }
+    #rarityAlert { top: 18px; background: #151824; border: 2px solid var(--accent-gold); color: white; font-size: 1rem; }
+    #adminRefreshNotice { top: 18px; background: #151824; border: 2px solid var(--accent-gold); color: white; font-size: 1rem; }
+
     /* Mensaje de drop garantizado */
     #adminDropMessage {
       display: none;
@@ -1715,6 +1733,10 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
   <div id="adminEventBanner">
     🔥⚡ ADMIN ABUSE ⚡🔥 · x5 STOCK · x2 DINERO · ¡FIESTA!
   </div>
+
+
+  <div id="rarityAlert" role="status" aria-live="polite"></div>
+  <div id="adminRefreshNotice" role="alert" aria-live="assertive">⚠️ REFRESCA LA PÁGINA ⚠️<br>Han pasado 2 minutos desde el Admin Abuse. Refresca la página para cargar correctamente el stock final.</div>
 
   <div id="confettiContainer"></div>
 
@@ -2565,6 +2587,10 @@ function triggerAdminAbuseEndDrop() {
     "brainrot_admin_end_drop_key",
     eventKey
   );
+  localStorage.setItem(
+    "brainrot_admin_end_time",
+    String(now.getTime())
+  );
 
   adminGuaranteedMythicPending = true;
 
@@ -2573,7 +2599,7 @@ function triggerAdminAbuseEndDrop() {
     que uno de los Míticos tenga stock.
   */
   restockShop(true);
-  restockHalloweenShop(true);
+  restockHalloweenShop();
 
   /*
     Feedback visual.
@@ -2586,6 +2612,14 @@ function triggerAdminAbuseEndDrop() {
   if (message) {
     message.style.display = "block";
   }
+
+  // Aviso visual y alarma 2 minutos después de terminar Admin Abuse.
+  clearTimeout(window.__adminRefreshTimer);
+  window.__adminRefreshTimer = setTimeout(() => {
+    const notice = document.getElementById("adminRefreshNotice");
+    if (notice) notice.style.display = "block";
+    playSound("alarm");
+  }, 120000);
 
   playSound("rebirth");
 
@@ -2645,7 +2679,7 @@ function checkAdminAbuseTransition() {
       para que el x5 stock se note desde el principio.
     */
     restockShop();
-    restockHalloweenShop(true);
+    restockHalloweenShop();
 
     playSound("buy");
   }
@@ -2971,6 +3005,22 @@ function playSound(type) {
       osc.stop(now + .25);
     }
 
+    else if (type === "accelerate") {
+      [520, 740, 980, 1280, 1600].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const start = now + i * .055;
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(.08, start);
+        gain.gain.exponentialRampToValueAtTime(.001, start + .14);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + .14);
+      });
+    }
+
     else if (type === "defend") {
 
       [
@@ -3115,7 +3165,8 @@ function playSound(type) {
 ========================================================= */
 
 const MIN_STARTING_COINS = 100;
-const MAX_REBIRTHS = 11;
+const MAX_REBIRTHS = 15;
+const MAX_SHIELDS = 5;
 
 let playerId =
   localStorage.getItem(
@@ -3312,78 +3363,106 @@ const rebirthConfigs = [
     level: 1,
     cost: 250000,
     lifetimeReq: 1000000,
-    bonusMultiplier: 1.5,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 2,
     cost: 2500000,
     lifetimeReq: 10000000,
-    bonusMultiplier: 2.2,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 3,
     cost: 25000000,
     lifetimeReq: 100000000,
-    bonusMultiplier: 3.5,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 4,
     cost: 250000000,
     lifetimeReq: 1000000000,
-    bonusMultiplier: 5,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 5,
     cost: 2500000000,
     lifetimeReq: 10000000000,
-    bonusMultiplier: 10,
+    bonusMultiplier: 2,
     addPlots: 2
   },
   {
     level: 6,
     cost: 8000000000,
     lifetimeReq: 30000000000,
-    bonusMultiplier: 15,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 7,
     cost: 75000000000,
     lifetimeReq: 250000000000,
-    bonusMultiplier: 22,
+    bonusMultiplier: 2,
     addPlots: 0
   },
   {
     level: 8,
     cost: 750000000000,
     lifetimeReq: 2500000000000,
-    bonusMultiplier: 35,
+    bonusMultiplier: 2,
     addPlots: 2
   },
   {
     level: 9,
     cost: 2250000000000,
     lifetimeReq: 7500000000000,
-    bonusMultiplier: 105,
+    bonusMultiplier: 2,
     addPlots: 0
   },
   {
     level: 10,
     cost: 11250000000000,
     lifetimeReq: 37500000000000,
-    bonusMultiplier: 525,
+    bonusMultiplier: 2,
     addPlots: 1
   },
   {
     level: 11,
     cost: 90000000000000,
     lifetimeReq: 300000000000000,
-    bonusMultiplier: 4200,
+    bonusMultiplier: 2,
     addPlots: 2
+  },
+  {
+    level: 12,
+    cost: 720000000000000,
+    lifetimeReq: 2400000000000000,
+    bonusMultiplier: 2,
+    addPlots: 0
+  },
+  {
+    level: 13,
+    cost: 5760000000000000,
+    lifetimeReq: 19200000000000000,
+    bonusMultiplier: 2,
+    addPlots: 0
+  },
+  {
+    level: 14,
+    cost: 46080000000000000,
+    lifetimeReq: 153600000000000000,
+    bonusMultiplier: 2,
+    addPlots: 0
+  },
+  {
+    level: 15,
+    cost: 368640000000000000,
+    lifetimeReq: 1228800000000000000,
+    bonusMultiplier: 2,
+    addPlots: 0
   }
 ];
 
@@ -3587,9 +3666,9 @@ allMemes.forEach(meme => { meme.price = meme.cps * 100; });
 halloweenMemes.forEach(meme => { meme.price = meme.cps * 100; });
 
 const mysteryBoxes = [
-  {id:"spooky_box",name:"Spooky Box",icon:"🎃",price:1000000},
-  {id:"haunted_box",name:"Haunted Box",icon:"👻",price:410000000},
-  {id:"demon_box",name:"Demon Box",icon:"😈",price:900000000}
+  {id:"spooky_box",name:"Spooky Box",icon:"🎃",price:320000},
+  {id:"haunted_box",name:"Haunted Box",icon:"👻",price:20000000},
+  {id:"demon_box",name:"Demon Box",icon:"😈",price:50000000000}
 ];
 
 function getHalloweenRarityMultiplier(rarity){
@@ -3599,6 +3678,7 @@ function getHalloweenRarityMultiplier(rarity){
 
 let halloweenShopStock = [];
 let halloweenGuaranteedPending = false;
+let adminHalloweenClaimKey = localStorage.getItem("brainrot_admin_halloween_key") || "";
 
 function restockHalloweenShop(forceHalloween = false){
   const byRarity = {};
@@ -3611,7 +3691,7 @@ function restockHalloweenShop(forceHalloween = false){
   const rarityChances = {
     "Común": 0.75, "Raro": 0.67, "Épico": 0.25,
     "Legendario": 0.10, "Mítico": 0.02,
-    "Halloween": forceHalloween || isAdminAbuseActive() ? 1 : 0.005
+    "Halloween": forceHalloween ? 1 : (isAdminAbuseActive() ? 0.005 : 0.005)
   };
 
   halloweenShopStock = halloweenMemes.map(item => {
@@ -3619,6 +3699,22 @@ function restockHalloweenShop(forceHalloween = false){
     return {...item, stock: Math.random() <= chance ? 1 : 0};
   });
 
+  if (isAdminAbuseActive()) {
+    const eventKey = getAdminEventKey();
+    if (adminHalloweenClaimKey !== eventKey) {
+      const demon = halloweenShopStock.find(item => item.rarity === "Halloween");
+      if (demon) {
+        demon.stock = 1;
+        adminHalloweenClaimKey = eventKey;
+        localStorage.setItem("brainrot_admin_halloween_key", eventKey);
+      }
+    } else {
+      const demon = halloweenShopStock.find(item => item.rarity === "Halloween");
+      if (demon) demon.stock = 0;
+    }
+  }
+
+  checkHighRarityStock(halloweenShopStock, true);
   renderHalloweenShop();
 }
 
@@ -4169,7 +4265,7 @@ function loadGame() {
       shields =
         Math.max(
           0,
-          Number(data.shields) || 0
+          Math.min(MAX_SHIELDS, Number(data.shields) || 0)
         );
 
       candy = Math.max(0, Number(data.candy) || 0);
@@ -4299,6 +4395,12 @@ function loadGame() {
 
   fetchOnlineLeaderboard();
 
+  const savedAdminEndTime = Number(localStorage.getItem("brainrot_admin_end_time")) || 0;
+  if (savedAdminEndTime && Date.now() >= savedAdminEndTime + 120000) {
+    const notice = document.getElementById("adminRefreshNotice");
+    if (notice) notice.style.display = "block";
+  }
+
   /*
     Si hemos entrado justo después del Admin Abuse
     y todavía no se ha reclamado el drop de esa sesión,
@@ -4384,7 +4486,7 @@ function saveGame() {
     shields:
       Math.max(
         0,
-        shields
+        Math.min(MAX_SHIELDS, shields)
       ),
 
     candy: Math.max(0, candy),
@@ -4527,7 +4629,7 @@ function redeemCode() {
   else if (
     reward.type === "shield"
   ) {
-    shields += reward.value;
+    shields = Math.min(MAX_SHIELDS, shields + reward.value);
     success = true;
   }
 
@@ -4794,7 +4896,7 @@ function claimDailyStreak() {
   else if (
     reward.type === "shield"
   ) {
-    shields += reward.val;
+    shields = Math.min(MAX_SHIELDS, shields + reward.val);
   }
 
   else if (
@@ -4881,6 +4983,22 @@ function getRarityMultiplier(
 
   Se utiliza SOLO al terminar Admin Abuse.
 */
+function showRarityAlert(item) {
+  const el = document.getElementById("rarityAlert");
+  if (!el) return;
+  el.innerHTML = `✨ ¡${item.rarity.toUpperCase()} O MEJOR!<br>${item.icon} ${item.name} está en la tienda`;
+  el.style.display = "block";
+  playSound("accelerate");
+  clearTimeout(window.__rarityAlertTimer);
+  window.__rarityAlertTimer = setTimeout(() => { el.style.display = "none"; }, 4500);
+}
+
+function checkHighRarityStock(stock, includeHalloween = false) {
+  const priority = ["Legendario", "Mítico", "Secreto", "Exótico", "Halloween"];
+  const found = stock.find(item => item.stock > 0 && priority.includes(item.rarity));
+  if (found) showRarityAlert(found);
+}
+
 function restockShop(
   forceMythic = false
 ) {
@@ -4928,11 +5046,22 @@ function restockShop(
         };
       });
 
+  // Desbloqueos por Rebirth: Mítico 5+, Secreto 10+, Exótico 15+.
+  shopMemes.forEach(item => {
+    const locked =
+      (item.rarity === "Mítico" && rebirths < 5) ||
+      (item.rarity === "Secreto" && rebirths < 10) ||
+      (item.rarity === "Exótico" && rebirths < 15);
+    if (locked) item.stock = 0;
+  });
+
+  checkHighRarityStock(shopMemes);
+
 
   /*
     DROP MÍTICO GARANTIZADO
   */
-  if (forceMythic) {
+  if (forceMythic && rebirths >= 5) {
 
     const mythics =
       shopMemes.filter(
@@ -5467,7 +5596,7 @@ function buyPowerup(index) {
     powerup.type ===
     "shield"
   ) {
-    shields++;
+    shields = Math.min(MAX_SHIELDS, shields + 1);
   }
 
   else if (
