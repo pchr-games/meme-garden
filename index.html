@@ -341,7 +341,7 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .pass-node-row::before{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:8px;transform:translateY(-50%);background:linear-gradient(90deg,#ffcc00 var(--p,0%),#2a2f4a var(--p,0%))}
 .pass-node{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:#2a2f4a;border:3px solid #3d4468;display:grid;place-items:center;font-weight:900;font-size:.85rem}
 .pass-col.reached .pass-node{background:linear-gradient(135deg,#ffcc00,#ff8a00);border-color:#fff3b0;color:#000}
-.pass-col.current .pass-node{border:3px dashed #ffcc00;color:#ffcc00}
+.pass-col.current .pass-node{border:3px dashed #6b7280;color:#9ca3af}
 .pass-col.final .pass-cell{border-color:#ffcc00;box-shadow:0 0 14px rgba(255,204,0,.35)}
 .pass-actions{display:flex;gap:10px}
 @media (max-width:700px){
@@ -601,7 +601,7 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
     <div class="pass-progress">
       <div class="pass-tier-badge"><span id="passTierNum">0</span><small>NIVEL</small></div>
       <div class="pass-progress-main">
-        <div class="pass-progress-text"><span id="passTokens">0 / 800</span><span id="passTokensLabel">🎟️ Fichas para el nivel 1</span></div>
+        <div class="pass-progress-text"><span id="passTokens">0 / 800</span><span id="passTokensLabel">🎟️ Fichas</span></div>
         <div class="pass-bar"><div id="passBarFill"></div></div>
       </div>
       <button class="pass-plus-btn" id="passPlusBtn" onclick="buyPassPlus()">🔓 Desbloquear PLUS</button>
@@ -3389,7 +3389,7 @@ function updateSeasonLive(force) {
   const tokTxt = done ? "¡Pase completado!" : `${formatNumber(st.into)} / ${formatNumber(st.need)}`;
   if (tierEl && tierEl.innerText !== String(st.level)) tierEl.innerText = st.level;
   const labEl = document.getElementById("passTokensLabel");
-  const labTxt = done ? "🎟️ Máximo" : `🎟️ Fichas para el nivel ${st.level + 1}`;
+  const labTxt = done ? "🎟️ Máximo" : "🎟️ Fichas";
   if (labEl && labEl.innerText !== labTxt) labEl.innerText = labTxt;
   if (tokEl && tokEl.innerText !== tokTxt) tokEl.innerText = tokTxt;
   if (fill) fill.style.width = done ? "100%" : `${(st.into / st.need) * 100}%`;
