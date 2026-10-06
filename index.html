@@ -259,9 +259,10 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 
 @media (max-width:700px){
   body{padding:12px}
-  h1{font-size:1.9rem;padding:38px 50px 5px}
+  h1{font-size:1.9rem;padding:70px 10px 5px}
   .codes-btn,.streak-btn{top:0;font-size:.72rem;padding:7px 9px}
   .codes-btn{right:0}
+  .pass-btn{top:36px;right:0;font-size:.72rem;padding:7px 9px}
   .streak-btn{left:0}
   .main-container{flex-direction:column}
   .left-panel,.shop-panel{width:100%;min-width:0}
@@ -275,23 +276,11 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 }
 
 /* PASE DE TEMPORADA / MERCADER / ESTADÍSTICAS */
-.season-panel,.merchant-panel{background:linear-gradient(145deg,rgba(20,24,44,.96),rgba(40,28,70,.92));border:1px solid rgba(168,85,247,.45);border-radius:18px;padding:16px}
+.merchant-panel{background:linear-gradient(145deg,rgba(20,24,44,.96),rgba(40,28,70,.92));border:1px solid rgba(168,85,247,.45);border-radius:18px;padding:16px}
 .merchant-panel{border-color:rgba(255,204,0,.45);background:linear-gradient(145deg,rgba(40,28,12,.96),rgba(70,40,20,.92))}
 .season-head,.merchant-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
 .season-title,.merchant-title{font-family:"Fredoka",sans-serif;font-size:1.15rem;font-weight:700;color:var(--accent-gold)}
 .season-sub{font-size:.72rem;color:#aaa;margin-top:2px}
-.season-summary{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px}
-.season-bar{height:12px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-bottom:8px}
-#seasonBarFill{height:100%;width:0%;background:linear-gradient(90deg,#a855f7,#ffcc00);border-radius:99px;transition:width .4s}
-.season-how{font-size:.7rem;color:#aaa;margin-bottom:10px;line-height:1.35}
-.season-row{display:flex;align-items:center;gap:10px;background:rgba(15,18,28,.7);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:8px 12px;margin-bottom:8px}
-.season-row.ready{border-color:var(--accent-gold);box-shadow:0 0 12px rgba(255,204,0,.2)}
-.season-row.claimed{opacity:.55}
-.season-lv{width:28px;height:28px;border-radius:50%;background:rgba(168,85,247,.3);display:grid;place-items:center;font-weight:900;font-size:.8rem;flex-shrink:0}
-.season-ico{font-size:1.5rem;flex-shrink:0}
-.season-label{flex:1;font-weight:700;font-size:.82rem;min-width:0}
-.season-claim{border:0;border-radius:9px;padding:7px 10px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ffcc00,#ff5500);color:#000;white-space:nowrap}
-.season-claim:disabled{background:#333;color:#777;cursor:not-allowed}
 .merchant-timer{font-weight:800;font-size:.8rem;color:var(--accent-gold);background:rgba(0,0,0,.4);padding:6px 10px;border-radius:10px;white-space:nowrap}
 .merchant-empty{text-align:center;color:#aaa;font-size:.85rem;padding:24px 10px;line-height:1.6}
 .old-price{text-decoration:line-through;color:#888;margin-right:4px}
@@ -300,6 +289,65 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .stat-tile .st-ico{font-size:1.4rem}
 .stat-tile .st-label{font-size:.7rem;color:#aaa;margin-top:4px}
 .stat-tile .st-val{font-weight:900;font-size:1rem;color:var(--accent-gold);margin-top:2px;word-break:break-word}
+
+/* MEME PASS (estilo Brawl Pass) */
+.pass-btn{position:absolute;right:15px;top:52px;border:none;padding:9px 14px;border-radius:12px;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .15s ease;background:linear-gradient(45deg,#ffcc00,#ff5500);color:#000;box-shadow:0 4px 15px rgba(255,204,0,.25)}
+.pass-btn:hover{opacity:.88}
+.pass-btn.has-reward{animation:passBtnGlow 1s ease-in-out infinite alternate}
+@keyframes passBtnGlow{from{box-shadow:0 0 6px rgba(255,204,0,.4)}to{box-shadow:0 0 20px rgba(255,204,0,.95)}}
+.pass-box{background:linear-gradient(160deg,#1b0f3a,#0d1230 55%,#1a0b2e);border:2px solid #ffcc00;border-radius:20px;width:min(1000px,96vw);max-height:94vh;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 40px rgba(255,204,0,.25),0 15px 45px rgba(0,0,0,.85)}
+.pass-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pass-season{font-size:.7rem;font-weight:900;letter-spacing:.2em;color:#a9b6ff}
+.pass-title{font-family:"Fredoka",sans-serif;font-size:2rem;font-weight:800;line-height:1;background:linear-gradient(90deg,#ffcc00,#ff5500,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pass-timer-wrap{text-align:center;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:6px 14px;margin-left:auto}
+.pass-timer-label{font-size:.62rem;color:#aaa}
+.pass-timer{font-family:monospace;font-weight:900;color:var(--accent-gold);font-size:1rem}
+.pass-close{border:0;width:36px;height:36px;border-radius:10px;background:#c0143c;color:#fff;font-weight:900;font-size:1rem;cursor:pointer;flex-shrink:0}
+.pass-progress{display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.35);border-radius:16px;padding:10px 14px}
+.pass-tier-badge{width:62px;height:62px;border-radius:50%;background:radial-gradient(circle,#ffcc00,#ff8a00);color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:1.5rem;line-height:1;flex-shrink:0;box-shadow:0 0 18px rgba(255,204,0,.45)}
+.pass-tier-badge small{font-size:.5rem;letter-spacing:.1em}
+.pass-progress-main{flex:1;min-width:0}
+.pass-progress-text{display:flex;justify-content:space-between;font-weight:800;font-size:.8rem;margin-bottom:5px}
+.pass-bar{height:16px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+#passBarFill{height:100%;width:0%;background:linear-gradient(90deg,#34d399,#ffcc00);transition:width .4s}
+.pass-plus-btn{border:0;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#a855f7,#ff0055);color:#fff;white-space:nowrap;box-shadow:0 0 16px rgba(168,85,247,.5)}
+.pass-plus-btn:disabled{background:#333;color:#888;box-shadow:none;cursor:not-allowed}
+.pass-plus-btn.owned:disabled{background:linear-gradient(135deg,#ffcc00,#ff8a00);color:#000;box-shadow:0 0 16px rgba(255,204,0,.5);cursor:default}
+.pass-track-wrap{display:flex;min-height:0}
+.pass-side{flex-shrink:0;width:54px;display:flex;flex-direction:column;padding-top:6px}
+.pass-side div{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:.62rem;letter-spacing:.06em}
+.pass-side .ps-plus{height:112px;color:#d9a8ff}
+.pass-side .ps-mid{height:44px}
+.pass-side .ps-free{height:112px;color:#7dffcb}
+.pass-track{position:relative;display:flex;overflow-x:auto;gap:8px;padding:6px 4px 12px;flex:1;min-width:0;overscroll-behavior-x:contain}
+.pass-col{flex:0 0 96px;display:flex;flex-direction:column}
+.pass-col.final{flex-basis:124px}
+.pass-cell{position:relative;height:112px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px;text-align:center;cursor:default;border:2px solid transparent}
+.pass-cell.plus{background:linear-gradient(160deg,#5b21b6,#a21caf);border-color:#d8b4fe}
+.pass-cell.free{background:linear-gradient(160deg,#065f46,#0e7490);border-color:#6ee7b7}
+.pass-cell-ico{font-size:2rem}
+.pass-cell-label{font-size:.66rem;font-weight:800;line-height:1.15}
+.pass-cell-state{font-size:.62rem;font-weight:900;min-height:12px;letter-spacing:.04em}
+.pass-cell.unreached{filter:saturate(.45) brightness(.7)}
+.pass-cell.plus-locked::after{content:"🔒";position:absolute;top:5px;right:6px;font-size:.85rem}
+.pass-cell.ready{cursor:pointer;border-color:#ffcc00;animation:passReady 1s ease-in-out infinite alternate}
+.pass-cell.ready .pass-cell-state{color:#ffe066}
+.pass-cell.claimed{opacity:.55}
+@keyframes passReady{from{box-shadow:0 0 8px rgba(255,204,0,.4)}to{box-shadow:0 0 22px rgba(255,204,0,.95)}}
+.pass-node-row{position:relative;height:44px;display:flex;align-items:center;justify-content:center}
+.pass-node-row::before{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:8px;transform:translateY(-50%);background:linear-gradient(90deg,#ffcc00 var(--p,0%),#2a2f4a var(--p,0%))}
+.pass-node{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:#2a2f4a;border:3px solid #3d4468;display:grid;place-items:center;font-weight:900;font-size:.85rem}
+.pass-col.reached .pass-node{background:linear-gradient(135deg,#ffcc00,#ff8a00);border-color:#fff3b0;color:#000}
+.pass-col.current .pass-node{border-color:#fff;box-shadow:0 0 14px rgba(255,204,0,.8)}
+.pass-col.final .pass-cell{border-color:#ffcc00;box-shadow:0 0 14px rgba(255,204,0,.35)}
+.pass-actions{display:flex;gap:10px}
+@media (max-width:700px){
+  .pass-title{font-size:1.5rem}
+  .pass-progress{flex-wrap:wrap}
+  .pass-plus-btn{width:100%}
+  .pass-timer-wrap{padding:4px 8px}
+  .pass-side{width:42px}
+}
 </style>
 
 <style id="halloween-interface-theme">
@@ -361,6 +409,7 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
   <button class="streak-btn" onclick="openStreakModal()">🔥 Racha Diaria</button>
   <h1>🌱 MEME GARDEN</h1>
   <button class="codes-btn" onclick="openCodesModal()">🎁 Códigos</button>
+  <button class="pass-btn" id="passBtn" onclick="openPassModal()">🏆 Pase</button>
 </header>
 
 <div class="stats-bar">
@@ -393,7 +442,6 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
       <button class="tab-btn" onclick="switchTab('candy', this)">🍬 Candy</button>
       <button class="tab-btn" onclick="switchTab('halloween', this)">🎃 Halloween</button>
       <button class="tab-btn" id="merchantTabBtn" onclick="switchTab('merchant', this)">🧳 Mercader</button>
-      <button class="tab-btn" id="seasonTabBtn" onclick="switchTab('season', this)">🏆 Pase</button>
       <button class="tab-btn" onclick="switchTab('rebirth', this)">🌀 Rebirth</button>
       <button class="tab-btn" onclick="switchTab('leaderboard', this)">🌐 Online</button>
       <button class="tab-btn" onclick="switchTab('stats', this)">📊 Stats</button>
@@ -457,28 +505,11 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
         <div class="merchant-head">
           <div>
             <div class="merchant-title">🧳 Mercader Viajero</div>
-            <div class="season-sub">Ofertas con descuento y trueques. Solo se queda unos minutos.</div>
+            <div class="season-sub">Ofertas con descuento y trueques. Solo se queda 1 minuto.</div>
           </div>
           <div id="merchantTimer" class="merchant-timer">⏳</div>
         </div>
         <div id="merchantBody"></div>
-      </div>
-    </div>
-
-    <!-- PASE DE TEMPORADA -->
-    <div id="tab-season" class="tab-content">
-      <div class="season-panel">
-        <div class="season-head">
-          <div>
-            <div class="season-title">🏆 Pase de Temporada</div>
-            <div class="season-sub">Temporada 1 · Halloween · 20 niveles gratis</div>
-          </div>
-          <button class="mission-claim" onclick="claimAllSeason()">Reclamar todo</button>
-        </div>
-        <div class="season-summary"><strong id="seasonLevelText">Nivel 0 / 20</strong><span id="seasonXpText">0 / 100 XP</span></div>
-        <div class="season-bar"><div id="seasonBarFill"></div></div>
-        <div class="season-how">Gana XP comprando y plantando memes, abriendo cajas, defendiendo robos, completando misiones, tratando con el mercader, reclamando la racha y simplemente jugando.</div>
-        <div class="shop-list-container" id="seasonList"></div>
       </div>
     </div>
 
@@ -520,7 +551,7 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
             <li>🎁 <strong>Mystery Boxes:</strong> abre cajas para conseguir memes exclusivos de Halloween.</li>
             <li>👻 <strong>Interfaz Halloween:</strong> tienda temática con recompensas especiales.</li>
             <li>⚡ <strong>Admin Abuse:</strong> ¡confeti, x5 stock, x2 dinero y DROP MÍTICO al terminar!</li>
-            <li>🏆 <strong>Pase de Temporada:</strong> 20 niveles con recompensas gratis.</li>
+            <li>🏆 <strong>Meme Pass:</strong> pase de temporada (pista gratis y pista PLUS) · botón bajo Códigos.</li>
             <li>🧳 <strong>Mercader Viajero:</strong> descuentos y trueques por tiempo limitado.</li>
             <li>📊 <strong>Estadísticas:</strong> mira todo lo que has hecho.</li>
           </ul>
@@ -544,6 +575,46 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- MEME PASS -->
+<div class="modal-overlay" id="passModal">
+  <div class="pass-box">
+    <div class="pass-top">
+      <div>
+        <div class="pass-season">TEMPORADA 1 · HALLOWEEN</div>
+        <div class="pass-title">MEME PASS</div>
+      </div>
+      <div class="pass-timer-wrap">
+        <div class="pass-timer-label">LA TEMPORADA TERMINA EN</div>
+        <div class="pass-timer" id="passTimer">—</div>
+      </div>
+      <button class="pass-close" onclick="closePassModal()">✕</button>
+    </div>
+
+    <div class="pass-progress">
+      <div class="pass-tier-badge"><span id="passTierNum">0</span><small>NIVEL</small></div>
+      <div class="pass-progress-main">
+        <div class="pass-progress-text"><span id="passTokens">0 / 800</span><span>🎟️ Fichas</span></div>
+        <div class="pass-bar"><div id="passBarFill"></div></div>
+      </div>
+      <button class="pass-plus-btn" id="passPlusBtn" onclick="buyPassPlus()">🔓 Desbloquear PLUS</button>
+    </div>
+
+    <div class="pass-track-wrap">
+      <div class="pass-side">
+        <div class="ps-plus">✨ PLUS</div>
+        <div class="ps-mid"></div>
+        <div class="ps-free">GRATIS</div>
+      </div>
+      <div class="pass-track" id="passTrack"></div>
+    </div>
+
+    <div class="pass-actions">
+      <button class="btn-save" onclick="claimAllSeason()">Reclamar todo</button>
+      <button class="btn-cancel" onclick="closePassModal()">Cerrar</button>
+    </div>
   </div>
 </div>
 
@@ -975,6 +1046,8 @@ let restockTimerPowerVal = 60;
 /* Pase de temporada, mercader y estadísticas */
 let seasonXP = 0;
 let seasonClaimed = [];
+let seasonClaimedPlus = [];
+let seasonPremium = false;
 let merchant = { nextAt: 0, until: 0, offers: [] };
 let gameStats = {
   playSeconds: 0, memesBought: 0, memesPlanted: 0,
@@ -1576,10 +1649,19 @@ function loadGame() {
       candyMultiplierExpiresAt = Number(data.candyMultiplierExpiresAt) || 0;
       shortWordsActive = Math.max(0, Number(data.shortWordsActive) || 0);
 
-      seasonXP = Math.max(0, Number(data.seasonXP) || 0);
-      seasonClaimed = Array.isArray(data.seasonClaimed)
-        ? data.seasonClaimed.filter(n => Number.isInteger(n) && n >= 0 && n < SEASON_MAX_LEVEL)
-        : [];
+      /* Si cambia el número de temporada, el pase se reinicia. */
+      if (Number(data.seasonId) === SEASON_NUMBER) {
+        const validTier = n => Number.isInteger(n) && n >= 0 && n < SEASON_MAX_LEVEL;
+        seasonXP = Math.max(0, Number(data.seasonXP) || 0);
+        seasonClaimed = Array.isArray(data.seasonClaimed) ? data.seasonClaimed.filter(validTier) : [];
+        seasonClaimedPlus = Array.isArray(data.seasonClaimedPlus) ? data.seasonClaimedPlus.filter(validTier) : [];
+        seasonPremium = !!data.seasonPremium;
+      } else {
+        seasonXP = 0;
+        seasonClaimed = [];
+        seasonClaimedPlus = [];
+        seasonPremium = false;
+      }
 
       if (data.gameStats && typeof data.gameStats === "object") {
         Object.keys(gameStats).forEach(k => {
@@ -1687,8 +1769,11 @@ function saveGame() {
     moneyStormExpiresAt,
     candyMultiplierExpiresAt,
     shortWordsActive,
+    seasonId: SEASON_NUMBER,
     seasonXP,
     seasonClaimed,
+    seasonClaimedPlus,
+    seasonPremium,
     gameStats,
     merchant,
     playerName
@@ -2590,7 +2675,6 @@ function switchTab(tabId, button) {
   if (tabId === "halloween") renderHalloweenShop();
   if (tabId === "candy") renderCandyMissions();
   if (tabId === "merchant") renderMerchant();
-  if (tabId === "season") renderSeason();
   if (tabId === "stats") renderStats();
 }
 
@@ -2868,6 +2952,7 @@ document.querySelectorAll(".modal-overlay").forEach(modal => {
     if (modal.id === "codesModal") closeCodesModal();
     else if (modal.id === "streakModal") closeStreakModal();
     else if (modal.id === "firebaseModal") closeFirebaseModal();
+    else if (modal.id === "passModal") closePassModal();
   });
 });
 
@@ -3061,60 +3146,78 @@ function updateStatsLive(force) {
 
 
 /* =========================================================
-   PASE DE TEMPORADA
+   MEME PASS (estilo Brawl Pass)
 ========================================================= */
-const SEASON_MAX_LEVEL = 20;
+/* Cambia estas fechas para mover la temporada. Si subes SEASON_NUMBER, el pase de todos se reinicia. */
+const SEASON_NUMBER = 1;
+const SEASON_START = new Date(2026, 9, 6, 0, 0, 0).getTime();    /* 6 oct 2026 */
+const SEASON_END   = new Date(2026, 10, 6, 0, 0, 0).getTime();   /* 6 nov 2026 (1 mes) */
+const SEASON_MAX_LEVEL = 30;
+const TOKENS_PER_TIER = 800;
+const PASS_PLUS_PRICE = 3000;   /* en Candy */
 
-const seasonRewards = [
-  { icon: "🪙", label: "5.000 monedas",          type: "coins", val: 5000 },
-  { icon: "🛡️", label: "1 Escudo",               type: "shield", val: 1 },
-  { icon: "🍬", label: "50 Candy",               type: "candy", val: 50 },
-  { icon: "🎃", label: "1 Spooky Box",           type: "box", boxId: "spooky_box", val: 1 },
-  { icon: "🍷", label: "Sigmaphone",             type: "meme", memeId: "sigma" },
-  { icon: "⏳", label: "5 min de producción",    type: "coinsCps", minutes: 5, min: 20000 },
-  { icon: "🍬", label: "100 Candy",              type: "candy", val: 100 },
-  { icon: "🛡️", label: "2 Escudos",              type: "shield", val: 2 },
-  { icon: "👻", label: "1 Haunted Box",          type: "box", boxId: "haunted_box", val: 1 },
-  { icon: "👑", label: "Ohio King",              type: "meme", memeId: "ohio" },
-  { icon: "⏳", label: "10 min de producción",   type: "coinsCps", minutes: 10, min: 100000 },
-  { icon: "🍬", label: "150 Candy",              type: "candy", val: 150 },
-  { icon: "🍭", label: "Sugar Rush x3 (60 s)",   type: "rush" },
-  { icon: "🎃", label: "2 Spooky Boxes",         type: "box", boxId: "spooky_box", val: 2 },
-  { icon: "🌌", label: "Cosmic Rizz",            type: "meme", memeId: "cosmic" },
-  { icon: "🍬", label: "250 Candy",              type: "candy", val: 250 },
-  { icon: "👻", label: "2 Haunted Boxes",        type: "box", boxId: "haunted_box", val: 2 },
-  { icon: "⏳", label: "30 min de producción",   type: "coinsCps", minutes: 30, min: 1000000 },
-  { icon: "🍬", label: "400 Candy",              type: "candy", val: 400 },
-  { icon: "😈", label: "1 Demon Box",            type: "box", boxId: "demon_box", val: 1 }
-];
-
-/* XP necesaria para completar el nivel (índice 0 = nivel 1). */
-function seasonXpNeeded(levelIndex) { return 100 + 40 * levelIndex; }
-
-function getSeasonState(xp) {
-  let level = 0;
-  let remaining = xp;
-  while (level < SEASON_MAX_LEVEL) {
-    const need = seasonXpNeeded(level);
-    if (remaining < need) return { level, into: remaining, need };
-    remaining -= need;
-    level++;
-  }
-  return { level: SEASON_MAX_LEVEL, into: 0, need: 0 };
+function isSeasonActive() {
+  const now = Date.now();
+  return now >= SEASON_START && now < SEASON_END;
 }
 
+function memeReward(id) {
+  const t = allMemes.find(m => m.id === id);
+  return { icon: t ? t.icon : "❓", label: t ? t.name : id, type: "meme", memeId: id };
+}
+
+const PR = {
+  coins:  v => ({ icon: "🪙", label: `${formatNumber(v)} monedas`, type: "coins", val: v }),
+  cps:    (min, floor) => ({ icon: "⏳", label: `${min} min de producción`, type: "coinsCps", minutes: min, min: floor }),
+  candy:  v => ({ icon: "🍬", label: `${v} Candy`, type: "candy", val: v }),
+  shield: v => ({ icon: "🛡️", label: v === 1 ? "1 Escudo" : `${v} Escudos`, type: "shield", val: v }),
+  box:    (id, v) => {
+    const names = { spooky_box: ["🎃", "Spooky Box"], haunted_box: ["👻", "Haunted Box"], demon_box: ["😈", "Demon Box"] };
+    return { icon: names[id][0], label: `${v} ${names[id][1]}${v > 1 ? "es" : ""}`, type: "box", boxId: id, val: v };
+  },
+  rush:   () => ({ icon: "🍭", label: "Sugar Rush x3 (60 s)", type: "rush" }),
+  meme:   memeReward
+};
+
+/* Pista GRATIS (30 niveles) */
+const freeRewards = [
+  PR.coins(5000), PR.candy(30), PR.shield(1), PR.box("spooky_box", 1), PR.meme("sigma"),
+  PR.cps(5, 20000), PR.candy(50), PR.shield(1), PR.box("spooky_box", 1), PR.meme("ohio"),
+  PR.candy(60), PR.cps(10, 100000), PR.box("haunted_box", 1), PR.shield(2), PR.meme("gyatt"),
+  PR.candy(80), PR.box("spooky_box", 2), PR.cps(15, 300000), PR.candy(100), PR.meme("cosmic"),
+  PR.box("haunted_box", 1), PR.candy(120), PR.shield(2), PR.cps(30, 1000000), PR.meme("elprimo"),
+  PR.candy(150), PR.box("haunted_box", 2), PR.rush(), PR.candy(200), PR.box("demon_box", 1)
+];
+
+/* Pista PLUS (30 niveles) */
+const plusRewards = [
+  PR.candy(100), PR.cps(5, 50000), PR.box("spooky_box", 2), PR.candy(100), PR.meme("skibidi"),
+  PR.box("haunted_box", 1), PR.candy(150), PR.cps(10, 200000), PR.rush(), PR.meme("gyatt"),
+  PR.box("spooky_box", 3), PR.candy(200), PR.box("haunted_box", 2), PR.cps(20, 600000), PR.meme("cosmic"),
+  PR.candy(250), PR.rush(), PR.box("haunted_box", 2), PR.cps(30, 2000000), PR.meme("chadgold"),
+  PR.candy(300), PR.box("haunted_box", 3), PR.box("demon_box", 1), PR.cps(60, 5000000), PR.meme("fanum"),
+  PR.candy(400), PR.box("demon_box", 1), PR.rush(), PR.candy(500), PR.box("demon_box", 3)
+];
+
+function getSeasonState(xp) {
+  const level = Math.min(SEASON_MAX_LEVEL, Math.floor(xp / TOKENS_PER_TIER));
+  const done = level >= SEASON_MAX_LEVEL;
+  return { level, into: done ? 0 : xp - level * TOKENS_PER_TIER, need: done ? 0 : TOKENS_PER_TIER };
+}
+
+/* Fichas del pase. Solo se ganan mientras dura la temporada. */
 function addSeasonXP(n) {
+  if (!isSeasonActive()) return;
   const before = getSeasonState(seasonXP).level;
-  seasonXP += n;
+  seasonXP = Math.min(SEASON_MAX_LEVEL * TOKENS_PER_TIER, seasonXP + n);
   const after = getSeasonState(seasonXP).level;
   if (after > before) {
     playSound("accelerate");
-    showInfoBanner(`🏆 ¡Pase de Temporada: nivel ${after}!<br>Reclama tu recompensa en la pestaña 🏆 Pase`);
+    showInfoBanner(`🏆 ¡Meme Pass: nivel ${after}!<br>Reclama tu recompensa con el botón 🏆 Pase`);
   }
 }
 
-function applySeasonReward(i) {
-  const r = seasonRewards[i];
+function applySeasonReward(r) {
   if (!r) return false;
 
   if (r.type === "coins") {
@@ -3141,13 +3244,25 @@ function applySeasonReward(i) {
   return true;
 }
 
-function claimSeasonReward(i) {
+function claimSeasonReward(kind, i) {
   const st = getSeasonState(seasonXP);
-  if (i >= st.level || seasonClaimed.includes(i)) return;
-  if (!applySeasonReward(i)) return;
-  seasonClaimed.push(i);
+  if (i >= st.level) return;
+
+  if (kind === "plus") {
+    if (!seasonPremium) {
+      showInfoBanner("✨ Necesitas el Meme Pass PLUS para reclamar esta recompensa");
+      return;
+    }
+    if (seasonClaimedPlus.includes(i)) return;
+    if (!applySeasonReward(plusRewards[i])) return;
+    seasonClaimedPlus.push(i);
+  } else {
+    if (seasonClaimed.includes(i)) return;
+    if (!applySeasonReward(freeRewards[i])) return;
+    seasonClaimed.push(i);
+  }
+
   playSound("rebirth");
-  renderSeason();
   updateUI();
   saveGame();
 }
@@ -3156,81 +3271,175 @@ function claimAllSeason() {
   const st = getSeasonState(seasonXP);
   let any = false;
   for (let i = 0; i < st.level; i++) {
-    if (!seasonClaimed.includes(i) && applySeasonReward(i)) {
+    if (!seasonClaimed.includes(i) && applySeasonReward(freeRewards[i])) {
       seasonClaimed.push(i);
+      any = true;
+    }
+    if (seasonPremium && !seasonClaimedPlus.includes(i) && applySeasonReward(plusRewards[i])) {
+      seasonClaimedPlus.push(i);
       any = true;
     }
   }
   if (!any) return;
   playSound("rebirth");
-  renderSeason();
   updateUI();
   saveGame();
 }
 
+function buyPassPlus() {
+  if (seasonPremium || !isSeasonActive() || candy < PASS_PLUS_PRICE) return;
+  if (!confirm(`¿Desbloquear el Meme Pass PLUS por ${PASS_PLUS_PRICE.toLocaleString("es-ES")} 🍬?`)) return;
+  candy -= PASS_PLUS_PRICE;
+  seasonPremium = true;
+  playSound("rebirth");
+  showInfoBanner("✨ ¡Meme Pass PLUS desbloqueado!<br>Ya puedes reclamar las recompensas PLUS de tus niveles");
+  updateUI();
+  saveGame();
+}
+
+function formatCountdown(ms) {
+  const t = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(t / 86400);
+  const h = Math.floor((t % 86400) / 3600);
+  const m = Math.floor((t % 3600) / 60);
+  const sec = t % 60;
+  return `${d}d ${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(sec).padStart(2, "0")}s`;
+}
+
+function makePassCell(kind, i) {
+  const r = (kind === "plus" ? plusRewards : freeRewards)[i];
+  const cell = document.createElement("div");
+  cell.className = `pass-cell ${kind}`;
+  cell.dataset.kind = kind;
+  cell.dataset.tier = i;
+  cell.innerHTML = `<div class="pass-cell-ico">${r.icon}</div><div class="pass-cell-label">${r.label}</div><div class="pass-cell-state"></div>`;
+  cell.onclick = () => claimSeasonReward(kind, i);
+  return cell;
+}
+
+/* Se reconstruye SOLO al abrir el pase (no en el bucle), para que el ratón funcione bien. */
 function renderSeason() {
-  const list = document.getElementById("seasonList");
-  if (!list) return;
-  list.innerHTML = "";
-  seasonRewards.forEach((r, i) => {
-    const row = document.createElement("div");
-    row.className = "season-row";
-    row.dataset.level = i;
-    row.innerHTML = `<div class="season-lv">${i + 1}</div><div class="season-ico">${r.icon}</div><div class="season-label">${r.label}</div>`;
-    const btn = document.createElement("button");
-    btn.className = "season-claim";
-    btn.onclick = () => claimSeasonReward(i);
-    row.appendChild(btn);
-    list.appendChild(row);
-  });
+  const track = document.getElementById("passTrack");
+  if (!track) return;
+  track.innerHTML = "";
+  for (let i = 0; i < SEASON_MAX_LEVEL; i++) {
+    const col = document.createElement("div");
+    col.className = "pass-col" + (i === SEASON_MAX_LEVEL - 1 ? " final" : "");
+    col.dataset.tier = i;
+    col.appendChild(makePassCell("plus", i));
+    const nodeRow = document.createElement("div");
+    nodeRow.className = "pass-node-row";
+    nodeRow.innerHTML = `<div class="pass-node">${i + 1}</div>`;
+    col.appendChild(nodeRow);
+    col.appendChild(makePassCell("free", i));
+    track.appendChild(col);
+  }
   updateSeasonLive(true);
+}
+
+function openPassModal() {
+  playSound("select");
+  renderSeason();
+  document.getElementById("passModal").style.display = "flex";
+  setTimeout(() => {
+    const track = document.getElementById("passTrack");
+    const lvl = getSeasonState(seasonXP).level;
+    const col = track && track.children[Math.min(lvl, SEASON_MAX_LEVEL - 1)];
+    if (col) track.scrollLeft = Math.max(0, col.offsetLeft - 20);
+  }, 0);
+}
+
+function closePassModal() {
+  document.getElementById("passModal").style.display = "none";
 }
 
 function updateSeasonLive(force) {
   const st = getSeasonState(seasonXP);
 
-  /* Marca la pestaña si hay recompensas sin reclamar. */
+  /* Botón "Pase" bajo Códigos: avisa si hay recompensas sin reclamar. */
   let pending = 0;
-  for (let i = 0; i < st.level; i++) if (!seasonClaimed.includes(i)) pending++;
-  const tabBtn = document.getElementById("seasonTabBtn");
-  if (tabBtn) {
+  for (let i = 0; i < st.level; i++) {
+    if (!seasonClaimed.includes(i)) pending++;
+    if (seasonPremium && !seasonClaimedPlus.includes(i)) pending++;
+  }
+  const passBtn = document.getElementById("passBtn");
+  if (passBtn) {
     const label = pending > 0 ? "🏆 Pase ❗" : "🏆 Pase";
-    if (tabBtn.innerText !== label) tabBtn.innerText = label;
+    if (passBtn.innerText !== label) passBtn.innerText = label;
+    passBtn.classList.toggle("has-reward", pending > 0);
   }
 
-  const tab = document.getElementById("tab-season");
-  if (!tab || (!force && !tab.classList.contains("active"))) return;
+  const modal = document.getElementById("passModal");
+  if (!modal || (!force && modal.style.display !== "flex")) return;
 
-  const lvl = document.getElementById("seasonLevelText");
-  const xpText = document.getElementById("seasonXpText");
-  const fill = document.getElementById("seasonBarFill");
+  const active = isSeasonActive();
+  const timer = document.getElementById("passTimer");
+  const timerTxt = active ? formatCountdown(SEASON_END - Date.now()) : "TEMPORADA TERMINADA";
+  if (timer && timer.innerText !== timerTxt) timer.innerText = timerTxt;
+
   const done = st.level >= SEASON_MAX_LEVEL;
-
-  const lvlTxt = `Nivel ${st.level} / ${SEASON_MAX_LEVEL}`;
-  const xpTxt = done ? "¡Pase completado!" : `${formatNumber(st.into)} / ${formatNumber(st.need)} XP`;
-  if (lvl && lvl.innerText !== lvlTxt) lvl.innerText = lvlTxt;
-  if (xpText && xpText.innerText !== xpTxt) xpText.innerText = xpTxt;
+  const tierEl = document.getElementById("passTierNum");
+  const tokEl = document.getElementById("passTokens");
+  const fill = document.getElementById("passBarFill");
+  const tokTxt = done ? "¡Pase completado!" : `${formatNumber(st.into)} / ${formatNumber(st.need)}`;
+  if (tierEl && tierEl.innerText !== String(st.level)) tierEl.innerText = st.level;
+  if (tokEl && tokEl.innerText !== tokTxt) tokEl.innerText = tokTxt;
   if (fill) fill.style.width = done ? "100%" : `${(st.into / st.need) * 100}%`;
 
-  document.querySelectorAll("#seasonList .season-row").forEach(row => {
-    const i = Number(row.dataset.level);
-    const claimed = seasonClaimed.includes(i);
+  const plusBtn = document.getElementById("passPlusBtn");
+  if (plusBtn) {
+    const txt = seasonPremium
+      ? "✨ PLUS ACTIVO"
+      : `🔓 Desbloquear PLUS · ${PASS_PLUS_PRICE.toLocaleString("es-ES")} 🍬 (tienes ${formatNumber(candy)})`;
+    const dis = seasonPremium || !active || candy < PASS_PLUS_PRICE;
+    if (plusBtn.innerText !== txt) plusBtn.innerText = txt;
+    if (plusBtn.disabled !== dis) plusBtn.disabled = dis;
+    plusBtn.classList.toggle("owned", seasonPremium);
+  }
+
+  document.querySelectorAll("#passTrack .pass-col").forEach(col => {
+    const i = Number(col.dataset.tier);
+    const reached = st.level > i;
+    const current = !done && st.level === i;
+    const pct = reached ? 100 : current ? (st.into / st.need) * 100 : 0;
+    col.style.setProperty("--p", `${pct}%`);
+    col.classList.toggle("reached", reached);
+    col.classList.toggle("current", current);
+  });
+
+  document.querySelectorAll("#passTrack .pass-cell").forEach(cell => {
+    const i = Number(cell.dataset.tier);
+    const plus = cell.dataset.kind === "plus";
     const unlocked = st.level > i;
-    const btn = row.querySelector(".season-claim");
-    const text = claimed ? "✅ Reclamada" : unlocked ? "Reclamar" : "🔒";
-    const disabled = claimed || !unlocked;
-    if (btn.innerText !== text) btn.innerText = text;
-    if (btn.disabled !== disabled) btn.disabled = disabled;
-    row.classList.toggle("claimed", claimed);
-    row.classList.toggle("ready", unlocked && !claimed);
+    const claimed = (plus ? seasonClaimedPlus : seasonClaimed).includes(i);
+    const plusLocked = plus && !seasonPremium;
+    const ready = unlocked && !claimed && !plusLocked;
+
+    const stateEl = cell.querySelector(".pass-cell-state");
+    const text = claimed ? "✅ RECLAMADA" : ready ? "RECLAMAR" : (unlocked && plusLocked) ? "NECESITA PLUS" : "";
+    if (stateEl && stateEl.innerText !== text) stateEl.innerText = text;
+
+    cell.classList.toggle("claimed", claimed);
+    cell.classList.toggle("ready", ready);
+    cell.classList.toggle("plus-locked", plusLocked);
+    cell.classList.toggle("unreached", !unlocked);
   });
 }
+
+/* Rueda del ratón/trackpad: desplaza el pase en horizontal. */
+document.getElementById("passTrack").addEventListener("wheel", event => {
+  if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+    event.currentTarget.scrollLeft += event.deltaY;
+    event.preventDefault();
+  }
+}, { passive: false });
 
 
 /* =========================================================
    MERCADER VIAJERO
 ========================================================= */
-const MERCHANT_DURATION = 180000;
+const MERCHANT_DURATION = 60000;      /* se queda 1 minuto */
+const MERCHANT_COOLDOWN = 600000;     /* tarda 10 minutos en volver */
 
 function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -3297,8 +3506,8 @@ function tickMerchant() {
     /* Llega. */
     merchant.offers = generateMerchantOffers();
     merchant.until = now + MERCHANT_DURATION;
-    merchant.nextAt = merchant.until + 360000 + Math.random() * 240000;
-    showInfoBanner("🧳 ¡EL MERCADER VIAJERO HA LLEGADO!<br>Se queda 3 minutos · pestaña 🧳 Mercader");
+    merchant.nextAt = merchant.until + MERCHANT_COOLDOWN;
+    showInfoBanner("🧳 ¡EL MERCADER VIAJERO HA LLEGADO!<br>Se queda solo 1 minuto · pestaña 🧳 Mercader");
     playSound("accelerate");
     renderMerchant();
     saveGame();
@@ -3311,7 +3520,7 @@ function renderMerchant() {
   body.innerHTML = "";
 
   if (!isMerchantHere()) {
-    body.innerHTML = `<div class="merchant-empty">🌙 El mercader no está ahora mismo.<br>Aparece cada pocos minutos y se queda <strong>3 minutos</strong> con ofertas con descuento y trueques.<br>Te avisaremos cuando llegue.</div>`;
+    body.innerHTML = `<div class="merchant-empty">🌙 El mercader no está ahora mismo.<br>Aparece cada <strong>10 minutos</strong> y se queda solo <strong>1 minuto</strong> con ofertas con descuento y trueques.<br>Te avisaremos cuando llegue.</div>`;
     return;
   }
 
