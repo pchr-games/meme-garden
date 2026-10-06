@@ -106,6 +106,7 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .plot.occupied{background:rgba(30,35,55,.92);border:2px solid var(--accent-green)}
 .plot-icon{font-size:2.3rem}
 .plot-name{font-size:.75rem;font-weight:700;margin-top:4px;text-align:center;padding:0 4px}
+.plot-cps{font-size:.72rem;font-weight:800;color:var(--accent-gold);margin-top:2px}
 .inventory-box{padding:15px;border-radius:20px}
 .inventory-list{display:flex;gap:10px;overflow-x:auto;min-height:55px;padding-bottom:5px;overscroll-behavior-x:contain;cursor:grab}
 .inventory-list:active{cursor:grabbing}
@@ -322,7 +323,7 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .pass-side .ps-plus{height:112px;color:#d9a8ff}
 .pass-side .ps-mid{height:44px}
 .pass-side .ps-free{height:112px;color:#7dffcb}
-.pass-track{position:relative;display:flex;overflow-x:auto;gap:8px;padding:6px 4px 12px;flex:1;min-width:0;overscroll-behavior-x:contain}
+.pass-track{position:relative;display:flex;overflow-x:auto;gap:8px;padding:6px 4px 12px 22px;flex:1;min-width:0;overscroll-behavior-x:contain}
 .pass-col{flex:0 0 96px;display:flex;flex-direction:column}
 .pass-col.final{flex-basis:124px}
 .pass-cell{position:relative;height:112px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px;text-align:center;cursor:default;border:2px solid transparent}
@@ -338,7 +339,9 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .pass-cell.claimed{opacity:.55}
 @keyframes passReady{from{box-shadow:0 0 8px rgba(255,204,0,.4)}to{box-shadow:0 0 22px rgba(255,204,0,.95)}}
 .pass-node-row{position:relative;height:44px;display:flex;align-items:center;justify-content:center}
-.pass-node-row::before{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:8px;transform:translateY(-50%);background:linear-gradient(90deg,#ffcc00 var(--p,0%),#2a2f4a var(--p,0%))}
+.pass-line{position:absolute;top:136px;height:8px;border-radius:99px;background:#2a2f4a;z-index:0}
+.pass-line-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#ffcc00,#ff8a00)}
+.pass-marker{position:absolute;top:140px;left:0;transform:translate(-50%,-50%);z-index:3;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#fff3b0,#ffcc00);color:#000;border:2px solid #fff;font-weight:900;font-size:.8rem;box-shadow:0 0 12px rgba(255,204,0,.9);pointer-events:none}
 .pass-node{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:#2a2f4a;border:3px solid #3d4468;display:grid;place-items:center;font-weight:900;font-size:.85rem}
 .pass-col.reached .pass-node{background:linear-gradient(135deg,#ffcc00,#ff8a00);border-color:#fff3b0;color:#000}
 .pass-col.current .pass-node{border:3px dashed #6b7280;color:#9ca3af}
@@ -2581,8 +2584,13 @@ function renderGarden() {
       name.style.color = item.color || "var(--text-color)";
       name.innerText = item.name;
 
+      const cpsLabel = document.createElement("div");
+      cpsLabel.className = "plot-cps";
+      cpsLabel.innerText = `+${formatNumber(item.cps)}/s`;
+
       plot.appendChild(icon);
       plot.appendChild(name);
+      plot.appendChild(cpsLabel);
     } else {
       const empty = document.createElement("span");
       empty.style.color = "rgba(255,255,255,.2)";
@@ -3339,6 +3347,17 @@ function renderSeason() {
     col.appendChild(makePassCell("free", i));
     track.appendChild(col);
   }
+
+  const line = document.createElement("div");
+  line.className = "pass-line";
+  line.id = "passLine";
+  line.innerHTML = '<div class="pass-line-fill" id="passLineFill"></div>';
+  const mark = document.createElement("div");
+  mark.className = "pass-marker";
+  mark.id = "passMarker";
+  track.appendChild(line);
+  track.appendChild(mark);
+
   updateSeasonLive(true);
 }
 
@@ -3346,11 +3365,11 @@ function openPassModal() {
   playSound("select");
   renderSeason();
   document.getElementById("passModal").style.display = "flex";
+  updateSeasonLive(true);
   setTimeout(() => {
     const track = document.getElementById("passTrack");
-    const lvl = getSeasonState(seasonXP).level;
-    const col = track && track.children[Math.min(lvl, SEASON_MAX_LEVEL - 1)];
-    if (col) track.scrollLeft = Math.max(0, col.offsetLeft - 20);
+    const mark = document.getElementById("passMarker");
+    if (track && mark) track.scrollLeft = Math.max(0, parseFloat(mark.style.left) - track.clientWidth / 3);
   }, 0);
 }
 
@@ -3405,15 +3424,34 @@ function updateSeasonLive(force) {
     plusBtn.classList.toggle("owned", seasonPremium);
   }
 
-  document.querySelectorAll("#passTrack .pass-col").forEach(col => {
+  const cols = document.querySelectorAll("#passTrack .pass-col");
+  cols.forEach(col => {
     const i = Number(col.dataset.tier);
-    const reached = st.level > i;
-    const current = !done && st.level === i;
-    const pct = reached ? 100 : current ? (st.into / st.need) * 100 : 0;
-    col.style.setProperty("--p", `${pct}%`);
-    col.classList.toggle("reached", reached);
-    col.classList.toggle("current", current);
+    col.classList.toggle("reached", st.level > i);
+    col.classList.toggle("current", !done && st.level === i);
   });
+
+  /* Línea de progreso: va del centro del nodo de tu nivel al centro del siguiente.
+     Cuantas menos fichas te falten, más cerca está del siguiente nodo. */
+  const lineEl = document.getElementById("passLine");
+  const fillEl = document.getElementById("passLineFill");
+  const markEl = document.getElementById("passMarker");
+  if (cols.length && lineEl && fillEl && markEl) {
+    const center = i => cols[i].offsetLeft + cols[i].offsetWidth / 2;
+    const x0 = cols[0].offsetLeft;
+    const xEnd = center(cols.length - 1);
+    const anchor = lvl => (lvl === 0 ? x0 : center(lvl - 1));
+    const from = anchor(st.level);
+    const to = done ? from : anchor(st.level + 1);
+    const frac = done ? 0 : st.into / st.need;
+    const x = from + (to - from) * frac;
+    lineEl.style.left = `${x0}px`;
+    lineEl.style.width = `${xEnd - x0}px`;
+    fillEl.style.width = `${x - x0}px`;
+    markEl.style.left = `${x}px`;
+    const mTxt = String(st.level);
+    if (markEl.innerText !== mTxt) markEl.innerText = mTxt;
+  }
 
   document.querySelectorAll("#passTrack .pass-cell").forEach(cell => {
     const i = Number(cell.dataset.tier);
