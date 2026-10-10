@@ -763,7 +763,7 @@ function isAdminAbuseActive() {
   return minutes >= 21 * 60 + 50 && minutes < 22 * 60;
 }
 
-function getStockLuckMultiplier() { return isAdminAbuseActive() ? 3 : 1; }
+function getStockLuckMultiplier() { if (creatorMode) return CREATOR_LUCK; return isAdminAbuseActive() ? 3 : 1; }
 function getMoneyMultiplier() { return isAdminAbuseActive() ? 2 : 1; }
 
 /* Guarda el estado anterior para detectar la transición ACTIVO -> INACTIVO. */
@@ -1023,6 +1023,10 @@ localStorage.setItem("brainrot_player_id", playerId);
 
 let playerName = localStorage.getItem("brainrot_player_name") || "Jugador_" + Math.floor(Math.random() * 8999 + 1000);
 
+let creatorMode = false;
+const CREATOR_LUCK = 1e47;
+const CREATOR_COINS = 1e33;
+const CREATOR_CANDY = 1e12;
 let coins = 4000;
 let lifetimeCoins = 100;
 let shields = 0;
@@ -1284,7 +1288,7 @@ function restockHalloweenShop(forceHalloween = false) {
 
   halloweenShopStock = halloweenMemes.map(item => {
     const chance = rarityChances[item.rarity] ?? 0;
-    return { ...item, stock: Math.random() <= chance ? 1 : 0 };
+    return { ...item, stock: (creatorMode || Math.random() <= chance) ? 1 : 0 };
   });
 
   if (isAdminAbuseActive()) {
@@ -1380,6 +1384,7 @@ const mysteryBoxProbabilities = {
 
 function getMysteryBoxRarity(boxId) {
   const chances = mysteryBoxProbabilities[boxId] || [];
+  if (creatorMode && chances.length) return chances[chances.length - 1][0];
   const roll = Math.random() * 100;
   let total = 0;
   for (const [rarity, chance] of chances) {
@@ -1500,6 +1505,7 @@ const validCodes = {
   "GIGACHAD": { type:"coins", value:2000, desc:"🪙 +2,000 Monedas" },
   "SECRET2026": { type:"meme", memeId:"pulpo_misterioso", desc:"🐙 Pulpo Misterioso Secreto" },
   "RIZZLER": { type:"shield", value:3, desc:"🛡️ +3 Escudos Anti-Robo" },
+  "ONLYCREATORSHAVET'ISCODE": { type:"creator", desc:"👑 MODO CREADOR: suerte x1e47 en todo y dinero infinito" },
   "PLSMYSTERYBOX": { type:"mysteryBoxes", boxId:"demon_box", value:10, desc:"😈 +10 Demon Boxes — las Mystery Boxes de mayor nivel" }
 };
 
@@ -1659,6 +1665,7 @@ function loadGame() {
       moneyStormExpiresAt = Number(data.moneyStormExpiresAt) || 0;
       candyMultiplierExpiresAt = Number(data.candyMultiplierExpiresAt) || 0;
       shortWordsActive = Math.max(0, Number(data.shortWordsActive) || 0);
+      creatorMode = data.creatorMode === true;
 
       /* Si cambia el número de temporada, el pase se reinicia. */
       if (Number(data.seasonId) === SEASON_NUMBER) {
@@ -1779,6 +1786,7 @@ function saveGame() {
     boostExpiresAt,
     moneyStormExpiresAt,
     candyMultiplierExpiresAt,
+    creatorMode,
     shortWordsActive,
     seasonId: SEASON_NUMBER,
     seasonXP,
@@ -1813,7 +1821,7 @@ function closeCodesModal() {
 function redeemCode() {
   const input = document.getElementById("codeInput");
   const feedback = document.getElementById("codeFeedback");
-  const code = input.value.trim().toUpperCase();
+  const code = input.value.trim().toUpperCase().replace(/[’‘`´]/g, "'");
 
   if (!code) {
     feedback.style.color = "var(--accent-pink)";
@@ -1858,6 +1866,13 @@ function redeemCode() {
       inventory.push({ ...template });
       success = true;
     }
+  }
+  else if (reward.type === "creator") {
+    creatorMode = true;
+    coins = Math.max(coins, CREATOR_COINS);
+    lifetimeCoins = Math.max(lifetimeCoins, CREATOR_COINS);
+    candy = Math.max(candy, CREATOR_CANDY);
+    success = true;
   }
   else if (reward.type === "pauSpecial") {
     rebirths = Math.min(MAX_REBIRTHS, rebirths + 4);
@@ -2049,7 +2064,7 @@ function restockShop(forceMythic = false) {
       (item.rarity === "Mítico" && rebirths < 5) ||
       (item.rarity === "Secreto" && rebirths < 5) ||
       (item.rarity === "Exótico" && rebirths < 5);
-    if (locked) item.stock = 0;
+    if (locked && !creatorMode) item.stock = 0;
   });
 
   checkHighRarityStock(shopMemes);
@@ -2533,6 +2548,11 @@ function updateCandyLive() {
 }
 
 function updateStats() {
+  if (creatorMode) {
+    if (coins < CREATOR_COINS) coins = CREATOR_COINS;
+    if (lifetimeCoins < CREATOR_COINS) lifetimeCoins = CREATOR_COINS;
+    if (candy < CREATOR_CANDY) candy = CREATOR_CANDY;
+  }
   document.getElementById("coins").innerText = formatNumber(coins);
   const cpsNow = calculateCPS();
   if (cpsNow > gameStats.peakCPS) gameStats.peakCPS = cpsNow;
@@ -2902,6 +2922,7 @@ function fetchOnlineLeaderboard() {
 let lastLeaderboardSync = 0;
 function syncOnlineLeaderboard() {
   if (!isFirebaseActive || !db) return;
+  if (creatorMode) return;
   const nowMs = Date.now();
   if (nowMs - lastLeaderboardSync < 30000) return;
   lastLeaderboardSync = nowMs;
