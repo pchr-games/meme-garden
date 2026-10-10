@@ -404,7 +404,7 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
 </div>
 
 <!-- EVENTO ADMIN ABUSE -->
-<div id="adminEventBanner">🔥⚡ ADMIN ABUSE ⚡🔥 · x5 STOCK · x2 DINERO · ¡FIESTA!</div>
+<div id="adminEventBanner">🔥⚡ ADMIN ABUSE ⚡🔥 · x5 CANTIDAD DE STOCK · x3 SUERTE DE STOCK · x2 DINERO · ¡FIESTA!</div>
 
 <div id="rarityAlert" role="status" aria-live="polite"></div>
 <div id="adminRefreshNotice" role="alert" aria-live="assertive">⚠️ REFRESCA LA PÁGINA ⚠️<br>Han pasado 2 minutos desde el Admin Abuse. Refresca la página para cargar correctamente el stock final.</div>
@@ -553,12 +553,12 @@ input,select{background:#211612!important;color:#f4e9df!important;border-color:#
         <div class="update-timer-display" id="updateCountdown">🎃 HALLOWEEN UPDATE ACTIVA</div>
         <div class="update-content-box">
           <h4>🎃 Contenido de Halloween:</h4>
-          <p id="adminStatus" style="color:#7FFFD4;font-size:.8rem;margin-bottom:8px;">⚡ ADMIN ABUSE · Domingos 21:50-22:00 · x5 stock · x2 dinero.</p>
+          <p id="adminStatus" style="color:#7FFFD4;font-size:.8rem;margin-bottom:8px;">⚡ ADMIN ABUSE · Domingos 21:50-22:00 · x5 cantidad de stock · x3 suerte de stock · x2 dinero.</p>
           <ul>
             <li>🎃 <strong>Halloween:</strong> ¡10 memes exclusivos y una nueva rareza!</li>
             <li>🎁 <strong>Mystery Boxes:</strong> abre cajas para conseguir memes exclusivos de Halloween.</li>
             <li>👻 <strong>Interfaz Halloween:</strong> tienda temática con recompensas especiales.</li>
-            <li>⚡ <strong>Admin Abuse:</strong> ¡confeti, x5 stock, x2 dinero y DROP MÍTICO al terminar!</li>
+            <li>⚡ <strong>Admin Abuse:</strong> ¡confeti, x5 cantidad de stock, x3 suerte de stock, x2 dinero y DROP MÍTICO al terminar!</li>
             <li>🏆 <strong>Meme Pass:</strong> pase de temporada (pista gratis y pista PLUS) · botón bajo Códigos.</li>
             <li>🧳 <strong>Mercader Viajero:</strong> descuentos y trueques por tiempo limitado.</li>
             <li>📊 <strong>Estadísticas:</strong> mira todo lo que has hecho.</li>
@@ -759,7 +759,7 @@ function isAdminAbuseActive() {
   return minutes >= 21 * 60 + 50 && minutes < 22 * 60;
 }
 
-function getStockLuckMultiplier() { return isAdminAbuseActive() ? 5 : 1; }
+function getStockLuckMultiplier() { return isAdminAbuseActive() ? 3 : 1; }
 function getMoneyMultiplier() { return isAdminAbuseActive() ? 2 : 1; }
 
 /* Guarda el estado anterior para detectar la transición ACTIVO -> INACTIVO. */
@@ -2030,11 +2030,11 @@ function checkHighRarityStock(stock, includeHalloween = false) {
 /* forceMythic = true: este restock debe tener un Mítico garantizado (solo al terminar Admin Abuse). */
 function restockShop(forceMythic = false) {
   shopMemes = allMemes.map(item => {
-    const chance = Math.min(1, item.chance * getRarityMultiplier(item.rarity));
+    const chance = Math.min(1, item.chance * getRarityMultiplier(item.rarity) * getStockLuckMultiplier());
     const hasStock = Math.random() <= chance;
     let stock = hasStock ? Math.floor(Math.random() * 2) + 1 : 0;
 
-    /* Admin Abuse: x5 cantidad de stock. */
+    /* Admin Abuse: la probabilidad se multiplica por x3 y la cantidad por x5. */
     if (isAdminAbuseActive() && stock > 0) stock *= 5;
 
     return { ...item, stock };
@@ -2718,16 +2718,16 @@ function updateAdminStatus() {
 
   if (active) {
     document.body.classList.add("admin-abuse-active");
-    badge.innerText = "🔥 ADMIN ABUSE ACTIVO · x5 STOCK · x2 DINERO";
+    badge.innerText = "🔥 ADMIN ABUSE ACTIVO · x5 CANTIDAD · x3 SUERTE · x2 DINERO";
     badge.classList.add("admin-active");
     status.classList.add("admin-active");
-    status.innerText = "🔥 ADMIN ABUSE ACTIVO · x5 stock · x2 dinero · 🎉 CONFETI ACTIVADO";
+    status.innerText = "🔥 ADMIN ABUSE ACTIVO · x5 cantidad de stock · x3 suerte de stock · x2 dinero · 🎉 CONFETI ACTIVADO";
   } else {
     document.body.classList.remove("admin-abuse-active");
     badge.innerText = "⚡ ADMIN ABUSE INACTIVO";
     badge.classList.remove("admin-active");
     status.classList.remove("admin-active");
-    status.innerText = "⚡ ADMIN ABUSE · Domingos 21:50-22:00 · x5 stock · x2 dinero.";
+    status.innerText = "⚡ ADMIN ABUSE · Domingos 21:50-22:00 · x5 cantidad de stock · x3 suerte de stock · x2 dinero.";
   }
 }
 
