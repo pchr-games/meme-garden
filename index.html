@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Meme Garden: Halloween Update 1.2.1</title>
+<title>Meme Garden: Casino Update 1.3.4</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet" />
 
@@ -16,7 +16,7 @@
   --card-bg:rgba(26,29,41,.94);
   --accent-green:#00ffaa;--accent-pink:#ff0055;--accent-gold:#ffcc00;--accent-blue:#00d2ff;--accent-purple:#a855f7;
   --rarity-common:#b9b9b9;--rarity-rare:#4d9cff;--rarity-epic:#b84cff;--rarity-legendary:#ffd21c;
-  --rarity-mythic:#ff304f;--rarity-celestial:#ff69b4;--rarity-halloween:#ff6a00;
+  --rarity-mythic:#ff304f;--rarity-celestial:#ff69b4;--rarity-casino:#ffe58a;
   --rarity-exotic:#7FFFD4;
   --rarity-secret:linear-gradient(135deg,#050505 0%,#2a2a2a 18%,#707070 35%,#181818 52%,#4b4b4b 70%,#050505 100%);
   --text-color:#fff;
@@ -117,31 +117,46 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .inv-item.selected{border-color:var(--accent-gold);box-shadow:0 0 10px rgba(255,204,0,.6)}
 .shop-panel{padding:20px;border-radius:24px;flex:1;min-width:330px;display:flex;flex-direction:column}
 
-/* CANDY / MISIONES */
-.candy-panel{background:linear-gradient(145deg,rgba(35,12,45,.96),rgba(75,20,55,.92));border:1px solid rgba(255,157,0,.45);border-radius:18px;padding:16px;box-shadow:0 0 22px rgba(255,106,0,.12),inset 0 0 20px rgba(123,31,162,.10)}
-.candy-balance{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(135deg,rgba(255,106,0,.20),rgba(123,31,162,.25));border:1px solid rgba(255,189,102,.38);border-radius:15px;padding:14px 16px;margin-bottom:14px}
-.candy-balance strong{font-size:1.35rem;color:#ffd27a;text-shadow:0 0 10px rgba(255,157,0,.35)}
-.candy-subtitle{font-size:.72rem;color:#cdbbd4;margin-top:3px}
-.mission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.mission-card{background:rgba(12,8,20,.72);border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:14px;transition:.2s}
-.mission-card.completed{border-color:rgba(255,157,0,.55);box-shadow:0 0 14px rgba(255,106,0,.12)}
-.mission-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.mission-icon{font-size:1.8rem}.mission-title{font-weight:900;font-size:.88rem}.mission-desc{font-size:.72rem;color:#aaa;margin-top:3px}
-.mission-progress{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin:12px 0 9px}
-.mission-progress>div{height:100%;background:linear-gradient(90deg,#ff6a00,#ffd27a);border-radius:99px;transition:width .25s}
-.mission-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.72rem;color:#aaa}
-.mission-reward{color:#ffd27a;font-weight:900}
-.mission-claim{border:0;border-radius:9px;padding:7px 10px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:white}
-.mission-claim:disabled{opacity:.4;cursor:not-allowed}
-#tab-candy{position:relative;overflow:hidden}
-.candy-shop-title{font-size:1rem;font-weight:900;color:#ffd27a;margin:4px 0 10px}
-.candy-shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:18px}
-.candy-shop-card{background:rgba(12,8,20,.78);border:1px solid rgba(255,189,102,.18);border-radius:15px;padding:13px;box-shadow:inset 0 0 18px rgba(123,31,162,.08)}
-.candy-shop-card .shop-big-icon{font-size:2rem}
-.candy-shop-card h4{margin:6px 0 3px;font-size:.88rem}
-.candy-shop-card p{margin:0 0 9px;color:#aaa;font-size:.68rem;line-height:1.35;min-height:30px}
-.candy-buy{width:100%;border:0;border-radius:9px;padding:8px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:#fff}
-.candy-buy:disabled{opacity:.4;cursor:not-allowed}
+/* CASINO UPDATE */
+.casino-tab-btn{background:linear-gradient(135deg,#b8860b,#176b45)!important;color:#fff!important}
+.casino-shell{position:relative;overflow:hidden;padding:20px;border:2px solid #d4af37;border-radius:22px;background:radial-gradient(ellipse at 50% -5%,rgba(212,175,55,.24),transparent 48%),linear-gradient(145deg,#071d17,#101626 55%,#07110e);box-shadow:0 0 30px rgba(212,175,55,.14),inset 0 0 40px rgba(0,0,0,.32)}
+.casino-shell:before,.casino-shell:after{content:"♠";position:absolute;color:rgba(212,175,55,.08);font-size:9rem;pointer-events:none}
+.casino-shell:before{top:2px;right:18px}.casino-shell:after{content:"♦";bottom:-55px;left:8px}
+.casino-marquee{position:relative;text-align:center;font-family:"Fredoka",sans-serif;font-size:clamp(1.5rem,5vw,2.5rem);font-weight:900;letter-spacing:.1em;color:#ffe58a;text-shadow:0 0 10px #d4af37,0 0 28px rgba(212,175,55,.45);padding:8px 0}
+.casino-intro,.casino-description{position:relative;text-align:center;color:#d5d8df;font-size:.82rem;line-height:1.5;margin:4px auto 16px;max-width:680px}
+.casino-menu{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.casino-choice{min-height:160px;border:1px solid rgba(230,195,78,.55);border-radius:18px;padding:18px 12px;background:linear-gradient(155deg,rgba(18,71,49,.94),rgba(15,22,31,.98));color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:inset 0 0 22px rgba(212,175,55,.06),0 8px 18px rgba(0,0,0,.22);transition:transform .18s,border-color .18s,box-shadow .18s}
+.casino-choice:hover{transform:translateY(-4px);border-color:#ffe58a;box-shadow:0 0 22px rgba(212,175,55,.22)}
+.casino-choice span{font-size:2.6rem;filter:drop-shadow(0 0 8px rgba(255,222,110,.28))}
+.casino-choice strong{font-family:"Fredoka",sans-serif;font-size:1.1rem;color:#ffe58a}
+.casino-choice small{max-width:225px;color:#c4c9d0;font-size:.72rem;line-height:1.45}
+.casino-game{display:none;position:relative;margin-top:14px;padding:16px;border:1px solid rgba(230,195,78,.36);border-radius:18px;background:rgba(4,12,12,.72);text-align:center}
+.casino-game.active{display:block}
+.casino-game h2{font-family:"Fredoka",sans-serif;color:#ffe58a;margin:4px 0 8px}
+.casino-back{display:block;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:7px 11px;color:#eee;background:rgba(255,255,255,.07);cursor:pointer}
+.casino-bet-label{display:block;color:#ffe58a;font-size:.8rem;font-weight:800;margin:10px 0 5px}
+.casino-bet{display:block;width:min(360px,100%);margin:0 auto 12px;padding:11px;border:1px solid #c8a83e;border-radius:11px;background:#090f13;color:#fff;font-weight:800;text-align:center}
+.casino-action{display:block;width:min(360px,100%);margin:14px auto 8px;padding:13px;border:1px solid #ffe58a;border-radius:12px;background:linear-gradient(135deg,#176b45,#a87b13);color:#fff;font-weight:900;letter-spacing:.06em;cursor:pointer;box-shadow:0 5px 18px rgba(212,175,55,.16)}
+.casino-action:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.5)}
+.casino-result{min-height:28px;margin:12px auto 4px;color:#fff;font-weight:800;font-size:.95rem}
+.wheel-stage{position:relative;display:grid;place-items:center;margin:12px auto 4px}
+.wheel-pointer{position:absolute;top:-4px;z-index:2;color:#ffe58a;font-size:2rem;text-shadow:0 2px 8px #000}
+.wheel-disc{width:160px;height:160px;display:grid;place-items:center;border:8px solid #d4af37;border-radius:50%;background:conic-gradient(#8b1e1e 0 36deg,#0a613e 36deg 72deg,#172c6d 72deg 108deg,#8b1e1e 108deg 144deg,#0a613e 144deg 180deg,#172c6d 180deg 216deg,#8b1e1e 216deg 252deg,#0a613e 252deg 288deg,#172c6d 288deg 324deg,#8b1e1e 324deg);font-size:3.4rem;box-shadow:0 0 0 5px rgba(0,0,0,.55),0 0 28px rgba(212,175,55,.2)}
+.wheel-disc.spinning{animation:casinoWheelSpin 1.65s cubic-bezier(.12,.72,.2,1) forwards}
+@keyframes casinoWheelSpin{to{transform:rotate(1440deg)}}
+.casino-odds{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px;margin:14px auto 0;max-width:760px;text-align:left}
+.casino-odds div{padding:7px 9px;border-radius:8px;background:rgba(255,255,255,.045);font-size:.7rem;color:#d9dce4}
+.slot-machine{display:flex;justify-content:center;gap:10px;width:min(400px,100%);margin:12px auto;padding:14px;border:5px ridge #d4af37;border-radius:16px;background:linear-gradient(180deg,#111,#242824);box-shadow:inset 0 0 20px #000,0 8px 25px rgba(0,0,0,.35)}
+.slot-reel{width:30%;height:92px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(180deg,#fff,#d8d8ce,#fff);color:#161616;font-size:2.7rem;box-shadow:inset 0 0 9px rgba(0,0,0,.3)}
+.slot-machine.spinning .slot-reel{animation:slotJiggle .12s linear infinite alternate}
+@keyframes slotJiggle{to{transform:translateY(5px);filter:blur(1px)}}
+.memory-status{margin:10px;color:#cdd2d8;font-size:.82rem;font-weight:700}
+.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(48px,76px));justify-content:center;gap:8px;margin:14px auto}
+.memory-card{aspect-ratio:1;border:1px solid #d4af37;border-radius:12px;background:linear-gradient(145deg,#145338,#101923);color:#fff;font-size:1.8rem;cursor:pointer;box-shadow:0 4px 8px rgba(0,0,0,.28);transition:transform .15s,background .15s}
+.memory-card:hover:not(:disabled){transform:translateY(-2px)}
+.memory-card.matched{background:linear-gradient(145deg,#ba962d,#543e0c);border-color:#ffe58a;cursor:default}
+.memory-card:disabled{cursor:default}
+@media(max-width:620px){.casino-menu{grid-template-columns:1fr}.casino-choice{min-height:120px}.casino-shell{padding:13px}.casino-game{padding:12px}.wheel-disc{width:138px;height:138px}.slot-reel{height:76px;font-size:2.2rem}}
 
 .shop-tabs{display:flex;gap:6px;margin-bottom:15px;flex-wrap:wrap}
 .tab-btn{flex:1 1 85px;padding:9px 6px;border-radius:12px;border:none;background:rgba(255,255,255,.05);color:#aaa;font-weight:700;cursor:pointer;font-size:.78rem;transition:background .12s ease,color .12s ease;text-align:center;min-height:38px}
@@ -165,7 +180,7 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .rarity-legendary{background:linear-gradient(135deg,#a66d00,#ffe66b,#c18a00);color:#111}
 .rarity-mythic{background:linear-gradient(135deg,#870019,#ff4d69,#99001d)}
 .rarity-celestial{background:linear-gradient(135deg,#d92f86,#ff69b4,#ff9ed0);color:#fff;border-color:#ffb7dc;box-shadow:0 0 9px rgba(255,105,180,.28)}
-.rarity-halloween{background:linear-gradient(135deg,#ff6a00,#7b2cff,#ff9d00);color:#fff;border-color:#ff6a00;box-shadow:0 0 10px rgba(255,106,0,.25)}
+.rarity-casino{background:linear-gradient(135deg,#7c5b0b,#ffe58a,#176b45);color:#10150f;border-color:#ffe58a;box-shadow:0 0 10px rgba(212,175,55,.3)}
 .rarity-exotic{background:linear-gradient(180deg,#ffffff 0%,#eafffb 18%,#8ff5df 55%,#55d9c2 100%);color:#06352e;border-color:#d8fff8;box-shadow:0 0 6px rgba(255,255,255,.35),0 0 12px rgba(127,255,212,.25),inset 0 1px 2px rgba(255,255,255,.9);text-shadow:0 1px 2px rgba(255,255,255,.65)}
 .rarity-secret{background:linear-gradient(120deg,#030303 0%,#222 22%,#777 42%,#171717 55%,#555 74%,#050505 100%);color:#fff;border-color:#888;box-shadow:inset 0 1px 2px rgba(255,255,255,.25)}
 .buy-btn{background:linear-gradient(45deg,var(--accent-pink),#ff5500);color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;transition:opacity .12s ease;white-space:nowrap;flex-shrink:0}
@@ -190,23 +205,6 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .update-content-box{background:rgba(0,0,0,.4);border-radius:12px;padding:12px;text-align:left;margin-top:12px;font-size:.85rem}
 .update-content-box h4{color:var(--accent-green);margin-bottom:8px;font-family:"Fredoka",sans-serif}
 .update-content-box ul{padding-left:18px;color:#ddd;display:flex;flex-direction:column;gap:6px}
-
-/* HALLOWEEN */
-.halloween-panel{background:linear-gradient(135deg,rgba(255,106,0,.12),rgba(123,44,255,.12));border:2px solid #ff6a00;border-radius:18px;padding:14px}
-.halloween-shop-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
-.mystery-open-btn{border:none;border-radius:12px;padding:9px 12px;background:linear-gradient(45deg,#ff6a00,#7b2cff);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 0 15px rgba(255,106,0,.25)}
-.halloween-title{color:#ff9d00;font-family:"Fredoka",sans-serif}
-.mystery-modal-box{background:#17101f;border:2px solid #ff6a00;padding:22px;border-radius:20px;text-align:center;width:min(560px,92vw);max-height:88vh;overflow-y:auto;box-shadow:0 15px 45px rgba(0,0,0,.85)}
-.mystery-modal-head{position:relative;display:flex;align-items:center;justify-content:center;min-height:42px}
-.mystery-modal-head h2{margin:0}
-.mystery-percent-btn{position:absolute;top:0;right:0;width:34px;height:34px;border-radius:10px;border:1px solid #ff9d00;background:#29152f;color:#ffbd66;font-size:1.1rem;font-weight:900;cursor:pointer;box-shadow:0 0 10px rgba(255,106,0,.2)}
-.mystery-percent-btn:hover{box-shadow:0 0 15px rgba(255,106,0,.45)}
-.halloween-restock-timer{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:8px;background:rgba(255,106,0,.10);border:1px solid rgba(255,157,0,.35);color:#ffbd66;font-size:.72rem;font-weight:800}
-.mystery-box-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-.mystery-card{background:rgba(0,0,0,.35);border:1px solid rgba(255,106,0,.35);border-radius:15px;padding:13px 8px}
-.mystery-card-icon{font-size:2.4rem}
-.mystery-card button{width:100%;margin-top:8px}
-@media(max-width:520px){.mystery-box-grid{grid-template-columns:1fr}}
 
 /* LEADERBOARD */
 .name-box{display:flex;gap:10px;margin-bottom:12px}
@@ -301,10 +299,10 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .pass-btn:hover{opacity:.88}
 .pass-btn.has-reward{animation:passBtnGlow 1s ease-in-out infinite alternate}
 @keyframes passBtnGlow{from{box-shadow:0 0 6px rgba(255,204,0,.4)}to{box-shadow:0 0 20px rgba(255,204,0,.95)}}
-.pass-box{background:linear-gradient(160deg,#1b0f3a,#0d1230 55%,#1a0b2e);border:2px solid #ffcc00;border-radius:20px;width:min(1000px,96vw);max-height:94vh;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 40px rgba(255,204,0,.25),0 15px 45px rgba(0,0,0,.85)}
+.pass-box{background:linear-gradient(160deg,#09261b,#10202a 55%,#17120a);border:2px solid #d4af37;border-radius:20px;width:min(1000px,96vw);max-height:94vh;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 40px rgba(212,175,55,.23),0 15px 45px rgba(0,0,0,.85)}
 .pass-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .pass-season{font-size:.7rem;font-weight:900;letter-spacing:.2em;color:#a9b6ff}
-.pass-title{font-family:"Fredoka",sans-serif;font-size:2rem;font-weight:800;line-height:1;background:linear-gradient(90deg,#ffcc00,#ff5500,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pass-title{font-family:"Fredoka",sans-serif;font-size:2rem;font-weight:800;line-height:1;background:linear-gradient(90deg,#ffe58a,#d4af37,#75d5a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .pass-timer-wrap{text-align:center;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:6px 14px;margin-left:auto}
 .pass-timer-label{font-size:.62rem;color:#aaa}
 .pass-timer{font-family:monospace;font-weight:900;color:var(--accent-gold);font-size:1rem}
@@ -316,7 +314,7 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 .pass-progress-text{display:flex;justify-content:space-between;font-weight:800;font-size:.8rem;margin-bottom:5px}
 .pass-bar{height:16px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
 #passBarFill{height:100%;width:0%;background:linear-gradient(90deg,#34d399,#ffcc00);transition:width .4s}
-.pass-plus-btn{border:0;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#a855f7,#ff0055);color:#fff;white-space:nowrap;box-shadow:0 0 16px rgba(168,85,247,.5)}
+.pass-plus-btn{border:0;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#176b45,#b8860b);color:#fff;white-space:nowrap;box-shadow:0 0 16px rgba(212,175,55,.35)}
 .pass-plus-btn:disabled{background:#333;color:#888;box-shadow:none;cursor:not-allowed}
 .pass-plus-btn.owned:disabled{background:linear-gradient(135deg,#ffcc00,#ff8a00);color:#000;box-shadow:0 0 16px rgba(255,204,0,.5);cursor:default}
 .pass-track-wrap{display:flex;min-height:0}
@@ -358,43 +356,9 @@ h1{font-family:"Fredoka",sans-serif;font-size:2.5rem;background:linear-gradient(
 }
 </style>
 
-<style id="halloween-interface-theme">
-#tab-halloween{position:relative;overflow:hidden;background:linear-gradient(180deg,#ff6a00 0%,#32104f 48%,#09030f 100%);border-radius:18px;min-height:520px}
-#tab-halloween::before{content:"";position:absolute;right:7%;top:30px;width:105px;height:105px;border-radius:50%;background:#ffd98a;box-shadow:0 0 30px rgba(255,217,138,.45);opacity:.9;z-index:0}
-#tab-halloween::after{content:"🦇     🕸️\A        🕷️";white-space:pre;position:absolute;inset:12px 18px auto auto;color:#17101d;font-size:32px;line-height:1.5;opacity:.8;pointer-events:none;z-index:1}
-#tab-halloween .halloween-panel{position:relative;z-index:2;margin:14px;border:2px solid #ff6a00;background:linear-gradient(145deg,rgba(20,5,30,.96),rgba(70,18,70,.94));box-shadow:0 0 24px rgba(255,106,0,.35),inset 0 0 22px rgba(123,0,255,.15);border-radius:18px}
-#tab-halloween .halloween-shop-head{background:linear-gradient(90deg,#ff6a00,#7b1fa2,#24102d);border-radius:15px 15px 0 0;padding:16px;border-bottom:2px solid #ff9d00}
-#tab-halloween .halloween-title{color:#ffd27a!important;text-shadow:0 0 10px #ff6a00,0 0 18px #8b2cff;font-size:1.45rem}
-#tab-halloween .mystery-open-btn{background:linear-gradient(135deg,#ff6a00,#7b1fa2);color:#fff;border:1px solid #ffbd66;box-shadow:0 0 12px rgba(255,106,0,.45);transition:.2s;cursor:pointer}
-#tab-halloween .mystery-open-btn:hover,.mystery-card:hover{box-shadow:0 0 18px rgba(255,106,0,.55)}
-#tab-halloween .restock-bar{background:rgba(18,7,25,.85);border:1px solid #ff6a00;color:#ffd27a;box-shadow:0 0 10px rgba(255,106,0,.2)}
-#tab-halloween .shop-card{background:linear-gradient(145deg,#21102b,#3b163f);border:1px solid #ff6a00;box-shadow:0 0 10px rgba(255,106,0,.18);transition:.2s}
-#tab-halloween .shop-card:hover{box-shadow:0 0 20px rgba(255,106,0,.4);border-color:#ffb347}
-#mysteryBoxesModal .mystery-modal-box{background:linear-gradient(145deg,#16051f,#3b1450,#1a071f);border:2px solid #ff6a00;box-shadow:0 0 30px rgba(255,106,0,.4)}
-#mysteryBoxesModal .mystery-card{background:linear-gradient(145deg,#25102f,#4a1852);border:1px solid #ff7a18;transition:.2s}
-#mysteryBoxesModal .mystery-card-icon{text-shadow:0 0 12px #ff6a00}
-</style>
-
-<style id="global-halloween-theme">
-:root{--bg:#17100d;--panel:#211612;--panel2:#2a1a13;--border:#5a2b16;--accent:#e85d04;--accent2:#f48c06;--purple:#6a0dad;--text:#f4e9df}
-body{background:radial-gradient(circle at 50% -8%,rgba(232,93,4,.18),transparent 34%),linear-gradient(180deg,#24130d 0%,#17100d 48%,#100b09 100%) !important;color:var(--text)}
-body:before{content:"🌙";position:fixed;top:18px;right:24px;font-size:42px;opacity:.28;pointer-events:none;z-index:0;filter:drop-shadow(0 0 12px rgba(244,140,6,.35))}
-.header,.stats,.shop,.garden,.inventory,.panel,.card,.modal-box,.tab-content,.leaderboard-card,.update-card{background-color:rgba(29,19,15,.94) !important;border-color:rgba(232,93,4,.25) !important}
-.header{border-bottom-color:rgba(232,93,4,.4)!important;box-shadow:0 4px 22px rgba(0,0,0,.28),0 0 18px rgba(232,93,4,.06)}
-button,.btn,.buy-btn{border-color:rgba(232,93,4,.35)!important}
-button:hover,.btn:hover,.buy-btn:hover{box-shadow:0 0 12px rgba(232,93,4,.22);border-color:rgba(244,140,6,.65)!important}
-.tab-btn.active{background:linear-gradient(135deg,#6a0dad,#e85d04)!important;color:#fff!important}
-.tab-btn:hover{background:rgba(106,13,173,.18)!important}
-.shop-list-container,.inventory-grid,.garden-grid{scrollbar-color:#6a0dad #17100d}
-input,select{background:#211612!important;color:#f4e9df!important;border-color:#5a2b16!important}
-.progress-bar,.xp-bar{background:#321b12!important}
-.progress-fill,.xp-fill{background:linear-gradient(90deg,#6a0dad,#e85d04,#f48c06)!important}
-.badge,.status-badge{background:rgba(106,13,173,.2)!important;border-color:rgba(106,13,173,.45)!important}
-body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0,85,.35),transparent 38%),linear-gradient(135deg,#180018,#071521,#16000d) !important}
-</style>
 </head>
 
-<body class="halloween-mode">
+<body>
 
 <!-- PANTALLA DE CARGA -->
 <div id="gameLoadingScreen" aria-label="Cargando Meme Garden">
@@ -427,8 +391,7 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
   <div class="stat-card">🪙 <span id="coins" class="stat-val">4,000</span></div>
   <div class="stat-card">⚡ <span id="cps" class="stat-val">0</span>/s</div>
   <div class="stat-card">🛡️ <span id="shields" class="stat-val">0</span></div>
-  <div class="stat-card">🍬 <span id="candy" class="stat-val">0</span></div>
-  <div class="stat-card">🌀 <span id="rebirthsVal" class="rebirth-badge">Rebirth 0/5</span></div>
+  <div class="stat-card">🌀 <span id="rebirthsVal" class="rebirth-badge">Rebirth 0/8</span></div>
   <div class="stat-card">📦 <span id="plotsVal" class="stat-val">4 Parcelas</span></div>
   <div class="stat-card" id="powerStatus"></div>
 </div>
@@ -451,8 +414,7 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
     <div class="shop-tabs">
       <button class="tab-btn active" onclick="switchTab('memes', this)">🌱 Memes</button>
       <button class="tab-btn" onclick="switchTab('powerups', this)">⚡ Power-Ups</button>
-      <button class="tab-btn" onclick="switchTab('candy', this)">🍬 Candy</button>
-      <button class="tab-btn" onclick="switchTab('halloween', this)">🎃 Halloween</button>
+      <button class="tab-btn casino-tab-btn" onclick="switchTab('casino', this)">🎰 Casino</button>
       <button class="tab-btn" id="merchantTabBtn" onclick="switchTab('merchant', this)">🧳 Mercader</button>
       <button class="tab-btn" onclick="switchTab('rebirth', this)">🌀 Rebirth</button>
       <button class="tab-btn" onclick="switchTab('leaderboard', this)">🌐 Online</button>
@@ -479,36 +441,56 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
       <div class="shop-list-container" id="powerShopList"></div>
     </div>
 
-    <!-- CANDY / MISIONES -->
-    <div id="tab-candy" class="tab-content">
-      <div class="candy-panel">
-        <div class="candy-balance">
-          <div>
-            <div style="font-size:1.05rem;font-weight:900;color:#fff;">🍬 Candy</div>
-            <div class="candy-subtitle">Completa misiones diarias para conseguir Candy.</div>
-          </div>
-          <strong id="candyBalance">0 🍬</strong>
+    <!-- CASINO -->
+    <div id="tab-casino" class="tab-content">
+      <section class="casino-shell">
+        <div class="casino-marquee">♠ CASINO MEME GARDEN ♣</div>
+        <p class="casino-intro">Elige una mesa. Cada partida cuesta monedas; revisa la apuesta antes de jugar.</p>
+        <div id="casinoScheduleStatus" aria-live="polite" style="position:relative;text-align:center;margin:8px auto 14px;color:var(--accent-gold);font-weight:800;font-size:.88rem;">Comprobando horario del casino…</div>
+        <div id="casinoClosedNotice" style="display:none;position:relative;text-align:center;padding:22px 12px;border:1px solid rgba(230,195,78,.28);border-radius:16px;background:rgba(0,0,0,.28);color:#d5d8df;line-height:1.7;">
+          <strong style="display:block;color:var(--accent-gold);font-size:1.2rem;">🔒 El casino está cerrado</strong>
+          <span>Vuelve cuando termine el descanso para abrir las mesas de nuevo.</span>
         </div>
-        <div class="candy-shop-title">🛒 Candy Shop</div>
-        <div id="candyShopGrid" class="candy-shop-grid"></div>
-        <div style="font-size:.92rem;font-weight:900;color:#ffd27a;margin-bottom:10px;">📜 Misiones de hoy</div>
-        <div id="candyMissions" class="mission-grid"></div>
-      </div>
-    </div>
+        <div class="casino-menu" id="casinoMenu">
+          <button class="casino-choice" onclick="openCasinoGame('wheel')"><span>🎡</span><strong>Ruleta Brainrot</strong><small>100B por giro · 50% de que no salga nada · espera 1 minuto entre giros</small></button>
+          <button class="casino-choice" onclick="openCasinoGame('slots')"><span>🎰</span><strong>Traga memes</strong><small>Elige cuánto apostar · combina símbolos del casino</small></button>
+          <button class="casino-choice" onclick="openCasinoGame('memory')"><span>🃏</span><strong>Memory</strong><small>Encuentra las parejas en menos de 10 intentos y cobra 10 veces tu apuesta</small></button>
+        </div>
 
-    <!-- HALLOWEEN -->
-    <div id="tab-halloween" class="tab-content">
-      <div class="halloween-panel">
-        <div class="halloween-shop-head">
-          <div>
-            <div class="halloween-title">🎃 Halloween Shop</div>
-            <div style="font-size:.72rem;color:#aaa;margin-top:3px;">Memes exclusivos + rareza Halloween</div>
-            <div id="restockTimerHalloween" class="halloween-restock-timer">🔄 Restock en 60s</div>
-          </div>
-          <button class="mystery-open-btn" onclick="openMysteryBoxesModal()">🎁 Mystery Boxes</button>
-        </div>
-        <div class="shop-list-container" id="halloweenShopList"></div>
-      </div>
+        <section class="casino-game" id="casinoWheel">
+          <button class="casino-back" onclick="backToCasinoMenu()">← Volver a mesas</button>
+          <h2>🎡 Ruleta Brainrot</h2>
+          <p class="casino-description">Un giro cuesta <strong>100B monedas</strong>. Hay un <strong>50% de posibilidades de no ganar nada</strong>. Cada brainrot conserva la mitad de su probabilidad original.</p>
+          <div class="wheel-stage"><div class="wheel-pointer">▼</div><div class="wheel-disc" id="brainrotWheel">🌀</div></div>
+          <button class="casino-action" id="wheelSpinBtn" onclick="spinBrainrotWheel()">GIRAR · 100B 🪙</button>
+          <div id="wheelCooldownDisplay" style="min-height:20px;color:var(--accent-gold);font-size:.8rem;font-weight:700;"></div>
+          <div class="casino-result" id="wheelResult" aria-live="polite">La suerte está esperando.</div>
+          <div class="casino-odds" id="wheelOdds"></div>
+        </section>
+
+        <section class="casino-game" id="casinoSlots">
+          <button class="casino-back" onclick="backToCasinoMenu()">← Volver a mesas</button>
+          <h2>🎰 Traga memes</h2>
+          <p class="casino-description">Una pareja devuelve tu apuesta y un 25% extra. Tres iguales devuelven el doble; 777 devuelve 8 veces la apuesta.</p>
+          <label class="casino-bet-label" for="slotsBet">Apuesta en monedas</label>
+          <input class="casino-bet" id="slotsBet" type="number" min="1" step="1" value="1000000000" inputmode="numeric">
+          <div class="slot-machine" id="slotMachine"><div class="slot-reel">🍋</div><div class="slot-reel">🍒</div><div class="slot-reel">💎</div></div>
+          <button class="casino-action" id="slotsSpinBtn" onclick="spinSlots()">JUGAR</button>
+          <div class="casino-result" id="slotsResult" aria-live="polite">¡Apuesta y prueba suerte!</div>
+        </section>
+
+        <section class="casino-game" id="casinoMemory">
+          <button class="casino-back" onclick="backToCasinoMenu()">← Volver a mesas</button>
+          <h2>🃏 Memory</h2>
+          <p class="casino-description">Encuentra las 6 parejas en menos de 10 intentos para cobrar 10 veces tu apuesta.</p>
+          <label class="casino-bet-label" for="memoryBet">Apuesta en monedas</label>
+          <input class="casino-bet" id="memoryBet" type="number" min="1" step="1" value="1000000000" inputmode="numeric">
+          <button class="casino-action" id="memoryStartBtn" onclick="startMemoryGame()">APOSTAR Y EMPEZAR</button>
+          <div class="memory-status" id="memoryStatus">Cada intento es una pareja de cartas.</div>
+          <div class="memory-grid" id="memoryGrid"></div>
+          <div class="casino-result" id="memoryResult" aria-live="polite"></div>
+        </section>
+      </section>
     </div>
 
     <!-- MERCADER VIAJERO -->
@@ -528,16 +510,14 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
     <!-- REBIRTH -->
     <div id="tab-rebirth" class="tab-content">
       <div class="rebirth-box">
-        <h2 id="rebirthTitle">🌀 REBIRTH 1 / 5</h2>
+        <h2 id="rebirthTitle">🌀 REBIRTH 1 / 8</h2>
         <p id="rebirthDesc">
-          Reinicia tus monedas e inventario a cambio de un
-          <strong>NUEVO SLOT EN TU JARDÍN</strong> y un
-          <strong>MULTIPLICADOR PERMANENTE</strong>.
+          Reinicia tus monedas e inventario para conseguir la recompensa indicada.
         </p>
         <div class="rebirth-requirements">
           <div class="req-item"><span>🪙 Monedas Actuales:</span><span id="reqCoins">0 / 10M</span></div>
           <div class="req-item"><span>📊 Monedas Generadas Totales:</span><span id="reqLifetime">0 / 25M</span></div>
-          <div class="req-item"><span>🎁 Recompensa:</span><span id="reqReward" style="color:var(--accent-green)">+1 Slot y x2 Monedas</span></div>
+          <div class="req-item"><span>🎁 Recompensa:</span><span id="reqReward" style="color:var(--accent-green)">+1 parcela · multiplicador x2</span></div>
         </div>
         <button id="rebirthBtn" class="rebirth-btn" onclick="doRebirth()">¡Hacer Rebirth!</button>
       </div>
@@ -552,18 +532,19 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
     <!-- UPDATE -->
     <div id="tab-update" class="tab-content">
       <div class="update-panel-box">
-        <h2>🎃 Update 1.2.1 — Halloween Update</h2>
-        <p style="font-size:.8rem;color:#ddd;margin-bottom:5px;">¡La expansión de Halloween ya está aquí!</p>
-        <div class="update-timer-display" id="updateCountdown">🎃 HALLOWEEN UPDATE ACTIVA</div>
+        <h2>🎰 Update 1.3.4 — Casino Update</h2>
+        <p style="font-size:.8rem;color:#ddd;margin-bottom:5px;">¡Abren las mesas del Casino Meme Garden!</p>
+        <div class="update-timer-display" id="updateCountdown">🎰 CASINO UPDATE ACTIVA</div>
         <div class="update-content-box">
-          <h4>🎃 Contenido de Halloween:</h4>
+          <h4>♠ Novedades de la Casino Update:</h4>
           <p id="adminStatus" style="color:#7FFFD4;font-size:.8rem;margin-bottom:8px;">⚡ ADMIN ABUSE · Domingos 21:50-22:00 · x5 cantidad de stock · x3 suerte de stock · x2 dinero.</p>
           <ul>
-            <li>🎃 <strong>Halloween:</strong> ¡10 memes exclusivos y una nueva rareza!</li>
-            <li>🎁 <strong>Mystery Boxes:</strong> abre cajas para conseguir memes exclusivos de Halloween.</li>
-            <li>👻 <strong>Interfaz Halloween:</strong> tienda temática con recompensas especiales.</li>
+            <li>🎡 <strong>Ruleta Brainrot:</strong> giros por 100B y 10 brainrots exclusivos de casino.</li>
+            <li>🎰 <strong>Traga memes:</strong> apuesta monedas y combina símbolos clásicos del casino.</li>
+            <li>🃏 <strong>Memory:</strong> encuentra las seis parejas en menos de 10 intentos para ganar.</li>
+            <li>💰 <strong>Todo cuesta monedas:</strong> no hay partidas gratis; el pase PLUS cuesta 1Qa.</li>
             <li>⚡ <strong>Admin Abuse:</strong> ¡confeti, x5 cantidad de stock, x3 suerte de stock, x2 dinero y DROP MÍTICO al terminar!</li>
-            <li>🏆 <strong>Meme Pass:</strong> pase de temporada (pista gratis y pista PLUS) · botón bajo Códigos.</li>
+            <li>🏆 <strong>Casino Pass:</strong> nueva temporada con pista gratis y pista PLUS.</li>
             <li>🧳 <strong>Mercader Viajero:</strong> descuentos y trueques por tiempo limitado.</li>
             <li>📊 <strong>Estadísticas:</strong> mira todo lo que has hecho.</li>
           </ul>
@@ -595,8 +576,8 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
   <div class="pass-box">
     <div class="pass-top">
       <div>
-        <div class="pass-season">TEMPORADA 1 · HALLOWEEN</div>
-        <div class="pass-title">MEME PASS</div>
+        <div class="pass-season">TEMPORADA 2 · CASINO ROYALE</div>
+        <div class="pass-title">CASINO PASS</div>
       </div>
       <div class="pass-timer-wrap">
         <div class="pass-timer-label">LA TEMPORADA TERMINA EN</div>
@@ -641,19 +622,6 @@ body.admin-abuse-active{background:radial-gradient(circle at 50% -15%,rgba(255,0
       <button class="btn-save" onclick="redeemCode()">Canjear</button>
       <button class="btn-cancel" onclick="closeCodesModal()">Cerrar</button>
     </div>
-  </div>
-</div>
-
-<!-- MYSTERY BOXES -->
-<div class="modal-overlay" id="mysteryBoxesModal">
-  <div class="mystery-modal-box">
-    <div class="mystery-modal-head">
-      <h2 style="color:#ff9d00;font-family:'Fredoka',sans-serif;">🎃 Mystery Boxes</h2>
-      <button class="mystery-percent-btn" onclick="showMysteryBoxProbabilities()" title="Ver probabilidades">%</button>
-    </div>
-    <p style="font-size:.8rem;color:#aaa;">Compra una caja y recibe un meme exclusivo de Halloween.</p>
-    <div class="mystery-box-grid" id="mysteryBoxGrid"></div>
-    <button class="btn-cancel" style="width:100%;" onclick="closeMysteryBoxesModal()">Cerrar</button>
   </div>
 </div>
 
@@ -763,7 +731,7 @@ function isAdminAbuseActive() {
   return minutes >= 21 * 60 + 50 && minutes < 22 * 60;
 }
 
-function getStockLuckMultiplier() { if (creatorMode) return CREATOR_LUCK; return isAdminAbuseActive() ? 3 : 1; }
+function getStockLuckMultiplier() { return isAdminAbuseActive() ? 3 : 1; }
 function getMoneyMultiplier() { return isAdminAbuseActive() ? 2 : 1; }
 
 /* Guarda el estado anterior para detectar la transición ACTIVO -> INACTIVO. */
@@ -857,8 +825,6 @@ function triggerAdminAbuseEndDrop() {
 
   /* Restock inmediato con Mítico garantizado. */
   restockShop(true);
-  restockHalloweenShop();
-
   const message = document.getElementById("adminDropMessage");
   if (message) message.style.display = "block";
 
@@ -891,7 +857,6 @@ function checkAdminAbuseTransition() {
     const message = document.getElementById("adminDropMessage");
     if (message) message.style.display = "none";
     restockShop();
-    restockHalloweenShop();
     playSound("buy");
   }
 
@@ -1015,7 +980,7 @@ function playSound(type) {
 /* =========================================================
    ESTADO
 ========================================================= */
-const MAX_REBIRTHS = 5;
+const MAX_REBIRTHS = 8;
 const MAX_SHIELDS = 5;
 
 let playerId = localStorage.getItem("brainrot_player_id") || "usr_" + Math.random().toString(36).substring(2, 9);
@@ -1023,19 +988,9 @@ localStorage.setItem("brainrot_player_id", playerId);
 
 let playerName = localStorage.getItem("brainrot_player_name") || "Jugador_" + Math.floor(Math.random() * 8999 + 1000);
 
-let creatorMode = false;
-const CREATOR_LUCK = 1e47;
-const CREATOR_COINS = 1e33;
-const CREATOR_CANDY = 1e12;
 let coins = 4000;
 let lifetimeCoins = 100;
 let shields = 0;
-let candy = 0;
-let candyMissionDate = "";
-let candyDailyStats = { earned: 0, planted: 0, halloweenBought: 0 };
-let candyClaimedMissions = [];
-let candyMultiplierExpiresAt = 0;
-
 let boostExpiresAt = 0;
 let moneyStormExpiresAt = 0;
 let shortWordsActive = 0;
@@ -1048,7 +1003,6 @@ let streakDay = 1;
 let lastClaimDate = "";
 
 let inventory = [];
-let mysteryBoxInventory = { spooky_box: 0, haunted_box: 0, demon_box: 0 };
 let selectedInvIndex = null;
 let garden = [null, null, null, null];
 
@@ -1067,140 +1021,23 @@ let merchant = { nextAt: 0, until: 0, offers: [] };
 let gameStats = {
   playSeconds: 0, memesBought: 0, memesPlanted: 0,
   stealsBlocked: 0, shieldsUsed: 0, stealsFailed: 0,
-  boxesOpened: 0, missionsClaimed: 0, merchantDeals: 0,
+  merchantDeals: 0,
   peakCPS: 0, rarestRank: -1, rarestName: "", rarestRarity: "", rarestCps: 0
 };
-
-
-/* =========================================================
-   CANDY / MISIONES DIARIAS
-========================================================= */
-const candyMissions = [
-  { id:"earn", icon:"🪙", title:"Genera monedas", desc:"Consigue 100.000 monedas hoy", target:100000, reward:50, stat:"earned" },
-  { id:"plant", icon:"🌱", title:"Jardín activo", desc:"Planta 3 memes hoy", target:3, reward:75, stat:"planted" },
-  { id:"halloween", icon:"🎃", title:"Cazador de Halloween", desc:"Compra 2 memes de Halloween hoy", target:2, reward:125, stat:"halloweenBought" }
-];
-
-function resetCandyMissionsIfNeeded() {
-  const today = getLocalDateKey();
-  if (candyMissionDate !== today) {
-    candyMissionDate = today;
-    candyDailyStats = { earned:0, planted:0, halloweenBought:0 };
-    candyClaimedMissions = [];
-  }
-}
-
-const candyShopItems = [
-  {id:"candy_spooky_box", icon:"🎃", name:"Candy Spooky Box", desc:"Consigue 1 Spooky Box para abrir después.", price:250, type:"box", boxId:"spooky_box"},
-  {id:"candy_haunted_box", icon:"👻", name:"Candy Haunted Box", desc:"Consigue 1 Haunted Box para abrir después.", price:900, type:"box", boxId:"haunted_box"},
-  {id:"candy_demon_box", icon:"😈", name:"Candy Demon Box", desc:"La mejor caja: Épico 80% · Legendario 13% · Mítico 6,5% · Halloween 0,5%.", price:2500, type:"box", boxId:"demon_box"},
-  {id:"candy_multiplier", icon:"🍭", name:"Sugar Rush x3", desc:"Multiplica tus monedas por x3 durante 60 segundos.", price:1500, type:"multiplier"}
-];
-
-function renderCandyShop() {
-  const grid = document.getElementById("candyShopGrid");
-  if (!grid) return;
-  grid.innerHTML = "";
-  candyShopItems.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "candy-shop-card";
-    card.innerHTML = `<div class="shop-big-icon">${item.icon}</div><h4>${item.name}</h4><p>${item.desc}</p>`;
-    const btn = document.createElement("button");
-    btn.className = "candy-buy";
-    btn.innerText = `${formatNumber(item.price)} 🍬`;
-    btn.disabled = candy < item.price;
-    btn.dataset.price = item.price;
-    btn.dataset.currency = "candy";
-    btn.onclick = () => buyCandyShopItem(item.id);
-    card.appendChild(btn);
-    grid.appendChild(card);
-  });
-}
-
-function buyCandyShopItem(id) {
-  const item = candyShopItems.find(x => x.id === id);
-  if (!item || candy < item.price) return;
-  candy -= item.price;
-
-  if (item.type === "box") {
-    mysteryBoxInventory[item.boxId] = (mysteryBoxInventory[item.boxId] || 0) + 1;
-    playSound("buy");
-    alert(`🍬 ¡COMPRA REALIZADA!\nHas conseguido 1 ${mysteryBoxes.find(b => b.id === item.boxId)?.name || "Mystery Box"} 🎁`);
-    renderMysteryBoxes();
-  } else if (item.type === "multiplier") {
-    candyMultiplierExpiresAt = Math.max(Date.now(), candyMultiplierExpiresAt) + 60000;
-    playSound("buy");
-    alert("🍭 ¡SUGAR RUSH!\nTus monedas se multiplican x3 durante 60 segundos.");
-  }
-
-  renderCandyShop();
-  renderCandyMissions();
-  updateUI();
-  saveGame();
-}
-
-function renderCandyMissions() {
-  resetCandyMissionsIfNeeded();
-  renderCandyShop();
-  const balance = document.getElementById("candyBalance");
-  const top = document.getElementById("candy");
-  if (balance) balance.innerText = `${formatNumber(candy)} 🍬`;
-  if (top) top.innerText = formatNumber(candy);
-  const grid = document.getElementById("candyMissions");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  candyMissions.forEach(m => {
-    const value = Math.min(m.target, Number(candyDailyStats[m.stat]) || 0);
-    const done = value >= m.target;
-    const claimed = candyClaimedMissions.includes(m.id);
-    const pct = Math.min(100, (value / m.target) * 100);
-    const card = document.createElement("div");
-    card.className = `mission-card${done ? " completed" : ""}`;
-    card.dataset.mission = m.id;
-    card.innerHTML = `
-      <div class="mission-top">
-        <div style="display:flex;gap:10px;align-items:flex-start;">
-          <div class="mission-icon">${m.icon}</div>
-          <div><div class="mission-title">${m.title}</div><div class="mission-desc">${m.desc}</div></div>
-        </div>
-      </div>
-      <div class="mission-progress"><div class="mission-bar" style="width:${pct}%"></div></div>
-      <div class="mission-footer">
-        <span class="mission-count">${formatNumber(value)} / ${formatNumber(m.target)}</span>
-        <span class="mission-reward">+${formatNumber(m.reward)} 🍬</span>
-        <button class="mission-claim" ${(!done || claimed) ? "disabled" : ""} onclick="claimCandyMission('${m.id}')">${claimed ? "RECLAMADA" : done ? "RECLAMAR" : "EN PROGRESO"}</button>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function claimCandyMission(id) {
-  resetCandyMissionsIfNeeded();
-  const mission = candyMissions.find(m => m.id === id);
-  if (!mission || candyClaimedMissions.includes(id)) return;
-  const value = Number(candyDailyStats[mission.stat]) || 0;
-  if (value < mission.target) return;
-  candyClaimedMissions.push(id);
-  candy += mission.reward;
-  gameStats.missionsClaimed++;
-  addSeasonXP(40);
-  playSound("buy");
-  renderCandyMissions();
-  updateUI();
-  saveGame();
-}
 
 
 /* =========================================================
    REBIRTHS
 ========================================================= */
 const rebirthConfigs = [
-  { level: 1, cost: 10000000,   lifetimeReq: 25000000,    bonusMultiplier: 2, addPlots: 1 },
-  { level: 2, cost: 25000000,   lifetimeReq: 100000000,   bonusMultiplier: 3, addPlots: 0 },
-  { level: 3, cost: 150000000,  lifetimeReq: 300000000,   bonusMultiplier: 4, addPlots: 0 },
-  { level: 4, cost: 500000000,  lifetimeReq: 2500000000,  bonusMultiplier: 5, addPlots: 1 },
-  { level: 5, cost: 3000000000, lifetimeReq: 10000000000, bonusMultiplier: 6, addPlots: 0 }
+  { level: 1, cost: 100000000,   lifetimeReq: 500000000,    bonusMultiplier: 2, addPlots: 1 },
+  { level: 2, cost: 1500000000,  lifetimeReq: 10000000000,  bonusMultiplier: 3, addPlots: 0 },
+  { level: 3, cost: 55000000000, lifetimeReq: 2000000000000, bonusMultiplier: 4, addPlots: 0 },
+  { level: 4, cost: 5000000000000, lifetimeReq: 25000000000000, bonusMultiplier: 5, addPlots: 1 },
+  { level: 5, cost: 50000000000000, lifetimeReq: 150000000000000, bonusMultiplier: 6, addPlots: 0 },
+  { level: 6, cost: 500000000000000, lifetimeReq: 10000000000000000, bonusMultiplier: 7, addPlots: 0 },
+  { level: 7, cost: 100000000000000000, lifetimeReq: 5000000000000000000, bonusMultiplier: 1, addPlots: 1 },
+  { level: 8, cost: 50000000000000000000, lifetimeReq: 150000000000000000000000, bonusMultiplier: 8, addPlots: 0 }
 ];
 
 /* Las parcelas SIEMPRE se calculan a partir de los rebirths (4 base + las de cada rebirth). */
@@ -1246,241 +1083,405 @@ const allMemes = [
   { id:"shadow_ape", name:"Shadow Ape", icon:"🦍", cps:700000000, price:1400000000000, chance:.00004, rarity:"Secreto", color:"var(--rarity-secret)" },
   { id:"gigante_supremo", name:"Gigante Supremo", icon:"🦾", cps:750000000, price:1500000000000, chance:.00002, rarity:"Secreto", color:"var(--rarity-secret)" }
 ];
+/* Precio estándar: 100× la producción de monedas por segundo. */
+allMemes.forEach(meme => { meme.price = meme.cps * 100; });
 
 
 /* =========================================================
-   HALLOWEEN
+   CASINO · UPDATE 1.3.4
 ========================================================= */
-const halloweenMemes = [
-  {id:"pumpkin_sigma", name:"Pumpkin Sigma", icon:"🎃", cps:45, price:90000, rarity:"Común", color:"var(--rarity-common)", chance:.7},
-  {id:"ghost_mewing", name:"Ghost Mewing", icon:"👻", cps:90, price:180000, rarity:"Común", color:"var(--rarity-common)", chance:.6},
-  {id:"spooky_skibidi", name:"Spooky Skibidi", icon:"🚽", cps:250, price:500000, rarity:"Raro", color:"var(--rarity-rare)", chance:.35},
-  {id:"witch_gyatt", name:"Witch Gyatt", icon:"🧙", cps:600, price:1200000, rarity:"Raro", color:"var(--rarity-rare)", chance:.3},
-  {id:"haunted_ohio", name:"Haunted Ohio", icon:"🏚️", cps:1800, price:3600000, rarity:"Épico", color:"var(--rarity-epic)", chance:.15},
-  {id:"vampire_rizz", name:"Vampire Rizz", icon:"🧛", cps:4200, price:8400000, rarity:"Épico", color:"var(--rarity-epic)", chance:.1},
-  {id:"reaper_chad", name:"Reaper Chad", icon:"💀", cps:15000, price:30000000, rarity:"Legendario", color:"var(--rarity-legendary)", chance:.05},
-  {id:"pumpkin_king", name:"Pumpkin King", icon:"🎃👑", cps:50000, price:100000000, rarity:"Legendario", color:"var(--rarity-legendary)", chance:.03},
-  {id:"cursed_fanum", name:"Cursed Fanum", icon:"🍔🕷️", cps:220000, price:440000000, rarity:"Mítico", color:"var(--rarity-mythic)", chance:.008},
-  {id:"halloween_demon", name:"Halloween Demon", icon:"😈", cps:550000000, price:1100000000000, rarity:"Halloween", color:"var(--rarity-halloween)", chance:.00005}
+const CASINO_WHEEL_COST = 100_000_000_000;
+const CASINO_WHEEL_COOLDOWN_MS = 60_000;
+const CASINO_OPEN_MS = 5 * 60_000;
+const CASINO_CLOSED_MS = 10 * 60_000;
+const CASINO_CYCLE_MS = CASINO_OPEN_MS + CASINO_CLOSED_MS;
+const CASINO_CYCLE_STORAGE_KEY = "brainrot_casino_cycle_start";
+let casinoCycleStartAt = Number(localStorage.getItem(CASINO_CYCLE_STORAGE_KEY));
+if (!Number.isFinite(casinoCycleStartAt) || casinoCycleStartAt <= 0) {
+  casinoCycleStartAt = Date.now();
+  localStorage.setItem(CASINO_CYCLE_STORAGE_KEY, String(casinoCycleStartAt));
+}
+let casinoLastOpenState = null;
+let wheelCooldownUntil = 0;
+const CASINO_BRAINROTS = [
+  {id:"casino_tralalero", name:"Tralalero Tralala", icon:"🦈", cps:900_000_000, chance:.01},
+  {id:"casino_bombardino", name:"Bombardino Crocodilo", icon:"🐊", cps:750_000_000, chance:1},
+  {id:"casino_ballerina", name:"Balerina Cappuccina", icon:"🩰", cps:670_000_000, chance:3},
+  {id:"casino_tungtung", name:"Tung Tung Tung Sahur", icon:"🥁", cps:350_000_000, chance:5},
+  {id:"casino_assassino", name:"Cappuccino Assassino", icon:"☕", cps:270_000_000, chance:7},
+  {id:"casino_trippi", name:"Trippi Troppi", icon:"🦐", cps:200_000_000, chance:9},
+  {id:"casino_vacca", name:"La Vacca Saturno Saturnita", icon:"🐄", cps:150_000_000, chance:11},
+  {id:"casino_chimpanzini", name:"Chimpanzini Bananini", icon:"🐒", cps:80_000_000, chance:15},
+  {id:"casino_lirili", name:"Lirilì Larilà", icon:"🐘", cps:45_000_000, chance:20},
+  {id:"casino_frigo", name:"Frigo Camelo", icon:"🐪", cps:10_000_000, chance:28.999}
 ];
-
-/* Economía de memes: todos cuestan exactamente CPS × 100 (tienda normal y de Halloween). */
-allMemes.forEach(meme => { meme.price = meme.cps * 100; });
-halloweenMemes.forEach(meme => { meme.price = meme.cps * 100; });
-
-const mysteryBoxes = [
-  {id:"spooky_box", name:"Spooky Box", icon:"🎃", price:320000},
-  {id:"haunted_box", name:"Haunted Box", icon:"👻", price:20000000},
-  {id:"demon_box", name:"Demon Box", icon:"😈", price:50000000000}
+const SLOT_SYMBOLS = [
+  {icon:"7️⃣", weight:4}, {icon:"🍋", weight:23}, {icon:"🍒", weight:22},
+  {icon:"🍊", weight:20}, {icon:"🍉", weight:18}, {icon:"💎", weight:13}
 ];
+const MEMORY_SYMBOLS = ["🪙","♠️","♥️","♦️","♣️","🎲"];
+let wheelSpinning = false;
+let slotsSpinning = false;
+let memoryGame = null;
 
-let halloweenShopStock = [];
-let halloweenGuaranteedPending = false;
-let adminHalloweenClaimKey = localStorage.getItem("brainrot_admin_halloween_key") || "";
-
-function restockHalloweenShop(forceHalloween = false) {
-  /* Todos los memes se muestran siempre; la probabilidad solo decide su stock. */
-  const rarityChances = {
-    "Común": 0.75, "Raro": 0.5, "Épico": 0.15,
-    "Legendario": 0.05, "Mítico": 0.01,
-    "Halloween": forceHalloween ? 1 : 0.0005
-  };
-
-  halloweenShopStock = halloweenMemes.map(item => {
-    const chance = rarityChances[item.rarity] ?? 0;
-    return { ...item, stock: (creatorMode || Math.random() <= chance) ? 1 : 0 };
-  });
-
-  if (isAdminAbuseActive()) {
-    const eventKey = getAdminEventKey();
-    const demon = halloweenShopStock.find(item => item.rarity === "Halloween");
-    if (adminHalloweenClaimKey !== eventKey) {
-      if (demon) {
-        demon.stock = 1;
-        adminHalloweenClaimKey = eventKey;
-        localStorage.setItem("brainrot_admin_halloween_key", eventKey);
-      }
-    } else if (demon) {
-      demon.stock = 0;
-    }
-  }
-
-  checkHighRarityStock(halloweenShopStock, true);
-  renderHalloweenShop();
-}
-
-function renderHalloweenShop() {
-  const c = document.getElementById("halloweenShopList");
-  if (!c) return;
-  c.innerHTML = "";
-  halloweenShopStock.forEach((item, index) => {
-    const el = document.createElement("div");
-    el.className = "shop-item";
-    const info = document.createElement("div");
-    info.className = "item-info";
-    const icon = document.createElement("span");
-    icon.className = "item-icon";
-    icon.innerText = item.icon;
-    const details = document.createElement("div");
-    const name = document.createElement("div");
-    name.className = "item-name";
-    name.innerText = item.name;
-    const tag = document.createElement("span");
-    tag.className = `stock-tag ${getRarityClass(item.rarity)}`;
-    tag.innerText = item.rarity;
-    name.appendChild(tag);
-    const meta = document.createElement("div");
-    meta.style.cssText = "font-size:.68rem;color:#aaa;margin-top:3px;";
-    meta.innerText = `${formatNumber(item.cps)} CPS · ${formatNumber(item.price)} 🪙`;
-    details.append(name, meta);
-    info.append(icon, details);
-    const stockText = document.createElement("div");
-    stockText.style.cssText = "font-size:.68rem;color:#ff9d00;margin-top:3px;";
-    stockText.innerText = `Stock: ${item.stock}`;
-    details.appendChild(stockText);
-    const btn = document.createElement("button");
-    btn.className = "buy-btn";
-    btn.innerText = `${formatNumber(item.price)} 🪙`;
-    btn.dataset.price = item.price;
-    btn.dataset.stock = item.stock;
-    btn.onclick = () => buyHalloweenMeme(index);
-    btn.disabled = coins < item.price || item.stock <= 0;
-    el.append(info, btn);
-    c.appendChild(el);
-  });
-}
-
-function buyHalloweenMeme(index) {
-  const item = halloweenShopStock[index];
-  if (!item || item.stock <= 0 || coins < item.price) return;
-  coins -= item.price;
-  item.stock--;
-  inventory.push({ ...item, stock: undefined });
-  resetCandyMissionsIfNeeded();
-  candyDailyStats.halloweenBought++;
-  gameStats.memesBought++;
-  recordMemeObtained(item);
-  addSeasonXP(10);
-  playSound("buy");
-  updateUI();
-  saveGame();
-  renderHalloweenShop();
-}
-
-function openMysteryBoxesModal() {
-  playSound("select");
-  renderMysteryBoxes();
-  document.getElementById("mysteryBoxesModal").style.display = "flex";
-}
-function closeMysteryBoxesModal() {
-  document.getElementById("mysteryBoxesModal").style.display = "none";
-}
-
-const mysteryBoxProbabilities = {
-  spooky_box: [["Común", 75], ["Raro", 20], ["Épico", 5]],
-  haunted_box: [["Raro", 60], ["Épico", 30], ["Legendario", 8], ["Mítico", 2]],
-  demon_box: [["Épico", 80], ["Legendario", 13], ["Mítico", 6.5], ["Halloween", 0.5]]
-};
-
-function getMysteryBoxRarity(boxId) {
-  const chances = mysteryBoxProbabilities[boxId] || [];
-  if (creatorMode && chances.length) return chances[chances.length - 1][0];
-  const roll = Math.random() * 100;
-  let total = 0;
-  for (const [rarity, chance] of chances) {
-    total += chance;
-    if (roll < total) return rarity;
-  }
-  return chances[chances.length - 1]?.[0] || "Común";
-}
-
-function showMysteryBoxProbabilities() {
-  const lines = [];
-  mysteryBoxes.forEach(box => {
-    lines.push(`${box.icon} ${box.name.toUpperCase()}`);
-    (mysteryBoxProbabilities[box.id] || []).forEach(([rarity, chance]) => lines.push(`${rarity}: ${chance}%`));
-    lines.push("");
-  });
-  alert("📊 Probabilidades Mystery Boxes\n\n" + lines.join("\n"));
-}
-
-function openMysteryBoxFromInventory(boxId) {
-  if (!mysteryBoxInventory[boxId] || mysteryBoxInventory[boxId] <= 0) return;
-  const box = mysteryBoxes.find(b => b.id === boxId);
-  if (!box) return;
-
-  const rarity = getMysteryBoxRarity(box.id);
-  const pool = halloweenMemes.filter(item => item.rarity === rarity);
-  if (!pool.length) return;
-
-  mysteryBoxInventory[boxId]--;
-  const reward = { ...pool[Math.floor(Math.random() * pool.length)] };
-  inventory.push(reward);
-
-  playSound("rebirth");
-  recordBox(reward);
-  alert(`🎃 ¡MYSTERY BOX ABIERTA!\nHas conseguido: ${reward.icon} ${reward.name} [${reward.rarity}]`);
-  updateUI();
-  saveGame();
-  renderMysteryBoxes();
-}
-
-function renderMysteryBoxes() {
-  const c = document.getElementById("mysteryBoxGrid");
-  if (!c) return;
-  c.innerHTML = "";
-
-  mysteryBoxes.forEach(box => {
-    const card = document.createElement("div");
-    card.className = "mystery-card";
-    card.innerHTML = `<div class="mystery-card-icon">${box.icon}</div><strong>${box.name}</strong><div style="font-size:.72rem;color:#aaa;margin-top:4px;">1 meme de Halloween</div>`;
-
-    const owned = mysteryBoxInventory[box.id] || 0;
-    if (owned > 0) {
-      const ownedText = document.createElement("div");
-      ownedText.style.cssText = "font-size:.78rem;color:#ff9d00;font-weight:800;margin:7px 0;";
-      ownedText.innerText = `🎁 En tu inventario: ${owned}`;
-      card.appendChild(ownedText);
-
-      const openBtn = document.createElement("button");
-      openBtn.className = "buy-btn";
-      openBtn.innerText = "Abrir 1";
-      openBtn.onclick = () => openMysteryBoxFromInventory(box.id);
-      card.appendChild(openBtn);
-    }
-
-    const btn = document.createElement("button");
-    btn.className = "buy-btn";
-    btn.innerText = `${formatNumber(box.price)} 🪙`;
-    btn.disabled = coins < box.price;
-    btn.dataset.price = box.price;
-    btn.onclick = () => buyMysteryBox(box);
-    card.appendChild(btn);
-    c.appendChild(card);
-  });
-}
-
-function buyMysteryBox(box) {
-  if (coins < box.price) return;
-  coins -= box.price;
-
-  const rarity = getMysteryBoxRarity(box.id);
-  const pool = halloweenMemes.filter(item => item.rarity === rarity);
-  if (!pool.length) {
-    coins += box.price;
+function openCasinoGame(game) {
+  if (!isCasinoOpen()) {
+    updateCasinoScheduleUI();
     return;
   }
+  document.getElementById("casinoMenu").style.display = "none";
+  document.querySelectorAll(".casino-game").forEach(panel => panel.classList.remove("active"));
+  const panel = document.getElementById(game === "wheel" ? "casinoWheel" : game === "slots" ? "casinoSlots" : "casinoMemory");
+  if (panel) panel.classList.add("active");
+  playSound("select");
+  updateCasinoAffordability();
+}
 
-  const reward = { ...pool[Math.floor(Math.random() * pool.length)] };
-  inventory.push(reward);
-  playSound("rebirth");
-  recordBox(reward);
-  alert(`🎃 ¡MYSTERY BOX!\nHas conseguido: ${reward.icon} ${reward.name} [${reward.rarity}]`);
+function backToCasinoMenu() {
+  document.querySelectorAll(".casino-game").forEach(panel => panel.classList.remove("active"));
+  document.getElementById("casinoMenu").style.display = isCasinoOpen() ? "grid" : "none";
+}
+
+function getCasinoScheduleState(now = Date.now()) {
+  let elapsed = (now - casinoCycleStartAt) % CASINO_CYCLE_MS;
+  if (elapsed < 0) elapsed += CASINO_CYCLE_MS;
+  const isOpen = elapsed < CASINO_OPEN_MS;
+  return {
+    isOpen,
+    remaining: isOpen ? CASINO_OPEN_MS - elapsed : CASINO_CYCLE_MS - elapsed
+  };
+}
+
+function isCasinoOpen() {
+  return getCasinoScheduleState().isOpen;
+}
+
+function formatCasinoTime(milliseconds) {
+  const seconds = Math.max(0, Math.ceil(milliseconds / 1000));
+  return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function updateCasinoScheduleUI() {
+  const state = getCasinoScheduleState();
+  const status = document.getElementById("casinoScheduleStatus");
+  const notice = document.getElementById("casinoClosedNotice");
+  const menu = document.getElementById("casinoMenu");
+  if (status) {
+    status.innerText = state.isOpen
+      ? `🎰 CASINO ABIERTO · cierra en ${formatCasinoTime(state.remaining)}`
+      : `🔒 CASINO CERRADO · abre en ${formatCasinoTime(state.remaining)}`;
+  }
+  if (casinoLastOpenState !== state.isOpen) {
+    casinoLastOpenState = state.isOpen;
+    document.querySelectorAll(".casino-game").forEach(panel => panel.classList.remove("active"));
+    if (menu) menu.style.display = state.isOpen ? "grid" : "none";
+    if (notice) notice.style.display = state.isOpen ? "none" : "block";
+  }
+  updateCasinoAffordability();
+}
+
+function pickCasinoBrainrot() {
+  const totalWeight = CASINO_BRAINROTS.reduce((sum, item) => sum + item.chance, 0);
+  let roll = Math.random() * 100;
+  if (roll >= 50) return null;
+  roll = (roll / 50) * totalWeight;
+  for (const item of CASINO_BRAINROTS) {
+    roll -= item.chance;
+    if (roll < 0) return item;
+  }
+  return CASINO_BRAINROTS[CASINO_BRAINROTS.length - 1];
+}
+
+function renderCasinoOdds() {
+  const target = document.getElementById("wheelOdds");
+  if (!target) return;
+  const totalWeight = CASINO_BRAINROTS.reduce((sum, item) => sum + item.chance, 0);
+  target.innerHTML = `<div>💨 <strong>Nada</strong><br>50% · la apuesta se pierde</div>` + CASINO_BRAINROTS.map(item => {
+    const actualChance = Number((item.chance * 50 / totalWeight).toFixed(6));
+    return `<div>${item.icon} <strong>${item.name}</strong><br>+${formatNumber(item.cps)}/s · ${actualChance}%</div>`;
+  }).join("");
+}
+
+function spinBrainrotWheel() {
+  if (wheelSpinning) return;
+  const result = document.getElementById("wheelResult");
+  if (!isCasinoOpen()) {
+    result.innerText = "El casino está cerrado. Espera a que abra para volver a jugar.";
+    updateCasinoScheduleUI();
+    return;
+  }
+  if (wheelCooldownUntil > Date.now()) {
+    result.innerText = `Espera ${formatCasinoTime(wheelCooldownUntil - Date.now())} para volver a girar.`;
+    updateCasinoAffordability();
+    return;
+  }
+  if (coins < CASINO_WHEEL_COST) {
+    result.innerText = `Te faltan monedas: necesitas ${formatNumber(CASINO_WHEEL_COST)}.`;
+    playSound("fail");
+    return;
+  }
+  coins -= CASINO_WHEEL_COST;
+  wheelCooldownUntil = Date.now() + CASINO_WHEEL_COOLDOWN_MS;
+  wheelSpinning = true;
+  const button = document.getElementById("wheelSpinBtn");
+  const disc = document.getElementById("brainrotWheel");
+  button.disabled = true;
+  result.innerText = "La ruleta está girando…";
+  disc.classList.remove("spinning");
+  void disc.offsetWidth;
+  disc.classList.add("spinning");
+  playSound("accelerate");
+  const won = pickCasinoBrainrot();
+  if (won) {
+    inventory.push({...won, price:won.cps * 100, chance:won.chance / 100, rarity:"Casino", color:"#ffe58a"});
+    gameStats.memesBought++;
+    recordMemeObtained({...won, rarity:"Casino"});
+    addSeasonXP(10);
+  }
+  saveGame();
+  updateStats();
+  updateCasinoAffordability();
+  window.setTimeout(() => {
+    disc.classList.remove("spinning");
+    if (won) {
+      disc.innerText = won.icon;
+      result.innerHTML = `🎉 ¡${won.name}! <strong>+${formatNumber(won.cps)}/s</strong> añadido a tu inventario.`;
+      playSound("rebirth");
+    } else {
+      disc.innerText = "💨";
+      result.innerHTML = `💨 No salió ningún brainrot. Has perdido <strong>${formatNumber(CASINO_WHEEL_COST)} 🪙</strong>.`;
+      playSound("fail");
+    }
+    wheelSpinning = false;
+    updateUI();
+    saveGame();
+  }, 1700);
+}
+
+function readCasinoBet(inputId) {
+  const input = document.getElementById(inputId);
+  const amount = Number(input && input.value);
+  if (!Number.isFinite(amount) || !Number.isInteger(amount) || amount < 1) return 0;
+  return amount;
+}
+
+function pickSlotSymbol() {
+  const total = SLOT_SYMBOLS.reduce((sum, item) => sum + item.weight, 0);
+  let roll = Math.random() * total;
+  for (const item of SLOT_SYMBOLS) {
+    roll -= item.weight;
+    if (roll < 0) return item.icon;
+  }
+  return SLOT_SYMBOLS[SLOT_SYMBOLS.length - 1].icon;
+}
+
+function spinSlots() {
+  if (slotsSpinning) return;
+  if (!isCasinoOpen()) { document.getElementById("slotsResult").innerText = "El casino está cerrado."; return; }
+  const bet = readCasinoBet("slotsBet");
+  const result = document.getElementById("slotsResult");
+  if (!bet) { result.innerText = "Escribe una apuesta válida, mayor que cero."; return; }
+  if (bet > coins) { result.innerText = "No tienes suficientes monedas para esa apuesta."; return; }
+  coins -= bet;
+  slotsSpinning = true;
+  document.getElementById("slotsSpinBtn").disabled = true;
+  const machine = document.getElementById("slotMachine");
+  const reels = [...machine.querySelectorAll(".slot-reel")];
+  machine.classList.add("spinning");
+  result.innerText = "¡Girando…!";
+  const symbols = [pickSlotSymbol(), pickSlotSymbol(), pickSlotSymbol()];
+  reels.forEach(reel => reel.innerText = "❔");
+  playSound("accelerate");
+  updateStats();
+  saveGame();
+  reels.forEach((reel, index) => {
+    window.setTimeout(() => {
+      reel.innerText = symbols[index];
+      playSound("select");
+    }, 650 + index * 600);
+  });
+  window.setTimeout(() => {
+    machine.classList.remove("spinning");
+    const allSame = symbols.every(symbol => symbol === symbols[0]);
+    const tripleSeven = allSame && symbols[0] === "7️⃣";
+    const pair = new Set(symbols).size === 2;
+    let multiplier = 0;
+    let message = "Sin combinación: apuesta perdida.";
+    if (tripleSeven) { multiplier = 8; message = "🎰 ¡777! Premio total: 8× tu apuesta (700% extra)."; }
+    else if (allSame) { multiplier = 2; message = "✨ ¡Tres iguales! Premio total: 2× tu apuesta (100% extra)."; }
+    else if (pair) { multiplier = 1.25; message = "🍀 ¡Pareja! Premio total: 1,25× tu apuesta (25% extra)."; }
+    const payout = Math.floor(bet * multiplier);
+    if (payout > 0) { coins += payout; lifetimeCoins += payout; }
+    result.innerHTML = `${message}${payout ? `<br>Recibes <strong>${formatNumber(payout)} 🪙</strong>.` : ""}`;
+    slotsSpinning = false;
+    playSound(payout ? "rebirth" : "fail");
+    updateUI();
+    saveGame();
+  }, 2150);
+}
+
+function shuffleMemoryDeck() {
+  const deck = [...MEMORY_SYMBOLS, ...MEMORY_SYMBOLS];
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  return deck;
+}
+
+function startMemoryGame() {
+  if (memoryGame) return;
+  if (!isCasinoOpen()) { document.getElementById("memoryResult").innerText = "El casino está cerrado."; return; }
+  const bet = readCasinoBet("memoryBet");
+  const result = document.getElementById("memoryResult");
+  if (!bet) { result.innerText = "Escribe una apuesta válida, mayor que cero."; return; }
+  if (bet > coins) { result.innerText = "No tienes suficientes monedas para esa apuesta."; return; }
+  coins -= bet;
+  memoryGame = {bet, deck:shuffleMemoryDeck(), matched:[], open:[], attempts:0, resolving:false};
+  result.innerText = "";
+  playSound("buy");
+  renderMemoryBoard();
   updateUI();
   saveGame();
-  renderMysteryBoxes();
-  renderHalloweenShop();
 }
+
+function renderMemoryBoard() {
+  const grid = document.getElementById("memoryGrid");
+  const status = document.getElementById("memoryStatus");
+  const start = document.getElementById("memoryStartBtn");
+  if (!grid || !status || !start) return;
+  grid.innerHTML = "";
+  start.disabled = !!memoryGame;
+  if (!memoryGame) {
+    status.innerText = "Cada intento es una pareja de cartas.";
+    return;
+  }
+  status.innerText = `Apuesta: ${formatNumber(memoryGame.bet)} 🪙 · Intentos: ${memoryGame.attempts}/10 · Parejas: ${memoryGame.matched.length/2}/6`;
+  memoryGame.deck.forEach((symbol, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    const isOpen = memoryGame.open.includes(index);
+    const isMatched = memoryGame.matched.includes(index);
+    card.className = `memory-card${isMatched ? " matched" : ""}`;
+    card.innerText = isOpen || isMatched ? symbol : "🂠";
+    card.disabled = isOpen || isMatched || memoryGame.resolving;
+    card.setAttribute("aria-label", isOpen || isMatched ? symbol : `Carta ${index + 1}, oculta`);
+    card.onclick = () => flipMemoryCard(index);
+    grid.appendChild(card);
+  });
+}
+
+function resolveMemoryMismatch() {
+  if (!memoryGame) return;
+  memoryGame.open = [];
+  memoryGame.resolving = false;
+  renderMemoryBoard();
+  saveGame();
+}
+
+function flipMemoryCard(index) {
+  if (!isCasinoOpen() || !memoryGame || memoryGame.resolving || memoryGame.open.includes(index) || memoryGame.matched.includes(index)) return;
+  memoryGame.open.push(index);
+  renderMemoryBoard();
+  if (memoryGame.open.length < 2) return;
+  memoryGame.attempts++;
+  const [first, second] = memoryGame.open;
+  const result = document.getElementById("memoryResult");
+  if (memoryGame.deck[first] === memoryGame.deck[second]) {
+    memoryGame.matched.push(first, second);
+    memoryGame.open = [];
+    playSound("defend");
+    if (memoryGame.matched.length === memoryGame.deck.length) {
+      const bet = memoryGame.bet;
+      if (memoryGame.attempts < 10) {
+        const payout = bet * 10;
+        coins += payout;
+        lifetimeCoins += payout;
+        result.innerHTML = `🏆 ¡Completado en ${memoryGame.attempts} intentos! Recibes <strong>${formatNumber(payout)} 🪙</strong> (10× tu apuesta).`;
+        playSound("rebirth");
+      } else {
+        result.innerText = `Se completó en el intento 10: como pedía menos de 10, la apuesta se pierde.`;
+        playSound("fail");
+      }
+      memoryGame = null;
+      renderMemoryBoard();
+      updateUI();
+      saveGame();
+      return;
+    }
+  } else {
+    memoryGame.resolving = true;
+    if (memoryGame.attempts >= 10) {
+      result.innerText = "10 intentos agotados: apuesta perdida.";
+      playSound("fail");
+      memoryGame = null;
+      renderMemoryBoard();
+      updateUI();
+      saveGame();
+      return;
+    }
+    window.setTimeout(resolveMemoryMismatch, 700);
+  }
+  if (memoryGame && memoryGame.attempts >= 10) {
+    result.innerText = "10 intentos agotados: apuesta perdida.";
+    playSound("fail");
+    memoryGame = null;
+    renderMemoryBoard();
+    updateUI();
+    saveGame();
+    return;
+  }
+  renderMemoryBoard();
+  updateCasinoAffordability();
+  saveGame();
+}
+
+function restoreMemoryGame() {
+  if (!memoryGame || !Array.isArray(memoryGame.deck) || memoryGame.deck.length !== 12) {
+    memoryGame = null;
+    renderMemoryBoard();
+    return;
+  }
+  renderMemoryBoard();
+  if (memoryGame.resolving && memoryGame.open.length === 2) window.setTimeout(resolveMemoryMismatch, 700);
+}
+
+function updateCasinoAffordability() {
+  const casinoOpen = isCasinoOpen();
+  const wheel = document.getElementById("wheelSpinBtn");
+  const cooldownRemaining = Math.max(0, wheelCooldownUntil - Date.now());
+  const cooldownDisplay = document.getElementById("wheelCooldownDisplay");
+  if (wheel) {
+    wheel.disabled = wheelSpinning || !casinoOpen || cooldownRemaining > 0 || coins < CASINO_WHEEL_COST;
+    wheel.innerText = wheelSpinning
+      ? "GIRANDO…"
+      : cooldownRemaining > 0
+        ? `ESPERA ${formatCasinoTime(cooldownRemaining)}`
+        : "GIRAR · 100B 🪙";
+  }
+  if (cooldownDisplay) {
+    cooldownDisplay.innerText = !casinoOpen
+      ? "Disponible cuando el casino vuelva a abrir."
+      : cooldownRemaining > 0
+        ? `Siguiente giro disponible en ${formatCasinoTime(cooldownRemaining)}`
+        : coins < CASINO_WHEEL_COST
+          ? `Necesitas ${formatNumber(CASINO_WHEEL_COST)} monedas para girar.`
+          : "La ruleta está lista.";
+  }
+  const slotsBet = readCasinoBet("slotsBet");
+  const slots = document.getElementById("slotsSpinBtn");
+  if (slots) slots.disabled = slotsSpinning || !casinoOpen || !slotsBet || slotsBet > coins;
+  const memoryBet = readCasinoBet("memoryBet");
+  const memory = document.getElementById("memoryStartBtn");
+  if (memory) memory.disabled = !!memoryGame || !casinoOpen || !memoryBet || memoryBet > coins;
+}
+
+document.getElementById("slotsBet").addEventListener("input", updateCasinoAffordability);
+document.getElementById("memoryBet").addEventListener("input", updateCasinoAffordability);
+renderCasinoOdds();
+updateCasinoAffordability();
+updateCasinoScheduleUI();
+window.setInterval(updateCasinoScheduleUI, 1000);
 
 
 /* =========================================================
@@ -1505,8 +1506,7 @@ const validCodes = {
   "GIGACHAD": { type:"coins", value:2000, desc:"🪙 +2,000 Monedas" },
   "SECRET2026": { type:"meme", memeId:"pulpo_misterioso", desc:"🐙 Pulpo Misterioso Secreto" },
   "RIZZLER": { type:"shield", value:3, desc:"🛡️ +3 Escudos Anti-Robo" },
-  "ONLYCREATORSHAVET'ISCODE": { type:"creator", desc:"👑 MODO CREADOR: suerte x1e47 en todo y dinero infinito" },
-  "PLSMYSTERYBOX": { type:"mysteryBoxes", boxId:"demon_box", value:10, desc:"😈 +10 Demon Boxes — las Mystery Boxes de mayor nivel" }
+  "CASINOUPDATE1.3.4": { type:"raritySet", rarities:["Exótico", "Secreto", "Celestial"], desc:"🌌 Todos los memes Exóticos, Secretos y Celestiales" }
 };
 
 
@@ -1574,7 +1574,7 @@ function formatNumber(value) {
   const sign = numericValue < 0 ? "-" : "";
   const units = [
     [1e33, "DC"], [1e30, "NO"], [1e27, "OC"], [1e24, "SP"], [1e21, "SX"], [1e18, "QI"],
-    [1e15, "QA"], [1e12, "T"], [1e9, "B"], [1e6, "M"], [1e3, "K"]
+    [1e15, "Qa"], [1e12, "T"], [1e9, "B"], [1e6, "M"], [1e3, "K"]
   ];
 
   for (const [threshold, suffix] of units) {
@@ -1611,7 +1611,6 @@ function getTemporaryMoneyMultiplier() {
   let multiplier = 1;
   if (now < boostExpiresAt) multiplier *= 2;
   if (now < moneyStormExpiresAt) multiplier *= 5;
-  if (now < candyMultiplierExpiresAt) multiplier *= 3;
   return multiplier;
 }
 
@@ -1630,18 +1629,6 @@ function loadGame() {
       lifetimeCoins = Math.max(100, Number(data.lifetimeCoins) || coins);
       shields = Math.max(0, Math.min(MAX_SHIELDS, Number(data.shields) || 0));
 
-      candy = Math.max(0, Number(data.candy) || 0);
-      candyMissionDate = typeof data.candyMissionDate === "string" ? data.candyMissionDate : "";
-      candyDailyStats = data.candyDailyStats && typeof data.candyDailyStats === "object"
-        ? {
-            earned: Math.max(0, Number(data.candyDailyStats.earned) || 0),
-            planted: Math.max(0, Number(data.candyDailyStats.planted) || 0),
-            halloweenBought: Math.max(0, Number(data.candyDailyStats.halloweenBought) || 0)
-          }
-        : { earned:0, planted:0, halloweenBought:0 };
-      candyClaimedMissions = Array.isArray(data.candyClaimedMissions) ? data.candyClaimedMissions : [];
-      resetCandyMissionsIfNeeded();
-
       rebirths = clampNumber(Number(data.rebirths) || 0, 0, MAX_REBIRTHS);
 
       /* Las parcelas ya NO se leen del guardado: se calculan según los rebirths. */
@@ -1649,23 +1636,24 @@ function loadGame() {
 
       inventory = Array.isArray(data.inventory) ? data.inventory : [];
 
-      mysteryBoxInventory = data.mysteryBoxInventory && typeof data.mysteryBoxInventory === "object"
-        ? {
-            spooky_box: Math.max(0, Number(data.mysteryBoxInventory.spooky_box) || 0),
-            haunted_box: Math.max(0, Number(data.mysteryBoxInventory.haunted_box) || 0),
-            demon_box: Math.max(0, Number(data.mysteryBoxInventory.demon_box) || 0)
-          }
-        : { spooky_box:0, haunted_box:0, demon_box:0 };
-
       garden = Array.isArray(data.garden) ? data.garden : [];
       redeemedCodes = Array.isArray(data.redeemedCodes) ? data.redeemedCodes : [];
       streakDay = clampNumber(Number(data.streakDay) || 1, 1, streakRewards.length);
       lastClaimDate = typeof data.lastClaimDate === "string" ? data.lastClaimDate : "";
       boostExpiresAt = Number(data.boostExpiresAt) || 0;
       moneyStormExpiresAt = Number(data.moneyStormExpiresAt) || 0;
-      candyMultiplierExpiresAt = Number(data.candyMultiplierExpiresAt) || 0;
+      wheelCooldownUntil = Math.max(0, Number(data.wheelCooldownUntil) || 0);
+      memoryGame = data.memoryGame && typeof data.memoryGame === "object"
+        ? {
+            bet: Math.max(1, Number(data.memoryGame.bet) || 1),
+            deck: Array.isArray(data.memoryGame.deck) ? data.memoryGame.deck.filter(x => MEMORY_SYMBOLS.includes(x)).slice(0, 12) : [],
+            matched: Array.isArray(data.memoryGame.matched) ? data.memoryGame.matched.filter(Number.isInteger) : [],
+            open: Array.isArray(data.memoryGame.open) ? data.memoryGame.open.filter(Number.isInteger).slice(0, 2) : [],
+            attempts: clampNumber(Number(data.memoryGame.attempts) || 0, 0, 10),
+            resolving: !!data.memoryGame.resolving
+          }
+        : null;
       shortWordsActive = Math.max(0, Number(data.shortWordsActive) || 0);
-      creatorMode = data.creatorMode === true;
 
       /* Si cambia el número de temporada, el pase se reinicia. */
       if (Number(data.seasonId) === SEASON_NUMBER) {
@@ -1771,28 +1759,23 @@ function saveGame() {
     coins: Math.max(0, coins),
     lifetimeCoins: Math.max(100, lifetimeCoins),
     shields: Math.max(0, Math.min(MAX_SHIELDS, shields)),
-    candy: Math.max(0, candy),
-    candyMissionDate,
-    candyDailyStats,
-    candyClaimedMissions,
     rebirths: clampNumber(rebirths, 0, MAX_REBIRTHS),
     maxPlots: getPlotsForRebirths(rebirths),
     inventory,
-    mysteryBoxInventory,
     garden,
     redeemedCodes,
     streakDay,
     lastClaimDate,
     boostExpiresAt,
     moneyStormExpiresAt,
-    candyMultiplierExpiresAt,
-    creatorMode,
+    wheelCooldownUntil,
     shortWordsActive,
     seasonId: SEASON_NUMBER,
     seasonXP,
     seasonClaimed,
     seasonClaimedPlus,
     seasonPremium,
+    memoryGame,
     gameStats,
     merchant,
     playerName
@@ -1821,7 +1804,7 @@ function closeCodesModal() {
 function redeemCode() {
   const input = document.getElementById("codeInput");
   const feedback = document.getElementById("codeFeedback");
-  const code = input.value.trim().toUpperCase().replace(/[’‘`´]/g, "'");
+  const code = input.value.trim().toUpperCase();
 
   if (!code) {
     feedback.style.color = "var(--accent-pink)";
@@ -1855,11 +1838,6 @@ function redeemCode() {
     shields = Math.min(MAX_SHIELDS, shields + reward.value);
     success = true;
   }
-  else if (reward.type === "mysteryBoxes") {
-    if (!mysteryBoxInventory[reward.boxId]) mysteryBoxInventory[reward.boxId] = 0;
-    mysteryBoxInventory[reward.boxId] += reward.value;
-    success = true;
-  }
   else if (reward.type === "meme") {
     const template = allMemes.find(m => m.id === reward.memeId);
     if (template) {
@@ -1867,12 +1845,12 @@ function redeemCode() {
       success = true;
     }
   }
-  else if (reward.type === "creator") {
-    creatorMode = true;
-    coins = Math.max(coins, CREATOR_COINS);
-    lifetimeCoins = Math.max(lifetimeCoins, CREATOR_COINS);
-    candy = Math.max(candy, CREATOR_CANDY);
-    success = true;
+  else if (reward.type === "raritySet") {
+    const templates = allMemes.filter(meme => reward.rarities.includes(meme.rarity));
+    if (templates.length) {
+      templates.forEach(template => inventory.push({ ...template }));
+      success = true;
+    }
   }
   else if (reward.type === "pauSpecial") {
     rebirths = Math.min(MAX_REBIRTHS, rebirths + 4);
@@ -2039,8 +2017,8 @@ function showRarityAlert(item) {
   window.__rarityAlertTimer = setTimeout(() => { el.style.display = "none"; }, 4500);
 }
 
-function checkHighRarityStock(stock, includeHalloween = false) {
-  const priority = ["Legendario", "Mítico", "Celestial", "Secreto", "Exótico", "Halloween"];
+function checkHighRarityStock(stock) {
+  const priority = ["Legendario", "Mítico", "Celestial", "Secreto", "Exótico"];
   const found = stock.find(item => item.stock > 0 && priority.includes(item.rarity));
   if (found) showRarityAlert(found);
 }
@@ -2058,13 +2036,13 @@ function restockShop(forceMythic = false) {
     return { ...item, stock };
   });
 
-  /* Desbloqueos por Rebirth: Mítico 5+, Secreto 5+, Exótico 5+. */
+  /* Desbloqueos por Rebirth: Mítico 5+, Secreto 7+, Exótico 8+. */
   shopMemes.forEach(item => {
     const locked =
       (item.rarity === "Mítico" && rebirths < 5) ||
-      (item.rarity === "Secreto" && rebirths < 5) ||
-      (item.rarity === "Exótico" && rebirths < 5);
-    if (locked && !creatorMode) item.stock = 0;
+      (item.rarity === "Secreto" && rebirths < 7) ||
+      (item.rarity === "Exótico" && rebirths < 8);
+    if (locked) item.stock = 0;
   });
 
   checkHighRarityStock(shopMemes);
@@ -2105,7 +2083,7 @@ function getRarityClass(rarity) {
     "Legendario": "rarity-legendary",
     "Mítico": "rarity-mythic",
     "Celestial": "rarity-celestial",
-    "Halloween": "rarity-halloween",
+    "Casino": "rarity-casino",
     "Exótico": "rarity-exotic",
     "Secreto": "rarity-secret"
   }[rarity] || "";
@@ -2344,8 +2322,6 @@ function handlePlotClick(plotIndex) {
       inventory.splice(selectedInvIndex, 1);
       selectedInvIndex = null;
 
-      resetCandyMissionsIfNeeded();
-      candyDailyStats.planted++;
       gameStats.memesPlanted++;
       addSeasonXP(5);
 
@@ -2518,49 +2494,17 @@ function refreshAffordability() {
   document.querySelectorAll("[data-price]").forEach(b => {
     const price = Number(b.dataset.price);
     const stock = b.dataset.stock === undefined ? 1 : Number(b.dataset.stock);
-    const funds = b.dataset.currency === "candy" ? candy : coins;
-    const disabled = stock <= 0 || funds < price;
+    const disabled = stock <= 0 || coins < price;
     if (b.disabled !== disabled) b.disabled = disabled;
   });
 }
 
-function updateCandyLive() {
-  const balance = document.getElementById("candyBalance");
-  if (balance) balance.innerText = `${formatNumber(candy)} 🍬`;
-
-  const tab = document.getElementById("tab-candy");
-  if (!tab || !tab.classList.contains("active")) return;
-
-  resetCandyMissionsIfNeeded();
-  candyMissions.forEach(m => {
-    const card = document.querySelector(`[data-mission="${m.id}"]`);
-    if (!card) return;
-    const value = Math.min(m.target, Number(candyDailyStats[m.stat]) || 0);
-    const done = value >= m.target;
-    const claimed = candyClaimedMissions.includes(m.id);
-    card.classList.toggle("completed", done);
-    card.querySelector(".mission-bar").style.width = `${Math.min(100, (value / m.target) * 100)}%`;
-    card.querySelector(".mission-count").innerText = `${formatNumber(value)} / ${formatNumber(m.target)}`;
-    const btn = card.querySelector(".mission-claim");
-    btn.disabled = !done || claimed;
-    btn.innerText = claimed ? "RECLAMADA" : done ? "RECLAMAR" : "EN PROGRESO";
-  });
-}
-
 function updateStats() {
-  if (creatorMode) {
-    if (coins < CREATOR_COINS) coins = CREATOR_COINS;
-    if (lifetimeCoins < CREATOR_COINS) lifetimeCoins = CREATOR_COINS;
-    if (candy < CREATOR_CANDY) candy = CREATOR_CANDY;
-  }
   document.getElementById("coins").innerText = formatNumber(coins);
   const cpsNow = calculateCPS();
   if (cpsNow > gameStats.peakCPS) gameStats.peakCPS = cpsNow;
   document.getElementById("cps").innerText = formatNumber(cpsNow);
   document.getElementById("shields").innerText = shields;
-
-  const candyEl = document.getElementById("candy");
-  if (candyEl) candyEl.innerText = formatNumber(candy);
 
   document.getElementById("rebirthsVal").innerText = `Rebirth ${rebirths}/${MAX_REBIRTHS}`;
   document.getElementById("plotsVal").innerText = `${maxPlots} Parcelas`;
@@ -2569,7 +2513,7 @@ function updateStats() {
   updatePowerupStatus();
   updateAdminStatus();
   refreshAffordability();
-  updateCandyLive();
+  updateCasinoAffordability();
 }
 
 /* Actualización COMPLETA: reconstruye jardín, inventario y tiendas. Solo se llama tras una acción. */
@@ -2578,8 +2522,6 @@ function updateUI() {
   updateStats();
   renderGarden();
   renderInventory();
-  renderHalloweenShop();
-  renderCandyMissions();
   refreshAffordability();
   updateExtrasLive();
 }
@@ -2654,8 +2596,11 @@ function updateRebirthUI() {
 
   title.innerText = `🌀 REBIRTH ${currentReq.level} / ${MAX_REBIRTHS}`;
 
-  document.getElementById("reqReward").innerText =
-    (currentReq.addPlots > 0 ? `+${currentReq.addPlots} Slot y ` : "") + `x${currentReq.bonusMultiplier} Monedas`;
+  const rewards = [];
+  if (currentReq.addPlots > 0) rewards.push(`+${currentReq.addPlots} parcela`);
+  if (currentReq.bonusMultiplier > 1) rewards.push(`multiplicador x${currentReq.bonusMultiplier}`);
+  else rewards.push("sin multiplicador nuevo");
+  document.getElementById("reqReward").innerText = rewards.join(" · ");
 
   const coinsReady = coins >= currentReq.cost;
   const lifetimeReady = lifetimeCoins >= currentReq.lifetimeReq;
@@ -2708,8 +2653,6 @@ function switchTab(tabId, button) {
   if (target) target.classList.add("active");
 
   if (tabId === "leaderboard") fetchOnlineLeaderboard();
-  if (tabId === "halloween") renderHalloweenShop();
-  if (tabId === "candy") renderCandyMissions();
   if (tabId === "merchant") renderMerchant();
   if (tabId === "stats") renderStats();
 }
@@ -2781,7 +2724,7 @@ function updateNextUpdateTimer() {
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
   document.getElementById("updateCountdown").innerText =
-    `🎃 Halloween Update 1.2.1 · Admin Abuse en ${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
+    `🎰 Casino Update 1.3.4 · Admin Abuse en ${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
 
   checkAdminAbuseTransition();
   updateAdminStatus();
@@ -2922,7 +2865,6 @@ function fetchOnlineLeaderboard() {
 let lastLeaderboardSync = 0;
 function syncOnlineLeaderboard() {
   if (!isFirebaseActive || !db) return;
-  if (creatorMode) return;
   const nowMs = Date.now();
   if (nowMs - lastLeaderboardSync < 30000) return;
   lastLeaderboardSync = nowMs;
@@ -3020,9 +2962,6 @@ setInterval(() => {
   coins += gained;
   lifetimeCoins += gained;
 
-  resetCandyMissionsIfNeeded();
-  candyDailyStats.earned += gained;
-
   /* La UI se refresca cada 500 ms; el dinero sigue sumando cada 100 ms. */
   if (++statsTick >= 5) { statsTick = 0; updateStats(); }
 }, 100);
@@ -3068,23 +3007,6 @@ updateNextUpdateTimer();
 
 setInterval(updateStats, 1000);
 
-let halloweenRestockTimer = 60;
-function updateHalloweenRestockTimerDisplay() {
-  const timerEl = document.getElementById("restockTimerHalloween");
-  if (timerEl) timerEl.innerText = `🔄 Restock en ${Math.max(0, halloweenRestockTimer)}s`;
-}
-updateHalloweenRestockTimerDisplay();
-
-setInterval(() => {
-  halloweenRestockTimer--;
-  if (halloweenRestockTimer <= 0) {
-    restockHalloweenShop(isAdminAbuseActive());
-    halloweenRestockTimer = 60;
-  }
-  updateHalloweenRestockTimerDisplay();
-}, 1000);
-
-
 /* =========================================================
    AVISO GENÉRICO
 ========================================================= */
@@ -3110,7 +3032,7 @@ function fmtSecs(sec) {
 /* =========================================================
    ESTADÍSTICAS
 ========================================================= */
-const RARITY_ORDER = ["Común", "Raro", "Épico", "Legendario", "Mítico", "Celestial", "Halloween", "Secreto", "Exótico"];
+const RARITY_ORDER = ["Casino", "Común", "Raro", "Épico", "Legendario", "Mítico", "Celestial", "Secreto", "Exótico"];
 
 function recordMemeObtained(item) {
   if (!item) return;
@@ -3122,12 +3044,6 @@ function recordMemeObtained(item) {
     gameStats.rarestRarity = item.rarity;
     gameStats.rarestCps = cps;
   }
-}
-
-function recordBox(reward) {
-  gameStats.boxesOpened++;
-  recordMemeObtained(reward);
-  addSeasonXP(15);
 }
 
 function formatDuration(sec) {
@@ -3154,12 +3070,10 @@ const statDefs = [
   { id: "blocked", icon: "⌨️", label: "Robos frenados (palabra)", get: () => formatNumber(gameStats.stealsBlocked) },
   { id: "shields", icon: "🛡️", label: "Escudos gastados",        get: () => formatNumber(gameStats.shieldsUsed) },
   { id: "failed",  icon: "💔", label: "Memes robados",           get: () => formatNumber(gameStats.stealsFailed) },
-  { id: "boxes",   icon: "🎁", label: "Cajas abiertas",          get: () => formatNumber(gameStats.boxesOpened) },
-  { id: "mis",     icon: "📜", label: "Misiones reclamadas",     get: () => formatNumber(gameStats.missionsClaimed) },
   { id: "deals",   icon: "🧳", label: "Tratos con el mercader",  get: () => formatNumber(gameStats.merchantDeals) },
   { id: "codes",   icon: "🎟️", label: "Códigos canjeados",       get: () => formatNumber(redeemedCodes.length) },
   { id: "rebirth", icon: "🌀", label: "Rebirths",                get: () => `${rebirths} / ${MAX_REBIRTHS}` },
-  { id: "pass",    icon: "🏆", label: "Nivel del pase",          get: () => `${getSeasonState(seasonXP).level} / ${SEASON_MAX_LEVEL}` },
+  { id: "pass",    icon: "🎰", label: "Nivel del Casino Pass",   get: () => `${getSeasonState(seasonXP).level} / ${SEASON_MAX_LEVEL}` },
   { id: "streak",  icon: "🔥", label: "Día de racha",            get: () => `Día ${streakDay}` }
 ];
 
@@ -3192,12 +3106,12 @@ function updateStatsLive(force) {
    MEME PASS (estilo Brawl Pass)
 ========================================================= */
 /* Cambia estas fechas para mover la temporada. Si subes SEASON_NUMBER, el pase de todos se reinicia. */
-const SEASON_NUMBER = 1;
+const SEASON_NUMBER = 2;
 const SEASON_START = new Date(2026, 9, 6, 0, 0, 0).getTime();    /* 6 oct 2026 */
 const SEASON_END   = new Date(2026, 10, 6, 0, 0, 0).getTime();   /* 6 nov 2026 (1 mes) */
 const SEASON_MAX_LEVEL = 30;
 const TOKENS_PER_TIER = 800;
-const PASS_PLUS_PRICE = 3000;   /* en Candy */
+const PASS_PLUS_PRICE = 1_000_000_000_000_000;   /* 1 Qa en monedas normales */
 
 function isSeasonActive() {
   const now = Date.now();
@@ -3212,34 +3126,28 @@ function memeReward(id) {
 const PR = {
   coins:  v => ({ icon: "🪙", label: `${formatNumber(v)} monedas`, type: "coins", val: v }),
   cps:    (min, floor) => ({ icon: "⏳", label: `${min} min de producción`, type: "coinsCps", minutes: min, min: floor }),
-  candy:  v => ({ icon: "🍬", label: `${v} Candy`, type: "candy", val: v }),
   shield: v => ({ icon: "🛡️", label: v === 1 ? "1 Escudo" : `${v} Escudos`, type: "shield", val: v }),
-  box:    (id, v) => {
-    const names = { spooky_box: ["🎃", "Spooky Box"], haunted_box: ["👻", "Haunted Box"], demon_box: ["😈", "Demon Box"] };
-    return { icon: names[id][0], label: `${v} ${names[id][1]}${v > 1 ? "es" : ""}`, type: "box", boxId: id, val: v };
-  },
-  rush:   () => ({ icon: "🍭", label: "Sugar Rush x3 (60 s)", type: "rush" }),
   meme:   memeReward
 };
 
 /* Pista GRATIS (30 niveles) */
 const freeRewards = [
-  PR.coins(5000), PR.candy(30), PR.shield(1), PR.box("spooky_box", 1), PR.meme("sigma"),
-  PR.cps(5, 20000), PR.candy(50), PR.shield(1), PR.box("spooky_box", 1), PR.meme("ohio"),
-  PR.candy(60), PR.cps(10, 100000), PR.box("haunted_box", 1), PR.shield(2), PR.meme("gyatt"),
-  PR.candy(80), PR.box("spooky_box", 2), PR.cps(15, 300000), PR.candy(100), PR.meme("cosmic"),
-  PR.box("haunted_box", 1), PR.candy(120), PR.shield(2), PR.cps(30, 1000000), PR.meme("elprimo"),
-  PR.candy(150), PR.box("haunted_box", 2), PR.rush(), PR.candy(200), PR.box("demon_box", 1)
+  PR.coins(5000), PR.shield(1), PR.coins(10000), PR.shield(1), PR.meme("sigma"),
+  PR.coins(50000), PR.shield(1), PR.coins(100000), PR.shield(2), PR.meme("ohio"),
+  PR.coins(250000), PR.cps(5, 150000), PR.shield(2), PR.coins(500000), PR.meme("gyatt"),
+  PR.coins(600000), PR.shield(2), PR.coins(1000000), PR.cps(10, 300000), PR.meme("cosmic"),
+  PR.coins(2000000), PR.cps(15, 1000000), PR.shield(3), PR.coins(8000000), PR.meme("elprimo"),
+  PR.coins(15000000), PR.cps(30, 5000000), PR.coins(25000000), PR.shield(4), PR.meme("fanum")
 ];
 
 /* Pista PLUS (30 niveles) */
 const plusRewards = [
-  PR.candy(100), PR.cps(5, 50000), PR.box("spooky_box", 2), PR.candy(100), PR.meme("skibidi"),
-  PR.box("haunted_box", 1), PR.candy(150), PR.cps(10, 200000), PR.rush(), PR.meme("gyatt"),
-  PR.box("spooky_box", 3), PR.candy(200), PR.box("haunted_box", 2), PR.cps(20, 600000), PR.meme("cosmic"),
-  PR.candy(250), PR.rush(), PR.box("haunted_box", 2), PR.cps(30, 2000000), PR.meme("chadgold"),
-  PR.candy(300), PR.box("haunted_box", 3), PR.box("demon_box", 1), PR.cps(60, 5000000), PR.meme("fanum"),
-  PR.candy(400), PR.box("demon_box", 1), PR.rush(), PR.candy(500), PR.box("demon_box", 3)
+  PR.coins(25000), PR.cps(5, 100000), PR.shield(2), PR.coins(100000), PR.meme("skibidi"),
+  PR.coins(250000), PR.cps(10, 300000), PR.shield(2), PR.coins(500000), PR.meme("gyatt"),
+  PR.coins(1000000), PR.cps(20, 1000000), PR.shield(3), PR.coins(2000000), PR.meme("cosmic"),
+  PR.coins(5000000), PR.cps(30, 3000000), PR.shield(3), PR.coins(10000000), PR.meme("chadgold"),
+  PR.coins(25000000), PR.cps(60, 10000000), PR.shield(4), PR.coins(50000000), PR.meme("fanum"),
+  PR.coins(100000000), PR.cps(120, 50000000), PR.shield(5), PR.coins(250000000), PR.meme("brainrot_supreme")
 ];
 
 function getSeasonState(xp) {
@@ -3256,7 +3164,7 @@ function addSeasonXP(n) {
   const after = getSeasonState(seasonXP).level;
   if (after > before) {
     playSound("accelerate");
-    showInfoBanner(`🏆 ¡Meme Pass: nivel ${after}!<br>Reclama tu recompensa con el botón 🏆 Pase`);
+    showInfoBanner(`🎰 ¡Casino Pass: nivel ${after}!<br>Reclama tu recompensa con el botón del pase`);
   }
 }
 
@@ -3270,19 +3178,13 @@ function applySeasonReward(r) {
     const amount = Math.max(r.min, calculateCPS() * r.minutes * 60);
     coins += amount;
     lifetimeCoins += amount;
-  } else if (r.type === "candy") {
-    candy += r.val;
   } else if (r.type === "shield") {
     shields = Math.min(MAX_SHIELDS, shields + r.val);
-  } else if (r.type === "box") {
-    mysteryBoxInventory[r.boxId] = (mysteryBoxInventory[r.boxId] || 0) + r.val;
   } else if (r.type === "meme") {
     const t = allMemes.find(m => m.id === r.memeId);
     if (!t) return false;
     inventory.push(cleanMeme(t));
     recordMemeObtained(t);
-  } else if (r.type === "rush") {
-    candyMultiplierExpiresAt = Math.max(Date.now(), candyMultiplierExpiresAt) + 60000;
   }
   return true;
 }
@@ -3293,7 +3195,7 @@ function claimSeasonReward(kind, i) {
 
   if (kind === "plus") {
     if (!seasonPremium) {
-      showInfoBanner("✨ Necesitas el Meme Pass PLUS para reclamar esta recompensa");
+      showInfoBanner("✨ Necesitas el Casino Pass PLUS para reclamar esta recompensa");
       return;
     }
     if (seasonClaimedPlus.includes(i)) return;
@@ -3330,12 +3232,12 @@ function claimAllSeason() {
 }
 
 function buyPassPlus() {
-  if (seasonPremium || !isSeasonActive() || candy < PASS_PLUS_PRICE) return;
-  if (!confirm(`¿Desbloquear el Meme Pass PLUS por ${PASS_PLUS_PRICE.toLocaleString("es-ES")} 🍬?`)) return;
-  candy -= PASS_PLUS_PRICE;
+  if (seasonPremium || !isSeasonActive() || coins < PASS_PLUS_PRICE) return;
+  if (!confirm(`¿Desbloquear el Casino Pass PLUS por ${formatNumber(PASS_PLUS_PRICE)} 🪙?`)) return;
+  coins -= PASS_PLUS_PRICE;
   seasonPremium = true;
   playSound("rebirth");
-  showInfoBanner("✨ ¡Meme Pass PLUS desbloqueado!<br>Ya puedes reclamar las recompensas PLUS de tus niveles");
+  showInfoBanner("✨ ¡Casino Pass PLUS desbloqueado!<br>Ya puedes reclamar las recompensas PLUS de tus niveles");
   updateUI();
   saveGame();
 }
@@ -3418,7 +3320,7 @@ function updateSeasonLive(force) {
   }
   const passBtn = document.getElementById("passBtn");
   if (passBtn) {
-    const label = pending > 0 ? "🏆 Pase ❗" : "🏆 Pase";
+    const label = pending > 0 ? "🎰 Pase ❗" : "🎰 Pase";
     if (passBtn.innerText !== label) passBtn.innerText = label;
     passBtn.classList.toggle("has-reward", pending > 0);
   }
@@ -3447,8 +3349,8 @@ function updateSeasonLive(force) {
   if (plusBtn) {
     const txt = seasonPremium
       ? "✨ PLUS ACTIVO"
-      : `🔓 Desbloquear PLUS · ${PASS_PLUS_PRICE.toLocaleString("es-ES")} 🍬 (tienes ${formatNumber(candy)})`;
-    const dis = seasonPremium || !active || candy < PASS_PLUS_PRICE;
+      : `🔓 PLUS · ${formatNumber(PASS_PLUS_PRICE)} 🪙 (tienes ${formatNumber(coins)})`;
+    const dis = seasonPremium || !active || coins < PASS_PLUS_PRICE;
     if (plusBtn.innerText !== txt) plusBtn.innerText = txt;
     if (plusBtn.disabled !== dis) plusBtn.disabled = dis;
     plusBtn.classList.toggle("owned", seasonPremium);
@@ -3748,14 +3650,13 @@ setInterval(() => {
    INICIO
 ========================================================= */
 loadGame();
+restoreMemoryGame();
 
 /* Pantalla de carga inicial */
 setTimeout(() => {
   const loadingScreen = document.getElementById("gameLoadingScreen");
   if (loadingScreen) loadingScreen.classList.add("loading-hidden");
 }, 5000);
-
-restockHalloweenShop();
 
 /* Si entramos durante Admin Abuse, activa el modo visual y el confeti. */
 if (isAdminAbuseActive()) {
